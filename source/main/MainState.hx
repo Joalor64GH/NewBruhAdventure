@@ -15,12 +15,17 @@ class MainState extends FlxUIState
 
 		save.bind("huy1234th", "data");
 		MainData.checkData();
-		FlxG.fullscreen = !FlxG.fullscreen;
+		if (FlxG.keys.justPressed.F10)
+		{
+			FlxG.fullscreen = !FlxG.fullscreen;
+		}
 	}
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		MainSprite.mouseImg();
 
 		if (MainData.fpsCounter(false))
 		{
