@@ -14,11 +14,21 @@ class MainState extends FlxUIState
 		super.create();
 
 		save.bind("huy1234th", "data");
+		MainData.checkData();
 		FlxG.fullscreen = !FlxG.fullscreen;
 	}
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		if (MainData.fpsCounter(false))
+		{
+			FlxG.stage.removeChild(Main.fpsCounter);
+		}
+		else
+		{
+			FlxG.stage.addChild(Main.fpsCounter);
+		}
 	}
 }

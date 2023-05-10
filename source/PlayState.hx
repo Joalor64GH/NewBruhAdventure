@@ -1,7 +1,5 @@
 package;
 
-import flixel.FlxState;
-
 class PlayState extends MainState
 {
 	override public function create()
