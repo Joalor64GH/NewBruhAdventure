@@ -1,8 +1,8 @@
 package;
 
-import flixel.FlxState;
+import flixel.addons.ui.FlxUIState;
 
-class PlayState extends MainState
+class MainState extends FlxUIState
 {
 	override public function create()
 	{
