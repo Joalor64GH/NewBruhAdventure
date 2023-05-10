@@ -96,6 +96,7 @@ class PlayState extends MainState
 		super.update(elapsed);
 
 		FlxG.camera.zoom = 2;
+		FlxG.camera.follow(player, PLATFORMER);
 		FlxG.collide(player, tile);
 		FlxG.overlap(player, coin, touchCoin_1);
 		FlxG.overlap(player, coin_2, touchCoin_2);
