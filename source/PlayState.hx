@@ -5,18 +5,16 @@ import flixel.FlxG;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
-import flixel.ui.FlxVirtualPad;
 
 class PlayState extends MainState
 {
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
+	var walls_2:FlxTilemap;
 
 	var player:Player;
 	var coins:FlxTypedGroup<Coin>;
 	var coins_2:FlxTypedGroup<Coin_2>;
-
-	var pad:FlxVirtualPad;
 
 	override public function create()
 	{
@@ -31,6 +29,12 @@ class PlayState extends MainState
 		walls.setTileProperties(2, ANY);
 		add(walls);
 
+		walls_2 = map.loadTilemap(AssetPaths.overmap__png, "tile_2");
+		walls_2.follow();
+		walls_2.setTileProperties(1, NONE);
+		walls_2.setTileProperties(2, ANY);
+		add(walls_2);
+
 		player = new Player();
 		add(player);
 
@@ -41,11 +45,6 @@ class PlayState extends MainState
 		add(coins_2);
 
 		map.loadEntities(placeEntities, "entity");
-
-		#if android
-		pad = new FlxVirtualPad(FlxDPadMode.FULL, FlxActionMode.NONE);
-		add(pad);
-		#end
 	}
 
 	function placeEntities(entity:EntityData)
@@ -67,14 +66,10 @@ class PlayState extends MainState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		FlxG.camera.follow(player, TOPDOWN);
 
 		FlxG.collide(player, walls);
 		FlxG.overlap(player, coins, playerTouchCoin);
-
-		var up:Bool = pad.buttonUp.pressed || FlxG.keys.anyPressed([UP, W]);
-		var down:Bool = pad.buttonDown.pressed || FlxG.keys.anyPressed([DOWN, S]);
-		var left:Bool = pad.buttonLeft.pressed || FlxG.keys.anyPressed([LEFT, A]);
-		var right:Bool = pad.buttonRight.pressed || FlxG.keys.anyPressed([RIGHT, D]);
 
 		if (up && down)
 			up = down = false;
@@ -82,34 +77,18 @@ class PlayState extends MainState
 			left = right = false;
 
 		if (up)
-		{
 			player.velocity.y = -100;
-			player.animation.play("up");
-		}
 		else if (down)
-		{
 			player.velocity.y = 100;
-			player.animation.play("down");
-		}
 		else
-		{
 			player.velocity.y = 0;
-		}
 
 		if (left)
-		{
 			player.velocity.x = -100;
-			player.animation.play("left");
-		}
 		else if (right)
-		{
 			player.velocity.x = 100;
-			player.animation.play("right");
-		}
 		else
-		{
-			player.velocity.x = 0;
-		}
+			player.velocity.y = 0;
 	}
 
 	function playerTouchCoin(player:Player, coin:Coin)

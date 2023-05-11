@@ -11,5 +11,20 @@ class Player extends MainSprite
 		animation.add("left", [1], 1);
 		animation.add("right", [2], 1);
 		animation.add("up", [3], 1);
+		animation.play("down");
+	}
+
+	override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		if (up)
+			animation.play("up");
+		else if (down)
+			animation.play("down");
+		else if (left)
+			animation.play("left");
+		else if (right)
+			animation.play("right");
 	}
 }
