@@ -1,12 +1,12 @@
 {
-  "name": "Level",
+  "name": "Bru Adventure",
   "ogmoVersion": "3.4.0",
   "levelPaths": ["."],
   "backgroundColor": "#282c34ff",
   "gridColor": "#3c4049cc",
   "anglesRadians": true,
   "directoryDepth": 5,
-  "layerGridDefaultSize": {"x": 8, "y": 8},
+  "layerGridDefaultSize": {"x": 16, "y": 16},
   "levelDefaultSize": {"x": 320, "y": 240},
   "levelMinSize": {"x": 640, "y": 480},
   "levelMaxSize": {"x": 8192, "y": 8192},
@@ -21,23 +21,23 @@
       "definition": "entity",
       "name": "en",
       "gridSize": {"x": 16, "y": 16},
-      "exportID": "70719222",
+      "exportID": "71169402",
       "requiredTags": [],
       "excludedTags": []
     },
     {
       "definition": "tile",
-      "name": "tile",
+      "name": "wall",
       "gridSize": {"x": 16, "y": 16},
-      "exportID": "70715480",
+      "exportID": "71162471",
       "exportMode": 0,
-      "arrayMode": 0,
+      "arrayMode": 1,
       "defaultTileset": ""
     }
   ],
   "entities": [
     {
-      "exportID": "70716563",
+      "exportID": "71160033",
       "name": "player",
       "limit": -1,
       "size": {"x": 16, "y": 16},
@@ -73,7 +73,7 @@
       "values": []
     },
     {
-      "exportID": "70768988",
+      "exportID": "71164063",
       "name": "coin",
       "limit": -1,
       "size": {"x": 16, "y": 16},
@@ -90,7 +90,7 @@
           {"x": 1, "y": 1}
         ]
       },
-      "color": "#ffe800ff",
+      "color": "#ffbf00ff",
       "tileX": false,
       "tileY": false,
       "tileSize": {"x": 16, "y": 16},
@@ -109,7 +109,7 @@
       "values": []
     },
     {
-      "exportID": "70779540",
+      "exportID": "71164657",
       "name": "coin_2",
       "limit": -1,
       "size": {"x": 16, "y": 16},
@@ -126,7 +126,7 @@
           {"x": 1, "y": 1}
         ]
       },
-      "color": "#1fff00ff",
+      "color": "#00ff09ff",
       "tileX": false,
       "tileY": false,
       "tileSize": {"x": 16, "y": 16},
@@ -145,80 +145,8 @@
       "values": []
     },
     {
-      "exportID": "70807900",
+      "exportID": "71163175",
       "name": "flag",
-      "limit": -1,
-      "size": {"x": 16, "y": 16},
-      "origin": {"x": 0, "y": 0},
-      "originAnchored": true,
-      "shape": {
-        "label": "Rectangle",
-        "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
-        ]
-      },
-      "color": "#ff9f9fff",
-      "tileX": false,
-      "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
-      "resizeableX": false,
-      "resizeableY": false,
-      "rotatable": false,
-      "rotationDegrees": 360,
-      "canFlipX": false,
-      "canFlipY": false,
-      "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
-      "nodeDisplay": 0,
-      "nodeGhost": true,
-      "tags": [],
-      "values": []
-    },
-    {
-      "exportID": "70803450",
-      "name": "water",
-      "limit": -1,
-      "size": {"x": 16, "y": 16},
-      "origin": {"x": 0, "y": 0},
-      "originAnchored": true,
-      "shape": {
-        "label": "Rectangle",
-        "points": [
-          {"x": -1, "y": -1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": -1},
-          {"x": -1, "y": 1},
-          {"x": 1, "y": 1}
-        ]
-      },
-      "color": "#00d2faff",
-      "tileX": false,
-      "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
-      "resizeableX": false,
-      "resizeableY": false,
-      "rotatable": false,
-      "rotationDegrees": 360,
-      "canFlipX": false,
-      "canFlipY": false,
-      "canSetColor": false,
-      "hasNodes": false,
-      "nodeLimit": 0,
-      "nodeDisplay": 0,
-      "nodeGhost": true,
-      "tags": [],
-      "values": []
-    },
-    {
-      "exportID": "70813093",
-      "name": "lava",
       "limit": -1,
       "size": {"x": 16, "y": 16},
       "origin": {"x": 0, "y": 0},
@@ -251,9 +179,81 @@
       "nodeGhost": true,
       "tags": [],
       "values": []
+    },
+    {
+      "exportID": "71169122",
+      "name": "lava",
+      "limit": -1,
+      "size": {"x": 16, "y": 16},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff3600ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": []
+    },
+    {
+      "exportID": "71164817",
+      "name": "water",
+      "limit": -1,
+      "size": {"x": 16, "y": 16},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#00ffadff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": []
     }
   ],
   "tilesets": [
-    {"label": "New Tileset", "path": "../images/tilemap_1.png", "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAwCAYAAABwrHhvAAAA0klEQVRYR+2XsQ6DMAxEbakd6I905lc695/7N3ToQAVSEAREL75I6XDM8fn8iLHxx3AZjXhu/ZWINnMZEIG/IJDf5OH1gW823QXPe3fahkdm2KTr6vyXARhF8KAMiIAItCcwvo3aB4Ltv4R5bsA7c0Q0Gpe0U/zGAJp8JwKazgubTCwGSpMjlJAzs4FWySeD0PtGKomekQEREAEREIHdOC79pLJzpHgasntAXmBoGq5N0ARKkddaRpIO1QU1dgnKQJTe5u+4hgijIQIiIAIi0JzAF/SaVcA8hCpqAAAAAElFTkSuQmCC", "tileWidth": 16, "tileHeight": 16, "tileSeparationX": 0, "tileSeparationY": 0, "tileMarginX": 0, "tileMarginY": 0}
+    {"label": "Tilemap", "path": "../images/tilemap_1.png", "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAwCAYAAABwrHhvAAAA0klEQVRYR+2XsQ6DMAxEbakd6I905lc695/7N3ToQAVSEAREL75I6XDM8fn8iLHxx3AZjXhu/ZWINnMZEIG/IJDf5OH1gW823QXPe3fahkdm2KTr6vyXARhF8KAMiIAItCcwvo3aB4Ltv4R5bsA7c0Q0Gpe0U/zGAJp8JwKazgubTCwGSpMjlJAzs4FWySeD0PtGKomekQEREAEREIHdOC79pLJzpHgasntAXmBoGq5N0ARKkddaRpIO1QU1dgnKQJTe5u+4hgijIQIiIAIi0JzAF/SaVcA8hCpqAAAAAElFTkSuQmCC", "tileWidth": 16, "tileHeight": 16, "tileSeparationX": 0, "tileSeparationY": 0, "tileMarginX": 0, "tileMarginY": 0}
   ]
 }

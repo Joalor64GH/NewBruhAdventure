@@ -1,5 +1,8 @@
 package;
 
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+
 class Coin extends MainSprite
 {
 	public function new(x:Float = 0, y:Float = 0)
@@ -7,6 +10,17 @@ class Coin extends MainSprite
 		super(x, y);
 
 		loadGraphic(AssetPaths.coin__png, true, 16, 16);
+	}
+
+	override function kill()
+	{
+		alive = false;
+		FlxTween.tween(this, {alpha: 0, y: y - 16}, 0.33, {ease: FlxEase.circOut, onComplete: finishKill});
+	}
+
+	function finishKill(_)
+	{
+		exists = false;
 	}
 }
 
@@ -17,5 +31,16 @@ class Coin_2 extends MainSprite
 		super(x, y);
 
 		loadGraphic(AssetPaths.coin_2__png, true, 16, 16);
+	}
+
+	override function kill()
+	{
+		alive = false;
+		FlxTween.tween(this, {alpha: 0, y: y - 16}, 0.33, {ease: FlxEase.circOut, onComplete: finishKill});
+	}
+
+	function finishKill(_)
+	{
+		exists = false;
 	}
 }

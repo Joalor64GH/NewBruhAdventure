@@ -1,93 +1,66 @@
 package;
 
 import Coin.Coin_2;
-import KindWater.Lava;
-import KindWater.Water;
 import flixel.FlxG;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
-import flixel.util.FlxTimer;
+import flixel.ui.FlxVirtualPad;
 
 class PlayState extends MainState
 {
 	var map:FlxOgmo3Loader;
-	var tile:FlxTilemap;
-
-	// coin stuff
-	var coin:FlxTypedGroup<Coin>;
-	var coin_2:FlxTypedGroup<Coin_2>;
-
-	// water kind stuff
-	var water:FlxTypedGroup<Water>;
-	var lava:FlxTypedGroup<Lava>;
-
-	// flag
-	var flag:FlxTypedGroup<Flag>;
+	var walls:FlxTilemap;
 
 	var player:Player;
+	var coins:FlxTypedGroup<Coin>;
+	var coins_2:FlxTypedGroup<Coin_2>;
 
-	var jumpTimer:Float = 0;
-	var jumping:Bool = false;
+	var pad:FlxVirtualPad;
 
 	override public function create()
 	{
 		super.create();
 
-		map = new FlxOgmo3Loader(AssetPaths.level__ogmo, AssetPaths.lv1__json);
-		tile = map.loadTilemap(AssetPaths.tilemap_1__png, "tile");
-		tile.follow();
-		tile.setTileProperties(1, NONE);
-		tile.setTileProperties(2, ANY);
-		add(tile);
+		FlxG.camera.follow(player, TOPDOWN, 1);
+
+		map = new FlxOgmo3Loader(AssetPaths.overworld__ogmo, AssetPaths.lv1__json);
+		walls = map.loadTilemap(AssetPaths.overmap__png, "tile");
+		walls.follow();
+		walls.setTileProperties(1, NONE);
+		walls.setTileProperties(2, ANY);
+		add(walls);
 
 		player = new Player();
 		add(player);
 
-		coin = new FlxTypedGroup<Coin>();
-		add(coin);
+		coins = new FlxTypedGroup<Coin>();
+		add(coins);
 
-		coin_2 = new FlxTypedGroup<Coin_2>();
-		add(coin_2);
+		coins_2 = new FlxTypedGroup<Coin_2>();
+		add(coins_2);
 
-		water = new FlxTypedGroup<Water>();
-		add(water);
+		map.loadEntities(placeEntities, "entity");
 
-		lava = new FlxTypedGroup<Lava>();
-		add(lava);
-
-		flag = new FlxTypedGroup<Flag>();
-		add(flag);
-
-		map.loadEntities(placeEntities, "en");
+		#if android
+		pad = new FlxVirtualPad(FlxDPadMode.FULL, FlxActionMode.NONE);
+		add(pad);
+		#end
 	}
 
 	function placeEntities(entity:EntityData)
 	{
-		var x = entity.x;
-		var y = entity.y;
-
-		switch (entity.name)
+		if (entity.name == "player")
 		{
-			case "player":
-				player.setPosition(x, y);
-				player.acceleration.y = 900;
-				player.maxVelocity.y = 300;
-
-			case "coin":
-				coin.add(new Coin(x, y));
-
-			case "flag":
-				flag.add(new Flag(x, y));
-
-			case "coin_2":
-				coin_2.add(new Coin_2(x, y));
-
-			case "lava":
-				lava.add(new Lava(x, y));
-
-			case "water":
-				water.add(new Water(x, y));
+			player.setPosition(entity.x, entity.y);
+		}
+		else if (entity.name == "coin")
+		{
+			coins.add(new Coin(entity.x, entity.y));
+		}
+		else if (entity.name == "coin_2")
+		{
+			coins_2.add(new Coin_2(entity.x, entity.y));
 		}
 	}
 
@@ -95,58 +68,55 @@ class PlayState extends MainState
 	{
 		super.update(elapsed);
 
-		FlxG.camera.zoom = 2;
-		FlxG.camera.follow(player, PLATFORMER);
-		FlxG.collide(player, tile);
-		FlxG.overlap(player, coin, touchCoin_1);
-		FlxG.overlap(player, coin_2, touchCoin_2);
+		FlxG.collide(player, walls);
+		FlxG.overlap(player, coins, playerTouchCoin);
 
-		var up:Bool = FlxG.keys.anyPressed([UP, W]);
-		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
-		var right:Bool = FlxG.keys.anyPressed([RIGHT, D]);
+		var up:Bool = pad.buttonUp.pressed || FlxG.keys.anyPressed([UP, W]);
+		var down:Bool = pad.buttonDown.pressed || FlxG.keys.anyPressed([DOWN, S]);
+		var left:Bool = pad.buttonLeft.pressed || FlxG.keys.anyPressed([LEFT, A]);
+		var right:Bool = pad.buttonRight.pressed || FlxG.keys.anyPressed([RIGHT, D]);
 
+		if (up && down)
+			up = down = false;
 		if (left && right)
 			left = right = false;
 
-		// From Haxe Snippests
-		if (jumping && !up)
-			jumping = false;
-
-		if (player.isTouching(DOWN) && !jumping)
-			jumpTimer = 0;
-
-		if (jumpTimer >= 0 && up)
+		if (up)
 		{
-			jumping = true;
-			jumpTimer += elapsed;
+			player.velocity.y = -100;
+			player.animation.play("up");
+		}
+		else if (down)
+		{
+			player.velocity.y = 100;
+			player.animation.play("down");
 		}
 		else
-			jumpTimer = -1;
-
-		if (jumpTimer > 0 && jumpTimer < 0.25)
-			player.velocity.y = -300;
+		{
+			player.velocity.y = 0;
+		}
 
 		if (left)
+		{
 			player.velocity.x = -100;
+			player.animation.play("left");
+		}
 		else if (right)
+		{
 			player.velocity.x = 100;
+			player.animation.play("right");
+		}
 		else
+		{
 			player.velocity.x = 0;
+		}
 	}
 
-	function touchCoin_1(player:Player, coin:Coin)
+	function playerTouchCoin(player:Player, coin:Coin)
 	{
 		if (player.alive && player.exists && coin.alive && coin.exists)
 		{
 			coin.kill();
-		}
-	}
-
-	function touchCoin_2(player:Player, coin_2:Coin_2)
-	{
-		if (player.alive && player.exists && coin_2.alive && coin_2.exists)
-		{
-			coin_2.kill();
 		}
 	}
 }
