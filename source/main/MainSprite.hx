@@ -18,6 +18,6 @@ class MainSprite extends FlxUISprite
 
 	public static function mouseImg()
 	{
-		FlxG.mouse.load(AssetPaths.mouse__png);
+		FlxG.mouse.load(Paths.mouse__png);
 	}
 }

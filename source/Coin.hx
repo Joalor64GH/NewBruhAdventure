@@ -9,7 +9,7 @@ class Coin extends MainSprite
 	{
 		super(x, y);
 
-		loadGraphic(AssetPaths.coin__png, true, 16, 16);
+		loadGraphic(Paths.coin__png, true, 16, 16);
 	}
 
 	override function kill()
@@ -30,7 +30,7 @@ class Coin_2 extends MainSprite
 	{
 		super(x, y);
 
-		loadGraphic(AssetPaths.coin_2__png, true, 16, 16);
+		loadGraphic(Paths.coin_2__png, true, 16, 16);
 	}
 
 	override function kill()

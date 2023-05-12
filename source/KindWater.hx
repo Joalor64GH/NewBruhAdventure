@@ -8,7 +8,7 @@ class Water extends MainSprite
 	{
 		super(x, y);
 
-		loadGraphic(AssetPaths.water_lava__png, true, 16, 16);
+		loadGraphic(Paths.water_lava__png, true, 16, 16);
 		animation.add("water", [2]);
 		animation.play("water");
 	}
@@ -20,7 +20,7 @@ class Lava extends MainSprite
 	{
 		super(x, y);
 
-		loadGraphic(AssetPaths.water_lava__png, true, 16, 16);
+		loadGraphic(Paths.water_lava__png, true, 16, 16);
 		animation.add("lava", [3]);
 		animation.play("lava");
 	}

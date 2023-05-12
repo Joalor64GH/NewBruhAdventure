@@ -1,5 +1,7 @@
 package;
 
+import crashdumper.CrashDumper;
+import crashdumper.SessionData;
 import flixel.FlxGame;
 import openfl.display.FPS;
 import openfl.display.Sprite;

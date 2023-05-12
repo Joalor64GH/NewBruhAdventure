@@ -8,7 +8,7 @@ class Flag extends MainSprite
 	{
 		super(x, y);
 
-		loadGraphic(AssetPaths.flag__png, true, 16, 16);
+		loadGraphic(Paths.flag__png, true, 16, 16);
 		animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8], 12, true);
 		animation.add("touch", [9, 10, 11, 12], 12, true);
 

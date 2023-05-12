@@ -1,6 +1,7 @@
 package openfl.display;
 
 import haxe.Timer;
+import lime.app.Application;
 import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
