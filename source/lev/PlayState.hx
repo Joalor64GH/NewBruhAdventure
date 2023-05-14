@@ -83,6 +83,8 @@ class PlayState extends MainState
 
 	override public function update(elapsed:Float)
 	{
+		super.update(elapsed);
+
 		FlxG.camera.follow(player, PLATFORMER);
 		// FlxG.collide(player, walls);
 		FlxG.overlap(player, coin, touchCoin);
