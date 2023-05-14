@@ -1,4 +1,4 @@
-package;
+package playstate;
 
 import flixel.FlxG;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
@@ -6,7 +6,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
 import main.Util;
 
-class PlayState extends MainState
+class Level2 extends MainState
 {
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
@@ -25,9 +25,6 @@ class PlayState extends MainState
 	{
 		super.create();
 
-		/*if (lev == 2)
-				map = new FlxOgmo3Loader(Paths.levelProject__ogmo, Paths.lev2__json);
-			else */
 		map = new FlxOgmo3Loader(Paths.levelProject__ogmo, Paths.lev1__json);
 
 		FlxG.camera.follow(player, LOCKON, 1);
@@ -76,7 +73,7 @@ class PlayState extends MainState
 
 		FlxG.save.data.runSpeed = Std.parseInt(Util.fileString(Paths.runSpeed__txt));
 
-		FlxG.camera.zoom = 2.25;
+		FlxG.camera.zoom = camZoom;
 		FlxG.camera.follow(player, TOPDOWN);
 
 		FlxG.collide(player, walls);
@@ -136,6 +133,8 @@ class PlayState extends MainState
 		if (player.alive && player.exists && flag.alive && flag.exists)
 		{
 			flag.kill();
+
+			FlxG.switchState(new MenuState());
 		}
 	}
 }

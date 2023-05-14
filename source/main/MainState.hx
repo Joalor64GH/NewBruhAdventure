@@ -8,6 +8,8 @@ class MainState extends FlxUIState
 {
 	var save:FlxSave = new FlxSave();
 
+	var camZoom:Float = Std.parseFloat(Util.fileString(Paths.camZoom__txt));
+
 	override public function create()
 	{
 		super.create();
