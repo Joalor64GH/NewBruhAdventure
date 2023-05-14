@@ -68,18 +68,21 @@ class MenuState extends MainState
 			change(1);
 		}
 
-		if (FlxG.keys.justPressed.ENTER)
+		menu_group.forEach(function(spr:MenuImage)
 		{
-			switch (list[select])
+			if (FlxG.keys.justPressed.ENTER || FlxG.mouse.overlaps(spr) && FlxG.mouse.pressed)
 			{
-				case "play":
-					FlxG.switchState(new MenuSelectLevel());
+				switch (list[select])
+				{
+					case "play":
+						FlxG.switchState(new MenuSelectLevel());
 
-				case "exit":
-					FlxG.save.flush();
-					Sys.exit(0);
+					case "exit":
+						FlxG.save.flush();
+						Sys.exit(0);
+				}
 			}
-		}
+		});
 	}
 
 	function change(change:Int = 0)

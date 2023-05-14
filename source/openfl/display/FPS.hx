@@ -3,6 +3,7 @@ package openfl.display;
 import haxe.Timer;
 import lime.app.Application;
 import openfl.events.Event;
+import openfl.system.System;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 #if gl_stats
@@ -74,15 +75,12 @@ class FPS extends TextField
 		var currentCount = times.length;
 		currentFPS = Math.round((currentCount + cacheCount) / 2);
 
+		var mem:Float = Math.round(System.totalMemory / 1024 / 1024 * 100) / 100;
+
 		if (currentCount != cacheCount /*&& visible*/)
 		{
 			text = "FPS: " + currentFPS;
-
-			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
-			text += "\ntotalDC: " + Context3DStats.totalDrawCalls();
-			text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
-			text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
-			#end
+			text += "\nMemory: " + mem;
 		}
 
 		cacheCount = currentCount;

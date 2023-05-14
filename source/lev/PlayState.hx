@@ -16,6 +16,9 @@ class PlayState extends MainState
 
 	var coin:FlxTypedGroup<Coin>;
 	var player:Player;
+	var flag:Flag;
+
+	static inline var SPEED:Float = 100;
 
 	var jumpTimer:Float = 0;
 	var jumping:Bool = false;
@@ -50,6 +53,11 @@ class PlayState extends MainState
 
 		coin = new FlxTypedGroup<Coin>();
 		add(coin);
+
+		flag = new Flag();
+		add(flag);
+
+		map.loadEntities(placeEntities, 'entity');
 	}
 
 	function placeEntities(entity:EntityData)
@@ -66,25 +74,36 @@ class PlayState extends MainState
 
 			case 'coin':
 				coin.add(new Coin(x, y));
+
+			case 'flag':
+				flag.x = x;
+				flag.y = y;
 		}
 	}
 
 	override public function update(elapsed:Float)
 	{
-		FlxG.save.data.runSpeed = Std.parseInt(Util.fileString(Paths.runSpeed__txt));
-
 		FlxG.camera.follow(player, PLATFORMER);
-		FlxG.collide(player, walls);
+		// FlxG.collide(player, walls);
 		FlxG.overlap(player, coin, touchCoin);
 
-		var up:Bool = FlxG.keys.anyPressed([UP, W]);
-		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
-		var right:Bool = FlxG.keys.anyPressed([RIGHT, D]);
+		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 
-		if (left && right)
-			left = right = false;
+		if (pause)
+		{
+			openSubState(new PauseSubState());
+		}
 
-		// From Haxe Snippests
+		var up:Bool = false;
+		var left:Bool = false;
+		var right:Bool = false;
+
+		#if FLX_KEYBOARD
+		up = FlxG.keys.anyJustPressed([UP, W, SPACE]);
+		left = FlxG.keys.anyPressed([LEFT, A]);
+		right = FlxG.keys.anyPressed([RIGHT, D]);
+		#end
+
 		if (jumping && !up)
 			jumping = false;
 
@@ -102,12 +121,36 @@ class PlayState extends MainState
 		if (jumpTimer > 0 && jumpTimer < 0.25)
 			player.velocity.y = -300;
 
-		if (left)
-			player.velocity.x = -100 * FlxG.save.data.runSpeed;
-		else if (right)
-			player.velocity.x = 100 * FlxG.save.data.runSpeed;
-		else
-			player.velocity.x = 0;
+		if (left && right)
+			left = right = false;
+
+		if (left || right)
+		{
+			var newAngle:Float = 0;
+			if (left)
+			{
+				newAngle = 180;
+				player.facing = LEFT;
+			}
+			else if (right)
+			{
+				newAngle = 0;
+				player.facing = RIGHT;
+			}
+
+			// determine our velocity based on angle and speed
+			player.velocity.setPolarDegrees(SPEED, newAngle);
+		}
+		// check if the player is moving, and not walking into walls
+
+		switch (player.facing)
+		{
+			case LEFT:
+				player.animation.play("left");
+			case RIGHT:
+				player.animation.play("right");
+			case _:
+		}
 	}
 
 	function touchCoin(player:Player, coin:Coin)
