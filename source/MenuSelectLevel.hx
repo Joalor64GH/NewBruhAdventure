@@ -44,10 +44,12 @@ class MenuSelectLevel extends MainState
 			switch (list[select])
 			{
 				case "lev1":
-					FlxG.switchState(new Level1());
+					PlayState.levRun();
+					FlxG.switchState(new PlayState());
 
 				case "lev2":
-					FlxG.switchState(new Level2());
+					PlayState.levRun(1);
+					FlxG.switchState(new PlayState());
 			}
 		}
 	}
