@@ -6,18 +6,7 @@ class MainData
 {
 	public static function fpsCounter(ifbool:Bool)
 	{
-		if (ifbool)
-		{
-			ifbool = true;
-		}
-		else
-		{
-			ifbool = false;
-		}
-
-		FlxG.save.data.fpsCounter = ifbool;
-
-		return ifbool;
+		return FlxG.save.data.fpsCounter = ifbool;
 	}
 
 	public static function checkData()
