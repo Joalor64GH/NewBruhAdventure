@@ -1,7 +1,18 @@
 package;
 
+import flixel.math.FlxPoint;
+
 class Player extends MainSprite
 {
+	/**
+		Direction of the player.
+		If left: FlxPoint.get(-1, 0);
+		etc...
+	*/
+	public var direction:FlxPoint = new FlxPoint(0, 0);
+
+	public var speed:FlxPoint = new FlxPoint(0, 0);
+
 	public function new(x:Float = 0, y:Float = 0)
 	{
 		super(x, y);
@@ -15,5 +26,6 @@ class Player extends MainSprite
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		
 	}
 }
