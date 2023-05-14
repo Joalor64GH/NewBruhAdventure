@@ -1,6 +1,6 @@
 package;
 
-import flixel.math.FlxPoint;
+import util.Vector;
 
 class Player extends MainSprite
 {
@@ -9,9 +9,9 @@ class Player extends MainSprite
 		If left: FlxPoint.get(-1, 0);
 		etc...
 	*/
-	public var direction:FlxPoint = new FlxPoint(0, 0);
+	public var direction:Vector = new Vector(0, 0);
 
-	public var speed:FlxPoint = new FlxPoint(0, 0);
+	public var speed:Vector = new Vector(0, 0);
 
 	public function new(x:Float = 0, y:Float = 0)
 	{
@@ -23,9 +23,22 @@ class Player extends MainSprite
 		animation.play("right");
 	}
 
+	// this would use less images...
+	/*public function turnRight() {
+		if(this.flipX) {
+			this.flipX = false;
+		}
+	}
+	public function turnLeft() {
+		if(!this.flipX) {
+			this.flipX = true;
+		}
+	}*/
+
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		
+		this.x += direction.dx * speed.dx;
+		this.y += direction.dy * speed.dy;
 	}
 }
