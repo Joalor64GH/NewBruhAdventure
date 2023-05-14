@@ -1,13 +1,14 @@
 package main;
 
 import flixel.FlxG;
-import flixel.addons.ui.FlxUISprite;
+import flixel.FlxSprite;
+import flixel.system.FlxAssets.FlxGraphicAsset;
 
-class MainSprite extends FlxUISprite
+class MainSprite extends FlxSprite
 {
-	public function new(x:Float = 0, y:Float = 0)
+	public function new(x:Float = 0, y:Float = 0, ?Graphic:FlxGraphicAsset)
 	{
-		super(x, y);
+		super(x, y, Graphic);
 	}
 
 	public static function mouseImg()
