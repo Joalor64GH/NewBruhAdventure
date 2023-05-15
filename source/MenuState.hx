@@ -5,7 +5,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 
 class MenuState extends MainState
 {
-	var list:Array<String> = ['play', 'setting', 'exit'];
+	var list:Array<String> = ['play', 'exit'];
 
 	var menu_group:FlxTypedGroup<MenuImage>;
 	var select:Int = 0;
@@ -105,12 +105,6 @@ class MenuState extends MainState
 						spr.animation.play("play_idle");
 
 				case 1:
-					if (FlxG.mouse.overlaps(spr))
-						spr.animation.play("options_select");
-					else
-						spr.animation.play("options_idle");
-
-				case 2:
 					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("quit_select");
 					else
