@@ -21,7 +21,6 @@ class PlayState extends MainState
 
 	var jumpTimer:Float = 0;
 	var jumping:Bool = false;
-	var jumpPress:Bool = false;
 
 	static var jsonPaths:String = '';
 
@@ -94,38 +93,29 @@ class PlayState extends MainState
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
 		var right:Bool = FlxG.keys.anyPressed([RIGHT, D]);
+		var up:Bool = FlxG.keys.anyPressed([W, UP, SPACE]);
 
 		if (pause)
 		{
 			openSubState(new PauseSubState());
 		}
 
-		if (FlxG.keys.anyPressed([W, UP, SPACE]))
+		if (jumping && !up)
+			jumping = false;
+
+		if (player.isTouching(DOWN) && !jumping)
+			jumpTimer = 0;
+
+		if (jumpTimer >= 0 && up)
 		{
-			jumpPress = true;
+			jumping = true;
+			jumpTimer += elapsed;
 		}
+		else
+			jumpTimer = -1;
 
-		if (jumpPress)
-		{
-			if (jumping && !jumpPress)
-				jumping = false;
-
-			if (player.isTouching(DOWN) && !jumping)
-				jumpTimer = 0;
-
-			if (jumpTimer >= 0 && jumpPress)
-			{
-				jumping = true;
-				jumpTimer += elapsed;
-			}
-			else
-				jumpTimer = -1;
-
-			if (jumpTimer > 0 && jumpTimer < 0.25)
-				player.velocity.y = -300;
-
-			jumpPress = false;
-		}
+		if (jumpTimer > 0 && jumpTimer < 0.25)
+			player.velocity.y = -300;
 
 		if (left && right)
 			left = right = false;
