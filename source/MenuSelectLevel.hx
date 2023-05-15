@@ -66,6 +66,10 @@ class MenuSelectLevel extends MainState
 				case "lev3":
 					PlayState.levRun(2);
 					FlxG.switchState(new PlayState());
+
+				case "lev4":
+					PlayState.levRun(3);
+					FlxG.switchState(new PlayState());
 			}
 		}
 	}
