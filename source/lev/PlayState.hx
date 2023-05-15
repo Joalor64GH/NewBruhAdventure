@@ -117,6 +117,12 @@ class PlayState extends MainState
 		if (jumpTimer > 0 && jumpTimer < 0.25)
 			player.velocity.y = -300;
 
+		if (left)
+			player.turnLeft(true);
+
+		if (right)
+			player.turnRight(false);
+
 		if (left && right)
 			left = right = false;
 

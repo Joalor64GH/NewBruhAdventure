@@ -8,7 +8,7 @@ class Player extends MainSprite
 		Direction of the player.
 		If left: FlxPoint.get(-1, 0);
 		etc...
-	*/
+	 */
 	public var direction:Vector = new Vector(0, 0);
 
 	public var speed:Vector = new Vector(0, 0);
@@ -24,16 +24,29 @@ class Player extends MainSprite
 	}
 
 	// this would use less images...
-	/*public function turnRight() {
-		if(this.flipX) {
+	public function turnRight(flip:Bool = true)
+	{
+		flipX = flip;
+
+		if (this.flipX)
+		{
 			this.flipX = false;
 		}
+
+		return flip;
 	}
-	public function turnLeft() {
-		if(!this.flipX) {
+
+	public function turnLeft(flip:Bool = false)
+	{
+		flipX = flip;
+
+		if (!this.flipX)
+		{
 			this.flipX = true;
 		}
-	}*/
+
+		return flip;
+	}
 
 	override public function update(elapsed:Float)
 	{
