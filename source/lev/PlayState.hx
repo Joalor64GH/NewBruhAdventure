@@ -19,6 +19,9 @@ class PlayState extends MainState
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
 
+	var jumpTimer:Float = 0;
+	var jumping:Bool = false;
+
 	public static function levRun(typeLev:Int = 0)
 	{
 		switch (typeLev)
@@ -83,12 +86,52 @@ class PlayState extends MainState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		FlxG.collide(player, walls);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
+		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
+		var right:Bool = FlxG.keys.anyPressed([RIGHT, D]);
 
 		if (pause)
 		{
 			openSubState(new PauseSubState());
 		}
+
+		if (FlxG.keys.anyPressed([W, UP, SPACE]))
+		{
+			jumpPress = true;
+		}
+
+		if (jumpPress)
+		{
+			if (jumping && !jumpPress)
+				jumping = false;
+
+			if (player.isTouching(DOWN) && !jumping)
+				jumpTimer = 0;
+
+			if (jumpTimer >= 0 && jumpPress)
+			{
+				jumping = true;
+				jumpTimer += elapsed;
+			}
+			else
+				jumpTimer = -1;
+
+			if (jumpTimer > 0 && jumpTimer < 0.25)
+				player.velocity.y = -300;
+
+			jumpPress = false;
+		}
+
+		if (left && right)
+			left = right = false;
+
+		if (left)
+			player.velocity.x = -100;
+		else if (right)
+			player.velocity.x = 100;
+		else
+			player.velocity.x = 0;
 	}
 }
