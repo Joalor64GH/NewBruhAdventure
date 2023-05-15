@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
@@ -12,6 +13,12 @@ class PauseSubState extends FlxSubState
 	public function new()
 	{
 		super(FlxColor.BLACK);
+
+		var bg:FlxSprite = new FlxSprite();
+		bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg.alpha = 0.65;
+		bg.scrollFactor.set();
+		add(bg);
 
 		text = new FlxText(0, 0, 0, "- PAUSE -
             \nPress Enter to resume\nPress R to restart\nPress Esc to return", 16);
