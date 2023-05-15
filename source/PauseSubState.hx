@@ -44,7 +44,7 @@ class PauseSubState extends FlxSubState
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.switchState(new MenuState());
+			FlxG.switchState(new MenuSelectLevel());
 		}
 	}
 }

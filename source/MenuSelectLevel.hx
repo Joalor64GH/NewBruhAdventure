@@ -51,27 +51,35 @@ class MenuSelectLevel extends MainState
 			change(1);
 		}
 
-		if (FlxG.keys.justPressed.ENTER)
+		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			switch (list[select])
-			{
-				case "lev1":
-					PlayState.levRun();
-					FlxG.switchState(new PlayState());
-
-				case "lev2":
-					PlayState.levRun(1);
-					FlxG.switchState(new PlayState());
-
-				case "lev3":
-					PlayState.levRun(2);
-					FlxG.switchState(new PlayState());
-
-				case "lev4":
-					PlayState.levRun(3);
-					FlxG.switchState(new PlayState());
-			}
+			FlxG.switchState(new MenuState());
 		}
+
+		select_lev.forEach(function(spr:MenuSelect)
+		{
+			if (FlxG.keys.justPressed.ENTER || FlxG.mouse.overlaps(spr) && FlxG.mouse.pressed)
+			{
+				switch (list[select])
+				{
+					case "lev1":
+						PlayState.levRun();
+						FlxG.switchState(new PlayState());
+
+					case "lev2":
+						PlayState.levRun(1);
+						FlxG.switchState(new PlayState());
+
+					case "lev3":
+						PlayState.levRun(2);
+						FlxG.switchState(new PlayState());
+
+					case "lev4":
+						PlayState.levRun(3);
+						FlxG.switchState(new PlayState());
+				}
+			}
+		});
 	}
 
 	function change(change:Int = 0)
