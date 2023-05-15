@@ -12,7 +12,7 @@ class PauseSubState extends FlxSubState
 
 	public function new()
 	{
-		super(FlxColor.BLACK);
+		super();
 
 		var bg:FlxSprite = new FlxSprite();
 		bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);

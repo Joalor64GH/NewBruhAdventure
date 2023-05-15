@@ -8,6 +8,7 @@ import flixel.FlxSprite;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
+import flixel.util.FlxColor;
 
 class PlayState extends MainState
 {
@@ -48,6 +49,10 @@ class PlayState extends MainState
 		super.create();
 
 		FlxG.camera.zoom = camZoom;
+
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.CYAN);
+		bg.scrollFactor.set();
+		add(bg);
 
 		map = new FlxOgmo3Loader(Paths.levelProject__ogmo, jsonPaths);
 		walls = map.loadTilemap(Paths.tilemap_1__png, 'walls');
