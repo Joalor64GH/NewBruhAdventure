@@ -21,7 +21,8 @@ class MenuState extends MainState
 		{
 			var selectThing:MenuImage = new MenuImage();
 			selectThing.ID = i;
-			selectThing.screenCenter();
+			selectThing.screenCenter(Y);
+			selectThing.x = 20;
 			menu_group.add(selectThing);
 		}
 

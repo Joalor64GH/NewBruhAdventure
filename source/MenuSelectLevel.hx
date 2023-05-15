@@ -21,6 +21,7 @@ class MenuSelectLevel extends MainState
 			var selectThing:MenuSelect = new MenuSelect();
 			selectThing.ID = i;
 			selectThing.screenCenter();
+			selectThing.x = 20;
 			select_lev.add(selectThing);
 		}
 	}
