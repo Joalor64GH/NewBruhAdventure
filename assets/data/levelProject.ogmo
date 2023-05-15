@@ -181,6 +181,42 @@
       "values": []
     },
     {
+      "exportID": "81438186",
+      "name": "lava",
+      "limit": -1,
+      "size": {"x": 16, "y": 16},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff9600ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": []
+    },
+    {
       "exportID": "81436580",
       "name": "water",
       "limit": -1,
@@ -217,8 +253,8 @@
       "values": []
     },
     {
-      "exportID": "81438186",
-      "name": "lava",
+      "exportID": "15793698",
+      "name": "coin_super",
       "limit": -1,
       "size": {"x": 16, "y": 16},
       "origin": {"x": 0, "y": 0},
@@ -234,7 +270,7 @@
           {"x": 1, "y": 1}
         ]
       },
-      "color": "#ff9600ff",
+      "color": "#ffbd71ff",
       "tileX": false,
       "tileY": false,
       "tileSize": {"x": 16, "y": 16},
@@ -254,6 +290,6 @@
     }
   ],
   "tilesets": [
-    {"label": "tilemap", "path": "../images/tilemap_1.png", "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAwCAYAAABwrHhvAAAA0klEQVRYR+2XsQ6DMAxEbakd6I905lc695/7N3ToQAVSEAREL75I6XDM8fn8iLHxx3AZjXhu/ZWINnMZEIG/IJDf5OH1gW823QXPe3fahkdm2KTr6vyXARhF8KAMiIAItCcwvo3aB4Ltv4R5bsA7c0Q0Gpe0U/zGAJp8JwKazgubTCwGSpMjlJAzs4FWySeD0PtGKomekQEREAEREIHdOC79pLJzpHgasntAXmBoGq5N0ARKkddaRpIO1QU1dgnKQJTe5u+4hgijIQIiIAIi0JzAF/SaVcA8hCpqAAAAAElFTkSuQmCC", "tileWidth": 16, "tileHeight": 16, "tileSeparationX": 0, "tileSeparationY": 0, "tileMarginX": 0, "tileMarginY": 0}
+    {"label": "tilemap", "path": "../images/tilemap_1.png", "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABNUlEQVRoQ+2YTQrCMBSEE9BFvYhrr+La2+l9dOtF2oWLSgqVGKSZSV5ahOm27++beZRH/bnfje6PHy+Ajd2TAxsb4MwcOJz2rr+/VueZAELz+GEHKcm3AvaXY7f4Gf0Fkw68JPucHw8c57Nipb2yAKvvBNlQAKRg5uFywFxSsqAcIAUzD5cD18dgripTsNqBFMB3ziMDjIP7ugDQvLn2nG8KUDwECJ0KEyDMANjhEZeQGBOArYYPgNUAt+cA7TyiZkmMAORAyd5EOVohrZBWKPNXIieQViinUOb9/3+F0rOWFWTLO2i6hT53NXjS1t7xrEC5+AmAVTGGYHNzA7Hviy9J1jl2MDS+GCA0KHEPHQyNqwJAm7SME0BLdZHacgBRqWWMHGipLlJbDiAqtYyRAy3VRWq/AfWblsAOraN4AAAAAElFTkSuQmCC", "tileWidth": 16, "tileHeight": 16, "tileSeparationX": 0, "tileSeparationY": 0, "tileMarginX": 0, "tileMarginY": 0}
   ]
 }

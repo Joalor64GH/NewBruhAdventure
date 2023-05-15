@@ -23,7 +23,7 @@ class MenuSelectLevel extends MainState
 
 		for (i in 0...list.length)
 		{
-			var selectThing:MenuSelect = new MenuSelect(-100, 0);
+			var selectThing:MenuSelect = new MenuSelect(100, 0);
 			selectThing.ID = i;
 			selectThing.screenCenter(Y);
 			selectThing.scrollFactor.set();
@@ -75,6 +75,18 @@ class MenuSelectLevel extends MainState
 
 					case "lev4":
 						PlayState.levRun(3);
+						FlxG.switchState(new PlayState());
+
+					case "lev5":
+						PlayState.levRun(4);
+						FlxG.switchState(new PlayState());
+
+					case "lev6":
+						PlayState.levRun(5);
+						FlxG.switchState(new PlayState());
+
+					case "lev7":
+						PlayState.levRun(6);
 						FlxG.switchState(new PlayState());
 				}
 			}

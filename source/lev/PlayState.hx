@@ -1,6 +1,7 @@
 package lev;
 
 import Coin.Coin_2;
+import Coin.Coin_Super;
 import Coin;
 import Player;
 import flixel.FlxG;
@@ -16,6 +17,7 @@ class PlayState extends MainState
 	var player:Player;
 	var coin:FlxTypedGroup<Coin>;
 	var coin_2:FlxTypedGroup<Coin_2>;
+	var coin_super:FlxTypedGroup<Coin_Super>;
 	var flag:Flag;
 
 	var map:FlxOgmo3Loader;
@@ -52,6 +54,21 @@ class PlayState extends MainState
 				curLevel = 'lev4';
 				jsonPaths = Paths.lev4__json;
 				trace('load: ' + jsonPaths);
+
+			case 4:
+				curLevel = 'lev5';
+				jsonPaths = Paths.lev5__json;
+				trace('load: ' + jsonPaths);
+
+			case 5:
+				curLevel = 'lev6';
+				jsonPaths = Paths.lev6__json;
+				trace('load: ' + jsonPaths);
+
+			case 6:
+				curLevel = 'lev7';
+				jsonPaths = Paths.lev7__json;
+				trace('load: ' + jsonPaths);
 		}
 	}
 
@@ -81,6 +98,9 @@ class PlayState extends MainState
 		coin_2 = new FlxTypedGroup<Coin_2>();
 		add(coin_2);
 
+		coin_super = new FlxTypedGroup<Coin_Super>();
+		add(coin_super);
+
 		flag = new Flag();
 		add(flag);
 
@@ -105,6 +125,9 @@ class PlayState extends MainState
 			case 'coin_2':
 				coin_2.add(new Coin_2(x, y));
 
+			case 'coin_super':
+				coin_super.add(new Coin_Super(x, y));
+
 			case 'flag':
 				flag.x = x;
 				flag.y = y;
@@ -119,6 +142,7 @@ class PlayState extends MainState
 
 		FlxG.overlap(player, coin, touchCoin);
 		FlxG.overlap(player, coin_2, touchCoin2);
+		FlxG.overlap(player, coin_super, touchCoinSuper);
 		FlxG.overlap(player, flag, touchFlag);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
@@ -182,6 +206,16 @@ class PlayState extends MainState
 			coin_2.kill();
 			score += 50;
 			trace('player got 50 score');
+		}
+	}
+
+	function touchCoinSuper(player:Player, coin_super:Coin_Super)
+	{
+		if (player.alive && player.exists && coin_super.alive && coin_super.exists)
+		{
+			coin_super.kill();
+			score += 100;
+			trace('player got 100 score');
 		}
 	}
 
