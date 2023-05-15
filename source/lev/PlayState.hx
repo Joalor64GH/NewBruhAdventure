@@ -14,17 +14,81 @@ class PlayState extends MainState
 	var player:Player;
 	var coin:FlxTypedGroup<Coin>;
 	var coin_2:FlxTypedGroup<Coin_2>;
+	var flag:Flag;
 
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
 
+	public static function levRun(typeLev:Int = 0)
+	{
+		switch (typeLev)
+		{
+			case 0:
+				jsonPaths = Paths.lev1__json;
+				trace('load: ' + jsonPaths);
+
+			case 1:
+				jsonPaths = Paths.lev2__json;
+				trace('load: ' + jsonPaths);
+		}
+	}
+
 	override public function create()
 	{
 		super.create();
+
+		map = new FlxOgmo3Loader(Paths.levelProject__ogmo, jsonPaths);
+		walls = map.loadTilemap(Paths.tilemap_1__png, 'walls');
+		walls.follow();
+		walls.setTileProperties(1, NONE);
+		walls.setTileProperties(2, ANY);
+		add(walls);
+
+		player = new Player();
+		add(player);
+
+		coin = new FlxTypedGroup<Coin>();
+		add(coin);
+
+		coin_2 = new FlxTypedGroup<Coin_2>();
+		add(coin_2);
+
+		flag = new Flag();
+		add(flag);
+
+		map.loadEntities(placeEntities, entity);
+	}
+
+	function placeEntities(entity:EntityData)
+	{
+		var x = entity.x;
+		var y = entity.y;
+
+		switch (entity.name)
+		{
+			case 'player':
+				player.setPosition(x, y);
+				player.acceleration.y = 900;
+				player.maxVelocity.y = 300;
+
+			case 'coin':
+				coin.add(new Coin(x, y));
+
+			case 'flag':
+				flag.x = x;
+				flag.y = y;
+		}
 	}
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
+
+		if (pause)
+		{
+			openSubState(new PauseSubState());
+		}
 	}
 }

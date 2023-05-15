@@ -6,7 +6,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
 import main.MainState;
 
-class PlayState extends MainState
+class PlayState_ERROR extends MainState
 {
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
