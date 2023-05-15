@@ -91,7 +91,7 @@ class PlayState extends MainState
 	{
 		super.update(elapsed);
 		FlxG.collide(player, walls);
-		FlxG.camera.follow(player, LOCKON);
+		FlxG.camera.follow(player, PLATFORMER);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
