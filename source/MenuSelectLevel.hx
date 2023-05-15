@@ -45,54 +45,55 @@ class MenuSelectLevel extends MainState
 			change(-1);
 		}
 		else if (FlxG.keys.anyJustPressed([DOWN, S]))
-		{
-			change(1);
-		}
-
-		if (FlxG.keys.justPressed.ESCAPE)
-		{
-			FlxG.switchState(new MenuState());
-		}
-
-		select_lev.forEach(function(spr:MenuSelect)
-		{
-			if (FlxG.keys.justPressed.ENTER || FlxG.mouse.overlaps(spr) && FlxG.mouse.pressed)
-			{
-				switch (list[select])
-				{
-					case "lev1":
-						PlayState.levRun();
-						FlxG.switchState(new PlayState());
-
-					case "lev2":
-						PlayState.levRun(1);
-						FlxG.switchState(new PlayState());
-
-					case "lev3":
-						PlayState.levRun(2);
-						FlxG.switchState(new PlayState());
-
-					case "lev4":
-						PlayState.levRun(3);
-						FlxG.switchState(new PlayState());
-				}
-			}
-		});
 	}
 
-	function change(change:Int = 0)
+else if (FlxG.keys.anyJustPressed([DOWN, S]))
+{
+	change(1);
+}
+	if (FlxG.keys.justPressed.ESCAPE)
 	{
-		select += change;
-
-		if (select < 0)
-			select = select_lev.length - 1;
-		if (select >= select_lev.length)
-			select = 0;
-
-		select_lev.forEach(function(spr:MenuSelect)
-		{
-			spr.animation.play("lev" + Std.string(select + 1));
-			spr.updateHitbox();
-		});
+		FlxG.switchState(new MenuState());
 	}
+	select_lev.forEach(function(spr:MenuSelect)
+	{
+		if (FlxG.keys.justPressed.ENTER || FlxG.mouse.overlaps(spr) && FlxG.mouse.pressed)
+		{
+			switch (list[select])
+			{
+				case "lev1":
+					PlayState.levRun();
+					FlxG.switchState(new PlayState());
+
+				case "lev2":
+					PlayState.levRun(1);
+					FlxG.switchState(new PlayState());
+
+				case "lev3":
+					PlayState.levRun(2);
+					FlxG.switchState(new PlayState());
+
+				case "lev4":
+					PlayState.levRun(3);
+					FlxG.switchState(new PlayState());
+			}
+		}
+	});
+}
+
+function change(change:Int = 0)
+{
+	select += change;
+
+	if (select < 0)
+		select = select_lev.length - 1;
+	if (select >= select_lev.length)
+		select = 0;
+
+	select_lev.forEach(function(spr:MenuSelect)
+	{
+		spr.animation.play("lev" + Std.string(select + 1));
+		spr.updateHitbox();
+	});
+}
 }
