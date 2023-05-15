@@ -42,6 +42,8 @@ class PlayState extends MainState
 	{
 		super.create();
 
+		FlxG.camera.zoom = camZoom;
+
 		map = new FlxOgmo3Loader(Paths.levelProject__ogmo, jsonPaths);
 		walls = map.loadTilemap(Paths.tilemap_1__png, 'walls');
 		walls.follow();
@@ -89,6 +91,7 @@ class PlayState extends MainState
 	{
 		super.update(elapsed);
 		FlxG.collide(player, walls);
+		FlxG.camera.follow(player, LOCKON);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
