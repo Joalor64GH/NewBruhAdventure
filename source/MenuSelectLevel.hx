@@ -12,6 +12,8 @@ class MenuSelectLevel extends MainState
 	var select_lev:FlxTypedGroup<MenuSelect>;
 	var select:Int = 0;
 
+	var arrowSelect:SelectArrow;
+
 	override public function create()
 	{
 		super.create();
@@ -23,10 +25,15 @@ class MenuSelectLevel extends MainState
 		{
 			var selectThing:MenuSelect = new MenuSelect();
 			selectThing.ID = i;
-			selectThing.screenCenter();
-			selectThing.x = 20;
+			selectThing.screenCenter(Y);
+			selectThing.scrollFactor.set();
 			select_lev.add(selectThing);
 		}
+
+		arrowSelect = new SelectArrow();
+		arrowSelect.scrollFactor.set();
+		arrowSelect.screenCenter(Y);
+		add(arrowSelect);
 	}
 
 	override public function update(elapsed:Float)
@@ -53,6 +60,10 @@ class MenuSelectLevel extends MainState
 
 				case "lev2":
 					PlayState.levRun(1);
+					FlxG.switchState(new PlayState());
+
+				case "lev3":
+					PlayState.levRun(2);
 					FlxG.switchState(new PlayState());
 			}
 		}
