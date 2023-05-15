@@ -21,6 +21,9 @@ class PlayState extends MainState
 
 	var jumpTimer:Float = 0;
 	var jumping:Bool = false;
+	var jumpPress:Bool = false;
+
+	static var jsonPaths:String = '';
 
 	public static function levRun(typeLev:Int = 0)
 	{
@@ -59,7 +62,7 @@ class PlayState extends MainState
 		flag = new Flag();
 		add(flag);
 
-		map.loadEntities(placeEntities, entity);
+		map.loadEntities(placeEntities, 'entity');
 	}
 
 	function placeEntities(entity:EntityData)
