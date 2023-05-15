@@ -80,7 +80,7 @@ class FPS extends TextField
 		if (currentCount != cacheCount /*&& visible*/)
 		{
 			text = "FPS: " + currentFPS;
-			text += "\nMemory: " + mem;
+			text += "\nMemory: " + mem + " MB";
 		}
 
 		cacheCount = currentCount;
