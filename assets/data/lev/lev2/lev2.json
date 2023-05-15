@@ -44,7 +44,19 @@
         {"name": "coin", "id": 26, "_eid": "81430102", "x": 3872, "y": 384, "originX": 0, "originY": 0},
         {"name": "coin", "id": 27, "_eid": "81430102", "x": 3968, "y": 384, "originX": 0, "originY": 0},
         {"name": "coin", "id": 28, "_eid": "81430102", "x": 3920, "y": 352, "originX": 0, "originY": 0},
-        {"name": "flag", "id": 29, "_eid": "81439628", "x": 4064, "y": 384, "originX": 0, "originY": 0}
+        {"name": "flag", "id": 29, "_eid": "81439628", "x": 4064, "y": 384, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 30, "_eid": "81438897", "x": 400, "y": 368, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 31, "_eid": "81438897", "x": 576, "y": 368, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 32, "_eid": "81438897", "x": 912, "y": 304, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 33, "_eid": "81438897", "x": 1328, "y": 304, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 34, "_eid": "81438897", "x": 1456, "y": 320, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 35, "_eid": "81438897", "x": 1600, "y": 304, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 36, "_eid": "81438897", "x": 2096, "y": 400, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 37, "_eid": "81438897", "x": 2256, "y": 336, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 38, "_eid": "81438897", "x": 2800, "y": 336, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 39, "_eid": "81438897", "x": 3392, "y": 320, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 40, "_eid": "81438897", "x": 3920, "y": 304, "originX": 0, "originY": 0},
+        {"name": "coin_2", "id": 41, "_eid": "81438897", "x": 3760, "y": 352, "originX": 0, "originY": 0}
       ]
     },
     {
