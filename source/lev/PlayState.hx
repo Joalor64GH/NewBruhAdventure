@@ -23,16 +23,21 @@ class PlayState extends MainState
 	var jumping:Bool = false;
 
 	static var jsonPaths:String = '';
+	static var curLevel:String = '';
+
+	var score:Int = 0;
 
 	public static function levRun(typeLev:Int = 0)
 	{
 		switch (typeLev)
 		{
 			case 0:
+				curLevel = 'lev1';
 				jsonPaths = Paths.lev1__json;
 				trace('load: ' + jsonPaths);
 
 			case 1:
+				curLevel = 'lev2';
 				jsonPaths = Paths.lev2__json;
 				trace('load: ' + jsonPaths);
 		}
@@ -81,6 +86,9 @@ class PlayState extends MainState
 			case 'coin':
 				coin.add(new Coin(x, y));
 
+			case 'coin_2':
+				coin_2.add(new Coin_2(x, y));
+
 			case 'flag':
 				flag.x = x;
 				flag.y = y;
@@ -92,6 +100,10 @@ class PlayState extends MainState
 		super.update(elapsed);
 		FlxG.collide(player, walls);
 		FlxG.camera.follow(player, PLATFORMER);
+
+		FlxG.overlap(player, coin, touchCoin);
+		FlxG.overlap(player, coin_2, touchCoin2);
+		FlxG.overlap(player, flag, touchFlag);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
@@ -135,5 +147,35 @@ class PlayState extends MainState
 			player.velocity.x = 100;
 		else
 			player.velocity.x = 0;
+	}
+
+	function touchCoin(player:Player, coin:Coin)
+	{
+		if (player.alive && player.exists && coin.alive && coin.exists)
+		{
+			coin.kill();
+			score += 10;
+			trace('player got 10 score');
+		}
+	}
+
+	function touchCoin2(player:Player, coin_2:Coin_2)
+	{
+		if (player.alive && player.exists && coin_2.alive && coin_2.exists)
+		{
+			coin_2.kill();
+			score += 50;
+			trace('player got 50 score');
+		}
+	}
+
+	function touchFlag(player:Player, flag:Flag)
+	{
+		if (player.alive && player.exists && flag.alive && flag.exists)
+		{
+			flag.kill();
+			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
+			FlxG.switchState(new MenuSelectLevel());
+		}
 	}
 }
