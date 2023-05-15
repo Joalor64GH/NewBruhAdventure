@@ -63,8 +63,7 @@ class MenuState extends MainState
 		{
 			change(-1);
 		}
-
-		if (FlxG.keys.anyJustPressed([DOWN, S]))
+		else if (FlxG.keys.anyJustPressed([DOWN, S]))
 		{
 			change(1);
 		}

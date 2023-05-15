@@ -15,7 +15,7 @@ class Coin extends MainSprite
 	override function kill()
 	{
 		alive = false;
-		FlxTween.tween(this, {alpha: 0, y: y - 16}, 0.33, {ease: FlxEase.circOut, onComplete: finishKill});
+		FlxTween.tween(this, {alpha: 0, y: y - 16}, 0.22, {ease: FlxEase.circOut, onComplete: finishKill});
 	}
 
 	function finishKill(_)
@@ -36,7 +36,7 @@ class Coin_2 extends MainSprite
 	override function kill()
 	{
 		alive = false;
-		FlxTween.tween(this, {alpha: 0, y: y - 16}, 0.33, {ease: FlxEase.circOut, onComplete: finishKill});
+		FlxTween.tween(this, {alpha: 0, y: y - 16}, 0.22, {ease: FlxEase.circOut, onComplete: finishKill});
 	}
 
 	function finishKill(_)
