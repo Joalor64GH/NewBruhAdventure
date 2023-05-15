@@ -9,6 +9,7 @@ import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
+import util.Util;
 
 class PlayState extends MainState
 {
@@ -114,7 +115,7 @@ class PlayState extends MainState
 	{
 		super.update(elapsed);
 		FlxG.collide(player, walls);
-		FlxG.camera.follow(player, PLATFORMER);
+		FlxG.camera.follow(player, LOCKON);
 
 		FlxG.overlap(player, coin, touchCoin);
 		FlxG.overlap(player, coin_2, touchCoin2);
@@ -157,9 +158,9 @@ class PlayState extends MainState
 			left = right = false;
 
 		if (left)
-			player.velocity.x = -100;
+			player.velocity.x = -100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
 		else if (right)
-			player.velocity.x = 100;
+			player.velocity.x = 100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
 		else
 			player.velocity.x = 0;
 	}
