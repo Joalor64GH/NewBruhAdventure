@@ -27,6 +27,7 @@ class MenuSelectLevel extends MainState
 			selectThing.ID = i;
 			selectThing.screenCenter(Y);
 			selectThing.scrollFactor.set();
+			selectThing.x -= 30;
 			select_lev.add(selectThing);
 		}
 

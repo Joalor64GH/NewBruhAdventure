@@ -10,5 +10,7 @@ class SelectArrow extends MainSprite
 		animation.add("idle", [0]);
 		animation.add("choose", [1, 2, 3, 0], 12);
 		animation.play("idle");
+
+		scale.set(3, 3);
 	}
 }

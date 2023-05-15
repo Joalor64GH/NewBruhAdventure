@@ -29,7 +29,5 @@ class MenuSelect extends MainSprite
 		animation.add("lev20", [19]);
 
 		scale.set(3, 3);
-
-		x -= 30;
 	}
 }

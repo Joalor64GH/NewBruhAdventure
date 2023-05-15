@@ -1,5 +1,6 @@
 package openfl.display;
 
+import flixel.FlxG;
 import haxe.Timer;
 import lime.app.Application;
 import openfl.events.Event;
@@ -58,6 +59,9 @@ class FPS extends TextField
 			__enterFrame(time - currentTime);
 		});
 		#end
+
+		width = FlxG.width;
+		height = FlxG.height;
 	}
 
 	// Event Handlers
