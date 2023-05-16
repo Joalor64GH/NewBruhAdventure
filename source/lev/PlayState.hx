@@ -8,6 +8,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.sound.FlxSound;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
@@ -141,6 +142,9 @@ class PlayState extends MainState
 
 	var restart:Bool = false;
 
+	var stepSound:FlxSound;
+	var coinSound:FlxSound;
+
 	override public function create()
 	{
 		super.create();
@@ -176,6 +180,10 @@ class PlayState extends MainState
 		add(flag);
 
 		map.loadEntities(placeEntities, 'entity');
+
+		// FlxG.sound.playMusic(Paths.grass_step__wav);
+		stepSound = FlxG.sound.load(Paths.grass_step__wav, 1);
+		coinSound = FlxG.sound.load(Paths.arcade_game_jump_coin__wav, 1);
 	}
 
 	function placeEntities(entity:EntityData)
@@ -244,18 +252,28 @@ class PlayState extends MainState
 			player.velocity.y = -300;
 
 		if (left)
+		{
 			player.turnLeft(true);
+		}
 
 		if (right)
+		{
 			player.turnRight(false);
+		}
 
 		if (left && right)
 			left = right = false;
 
 		if (left)
+		{
+			stepSound.play(true);
 			player.velocity.x = -100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+		}
 		else if (right)
+		{
+			stepSound.play(true);
 			player.velocity.x = 100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+		}
 		else
 			player.velocity.x = 0;
 	}
@@ -264,6 +282,7 @@ class PlayState extends MainState
 	{
 		if (player.alive && player.exists && coin.alive && coin.exists)
 		{
+			coinSound.play(true);
 			coin.kill();
 			score += 10;
 			trace('player got 10 score');
@@ -274,6 +293,7 @@ class PlayState extends MainState
 	{
 		if (player.alive && player.exists && coin_2.alive && coin_2.exists)
 		{
+			coinSound.play(true);
 			coin_2.kill();
 			score += 50;
 			trace('player got 50 score');
@@ -284,6 +304,7 @@ class PlayState extends MainState
 	{
 		if (player.alive && player.exists && coin_super.alive && coin_super.exists)
 		{
+			coinSound.play(true);
 			coin_super.kill();
 			score += 100;
 			trace('player got 100 score');
