@@ -37,7 +37,7 @@ class PauseSubState extends FlxSubState
 			close();
 		}
 
-		if (FlxG.keys.justPressaed.R)
+		if (FlxG.keys.justPressed.R)
 		{
 			FlxG.resetState();
 		}
