@@ -1,7 +1,5 @@
 # Bruh Adventure
 
-`A work in progress game`
-
 A Adventure Game, _'bruhhhhh'_
 
 - `Why the art was so bad`
