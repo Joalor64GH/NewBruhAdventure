@@ -20,4 +20,4 @@ A Adventure Game, _'bruhhhhh'_
 
 # Credits (just let me know if this missing):
 - Huy1234TH: Code, Art of This Project
-- Wither362: Code
+- Wither362: Coder of This Project

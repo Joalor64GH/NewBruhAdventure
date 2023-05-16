@@ -9,7 +9,7 @@ import flixel.util.FlxColor;
 
 class MenuState extends MainState
 {
-	var list:Array<String> = ['play', 'exit'];
+	var list:Array<String> = ['play', 'credits', 'exit'];
 
 	var menu_group:FlxTypedGroup<MenuImage>;
 	var select:Int = 0;
@@ -86,6 +86,12 @@ class MenuState extends MainState
 
 				case 1:
 					if (FlxG.mouse.overlaps(spr))
+						spr.animation.play("credits_select");
+					else
+						spr.animation.play("credits_idle");
+
+				case 2:
+					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("quit_select");
 					else
 						spr.animation.play("quit_idle");
@@ -117,12 +123,19 @@ class MenuState extends MainState
 					case "play":
 						FlxG.switchState(new MenuSelectLevel());
 
+					case "credits":
+						FlxG.switchState(new CreditsState());
+
 					case "exit":
-						FlxG.save.flush();
-						Sys.exit(0);
+						openSubState(new QuitSubState());
 				}
 			}
 		});
+
+		if (FlxG.keys.justPressed.ESCAPE)
+		{
+			openSubState(new QuitSubState());
+		}
 	}
 
 	function change(change:Int = 0)
@@ -145,6 +158,12 @@ class MenuState extends MainState
 						spr.animation.play("play_idle");
 
 				case 1:
+					if (FlxG.mouse.overlaps(spr))
+						spr.animation.play("credits_select");
+					else
+						spr.animation.play("credits_idle");
+
+				case 2:
 					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("quit_select");
 					else

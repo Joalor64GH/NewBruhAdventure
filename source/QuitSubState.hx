@@ -6,7 +6,7 @@ import flixel.FlxSubState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
-class PauseSubState extends FlxSubState
+class QuitSubState extends FlxSubState
 {
 	var text:FlxText;
 
@@ -20,8 +20,8 @@ class PauseSubState extends FlxSubState
 		bg.scrollFactor.set();
 		add(bg);
 
-		text = new FlxText(0, 0, 0, "- PAUSE -
-            \nPress Enter to resume\nPress R to restart\nPress Esc to return", 16);
+		text = new FlxText(0, 0, 0, "- HEY YOU -
+            Are you sure?\nPress Enter to return\nPress Esc to Quit Game", 16);
 		text.screenCenter();
 		text.alignment = CENTER;
 		text.scrollFactor.set();
@@ -37,14 +37,10 @@ class PauseSubState extends FlxSubState
 			close();
 		}
 
-		if (FlxG.keys.justPressaed.R)
-		{
-			FlxG.resetState();
-		}
-
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.switchState(new MenuSelectLevel());
+			FlxG.save.flush();
+			Sys.exit(0);
 		}
 	}
 }
