@@ -55,12 +55,18 @@ class CreditsState extends MainState
 			case 0:
 				textCredits.text = "- PAGE 1 : Coder -" + "\n- Huy1234TH: Code, Art of This Project\n- Wither362: Coder of This Project";
 			case 1:
-				textCredits.text = "- PAGE 2 : SOUND AND MUSIC (STILL NEED HELP) -" + "\n- Mixkit: (I took the sound from this website since it free)";
+				textCredits.text = "- PAGE 2 : SOUND AND MUSIC (STILL NEED HELP) -"
+					+ "\n- Mixkit: (I took the sound from this website since it free)\n\n\nPress Enter to Enter Mixkit Website!";
 		}
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			FlxG.switchState(new MenuState());
+		}
+
+		if (FlxG.keys.justPressed.ENTER && curPage == 1)
+		{
+			FlxG.openURL("https://mixkit.co/");
 		}
 	}
 }
