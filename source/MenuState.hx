@@ -1,7 +1,11 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.tile.FlxTilemap;
+import flixel.util.FlxColor;
 
 class MenuState extends MainState
 {
@@ -10,16 +14,51 @@ class MenuState extends MainState
 	var menu_group:FlxTypedGroup<MenuImage>;
 	var select:Int = 0;
 
+	var map:FlxOgmo3Loader;
+	var walls:FlxTilemap;
+
+	var jsonPaths:String = '';
+
+	function menuRun()
+	{
+		if (FlxG.random.bool(50)) // 50%
+			jsonPaths = Paths.menuMap1__json;
+		else if (FlxG.random.bool(25)) // 25%
+			jsonPaths = Paths.menuMap2__json;
+		else if (FlxG.random.bool(15)) // 15%
+			jsonPaths = Paths.menuMap3__json;
+		else if (FlxG.random.bool(5)) // 5%
+			jsonPaths = Paths.menuMap4__json;
+		else if (FlxG.random.bool(2)) // 2%
+			jsonPaths = Paths.menuMap5__json;
+		else
+			jsonPaths = Paths.menuMap1__json;
+	}
+
 	override public function create()
 	{
 		super.create();
+
+		menuRun();
+
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.CYAN);
+		bg.scrollFactor.set();
+		add(bg);
+
+		map = new FlxOgmo3Loader(Paths.levelProject__ogmo, jsonPaths);
+		walls = map.loadTilemap(Paths.tilemap_1__png, 'walls');
+		walls.screenCenter();
+		walls.follow();
+		walls.setTileProperties(1, NONE);
+		walls.setTileProperties(2, ANY);
+		add(walls);
 
 		menu_group = new FlxTypedGroup<MenuImage>();
 		add(menu_group);
 
 		for (i in 0...list.length)
 		{
-			var selectThing:MenuImage = new MenuImage();
+			var selectThing:MenuImage = new MenuImage(300, 0);
 			selectThing.ID = i;
 			selectThing.screenCenter(Y);
 			selectThing.scrollFactor.set();
@@ -33,6 +72,8 @@ class MenuState extends MainState
 	{
 		super.update(elapsed);
 
+		menuRun();
+
 		menu_group.forEach(function(spr:MenuImage)
 		{
 			switch (select)
@@ -44,12 +85,6 @@ class MenuState extends MainState
 						spr.animation.play("play_idle");
 
 				case 1:
-					if (FlxG.mouse.overlaps(spr))
-						spr.animation.play("options_select");
-					else
-						spr.animation.play("options_idle");
-
-				case 2:
 					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("quit_select");
 					else

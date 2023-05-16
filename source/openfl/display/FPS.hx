@@ -2,7 +2,6 @@ package openfl.display;
 
 import flixel.FlxG;
 import haxe.Timer;
-import lime.app.Application;
 import openfl.events.Event;
 import openfl.system.System;
 import openfl.text.TextField;

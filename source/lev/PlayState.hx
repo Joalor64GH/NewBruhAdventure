@@ -8,6 +8,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
 import util.Util;
@@ -30,6 +31,7 @@ class PlayState extends MainState
 	static var curLevel:String = '';
 
 	var score:Int = 0;
+	var scoreTxt:FlxText;
 
 	public static function levRun(typeLev:Int = 0)
 	{
@@ -69,12 +71,81 @@ class PlayState extends MainState
 				curLevel = 'lev7';
 				jsonPaths = Paths.lev7__json;
 				trace('load: ' + jsonPaths);
+
+			case 7:
+				curLevel = 'lev8';
+				jsonPaths = Paths.lev8__json;
+				trace('load: ' + jsonPaths);
+
+			case 8:
+				curLevel = 'lev9';
+				jsonPaths = Paths.lev9__json;
+				trace('load: ' + jsonPaths);
+
+			case 9:
+				curLevel = 'lev10';
+				jsonPaths = Paths.lev10__json;
+				trace('load: ' + jsonPaths);
+
+			case 10:
+				curLevel = 'lev11';
+				jsonPaths = Paths.lev11__json;
+				trace('load: ' + jsonPaths);
+
+			case 11:
+				curLevel = 'lev12';
+				jsonPaths = Paths.lev12__json;
+				trace('load: ' + jsonPaths);
+
+			case 12:
+				curLevel = 'lev13';
+				jsonPaths = Paths.lev13__json;
+				trace('load: ' + jsonPaths);
+
+			case 13:
+				curLevel = 'lev14';
+				jsonPaths = Paths.lev14__json;
+				trace('load: ' + jsonPaths);
+
+			case 14:
+				curLevel = 'lev15';
+				jsonPaths = Paths.lev15__json;
+				trace('load: ' + jsonPaths);
+
+			case 15:
+				curLevel = 'lev16';
+				jsonPaths = Paths.lev16__json;
+				trace('load: ' + jsonPaths);
+
+			case 16:
+				curLevel = 'lev17';
+				jsonPaths = Paths.lev17__json;
+				trace('load: ' + jsonPaths);
+
+			case 17:
+				curLevel = 'lev18';
+				jsonPaths = Paths.lev18__json;
+				trace('load: ' + jsonPaths);
+
+			case 18:
+				curLevel = 'lev19';
+				jsonPaths = Paths.lev19__json;
+				trace('load: ' + jsonPaths);
+
+			case 19:
+				curLevel = 'lev20';
+				jsonPaths = Paths.lev20__json;
+				trace('load: ' + jsonPaths);
 		}
 	}
+
+	var restart:Bool = false;
 
 	override public function create()
 	{
 		super.create();
+
+		restart = false;
 
 		FlxG.camera.zoom = camZoom;
 

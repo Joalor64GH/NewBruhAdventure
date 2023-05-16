@@ -7,8 +7,10 @@ class MenuSelect extends MainSprite
 		super(x, y);
 
 		loadGraphic(Paths.level_select__png, true, 64, 32);
-		for (i in 0...20)
+		for (i in 0...23)
+		{
 			animation.add("lev" + Std.string(i + 1), [i]);
+		}
 
 		scale.set(3, 3);
 	}
