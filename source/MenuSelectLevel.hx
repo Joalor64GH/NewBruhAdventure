@@ -99,6 +99,12 @@ class MenuSelectLevel extends MainState
 			{
 				spr.animation.play("lev" + Std.string(select + 1));
 			}
+
+			if (FlxG.mouse.overlaps(spr))
+			{
+				FlxG.mouse.load(Paths.overlaps_mouse__png);
+			}
+
 			spr.updateHitbox();
 		});
 
@@ -233,6 +239,12 @@ class MenuSelectLevel extends MainState
 			{
 				spr.animation.play("lev" + Std.string(select + 1));
 			}
+
+			if (FlxG.mouse.overlaps(spr))
+			{
+				FlxG.mouse.load(Paths.overlaps_mouse__png);
+			}
+
 			spr.updateHitbox();
 		});
 	}

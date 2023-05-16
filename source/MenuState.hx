@@ -91,6 +91,11 @@ class MenuState extends MainState
 						spr.animation.play("quit_idle");
 			}
 
+			if (FlxG.mouse.overlaps(spr))
+			{
+				FlxG.mouse.load(Paths.overlaps_mouse__png);
+			}
+
 			spr.updateHitbox();
 		});
 
@@ -144,6 +149,11 @@ class MenuState extends MainState
 						spr.animation.play("quit_select");
 					else
 						spr.animation.play("quit_idle");
+			}
+
+			if (FlxG.mouse.overlaps(spr))
+			{
+				FlxG.mouse.load(Paths.overlaps_mouse__png);
 			}
 
 			spr.updateHitbox();
