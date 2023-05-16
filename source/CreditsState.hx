@@ -53,7 +53,7 @@ class CreditsState extends MainState
 		switch (curPage)
 		{
 			case 0:
-				textCredits.text = "- PAGE 1 : Coder -" + "\n- Huy1234TH: Code, Art of This Project\n- Wither362: Coder of This Project";
+				textCredits.text = "- PAGE 1 : MAIN -" + "\n- Huy1234TH: Code, Art of This Project\n- Wither362: Coder of This Project";
 			case 1:
 				textCredits.text = "- PAGE 2 : SOUND AND MUSIC (STILL NEED HELP) -"
 					+ "\n- Mixkit: (I took the sound from this website since it free)\n\n\nPress Enter to Enter Mixkit Website!";
