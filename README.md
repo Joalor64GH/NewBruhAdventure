@@ -16,7 +16,7 @@ A Adventure Game, _'bruhhhhh'_
 - Need:
 > - Music, That all!
 
-# Credits (just let me know if this missing):
+# Credits:
 - Huy1234TH: Code, Art of This Project
 - Wither362: Coder of This Project
-- (Mixkit)[https://mixkit.co/]: A website contains alot of free sound (i took from this website since this website are free and very helpful for this project!, i like this website to much)
+- [Mixkit](https://mixkit.co/): A website contains alot of free sound (i took from this website since this website are free and very helpful for this project!, i like this website to much)
