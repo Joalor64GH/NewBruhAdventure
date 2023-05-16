@@ -21,7 +21,7 @@ class QuitSubState extends FlxSubState
 		add(bg);
 
 		text = new FlxText(0, 0, 0, "- HEY YOU -
-            Are you sure?\nPress Enter to return\nPress Esc to Quit Game", 16);
+            \nAre you sure?\nPress Enter to return\nPress Esc to Quit Game", 16);
 		text.screenCenter();
 		text.alignment = CENTER;
 		text.scrollFactor.set();

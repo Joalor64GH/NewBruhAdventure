@@ -21,7 +21,7 @@ class WarmSubState extends FlxSubState
 		add(bg);
 
 		text = new FlxText(0, 0, 0, "- HEY YOU -
-            \n!That Level can't play right now!\nPress Enter to close", 16);
+            \n!That Level can't play right now!\nPlease wait for a new update\n\nPress Enter to close", 16);
 		text.screenCenter();
 		text.alignment = CENTER;
 		text.scrollFactor.set();
