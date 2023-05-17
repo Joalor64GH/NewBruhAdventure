@@ -72,7 +72,7 @@ class MenuState extends MainState
 		pngTitle.scale.set(3, 3);
 		add(pngTitle);
 
-		var text:FlxText = new FlxText(0, 100, 0, "- Version: " + Application.current.meta.get('version') " -", 20);
+		var text:FlxText = new FlxText(0, 100, 0, "- Version: " + Application.current.meta.get('version') + " -", 20);
 		text.screenCenter(X);
 		text.scrollFactor.set();
 		add(text);
