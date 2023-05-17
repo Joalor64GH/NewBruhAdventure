@@ -87,4 +87,5 @@
 	<icon path="art/icon.png" size="16" />
 	<icon path="art/icon_32.png" size="32" />
 	<icon path="art/icon_64.png" size="64" />
+
 </project>
