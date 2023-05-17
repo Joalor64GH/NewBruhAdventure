@@ -95,17 +95,11 @@ class MenuSelectLevel extends MainState
 
 		select_lev.forEach(function(spr:MenuSelect)
 		{
-			spr.setPosition(x, y);
+			spr.setPosition(x, y); // shouldnt this be offset like (x, y + (spr.width * spr.ID)) or something??
 
 			if (FlxG.mouse.overlaps(spr))
-			{
-				spr.alpha = 0.5;
-				spr.animation.play("lev" + Std.string(select + 1));
-			}
-			else
-			{
-				spr.animation.play("lev" + Std.string(select + 1));
-			}
+				spr.alpha = 0.6;
+			spr.animation.play("lev" + Std.string(select + 1));
 
 			if (FlxG.mouse.overlaps(spr))
 			{
@@ -132,88 +126,12 @@ class MenuSelectLevel extends MainState
 
 		select_lev.forEach(function(spr:MenuSelect)
 		{
-			if (FlxG.keys.justPressed.ENTER || FlxG.mouse.overlaps(spr) && FlxG.mouse.pressed)
+			if (FlxG.keys.justPressed.ENTER || (FlxG.mouse.overlaps(spr) && FlxG.mouse.pressed))
 			{
 				switch (list[select])
 				{
-					case "lev1":
-						PlayState.levRun();
-						FlxG.switchState(new PlayState());
-
-					case "lev2":
-						PlayState.levRun(1);
-						FlxG.switchState(new PlayState());
-
-					case "lev3":
-						PlayState.levRun(2);
-						FlxG.switchState(new PlayState());
-
-					case "lev4":
-						PlayState.levRun(3);
-						FlxG.switchState(new PlayState());
-
-					case "lev5":
-						PlayState.levRun(4);
-						FlxG.switchState(new PlayState());
-
-					case "lev6":
-						PlayState.levRun(5);
-						FlxG.switchState(new PlayState());
-
-					case "lev7":
-						PlayState.levRun(6);
-						FlxG.switchState(new PlayState());
-
-					case "lev8":
-						PlayState.levRun(7);
-						FlxG.switchState(new PlayState());
-
-					case "lev9":
-						PlayState.levRun(8);
-						FlxG.switchState(new PlayState());
-
-					case "lev10":
-						PlayState.levRun(9);
-						FlxG.switchState(new PlayState());
-
-					case "lev11":
-						PlayState.levRun(10);
-						FlxG.switchState(new PlayState());
-
-					case "lev12":
-						PlayState.levRun(11);
-						FlxG.switchState(new PlayState());
-
-					case "lev13":
-						PlayState.levRun(12);
-						FlxG.switchState(new PlayState());
-
-					case "lev14":
-						PlayState.levRun(13);
-						FlxG.switchState(new PlayState());
-
-					case "lev15":
-						PlayState.levRun(14);
-						FlxG.switchState(new PlayState());
-
-					case "lev16":
-						PlayState.levRun(15);
-						FlxG.switchState(new PlayState());
-
-					case "lev17":
-						PlayState.levRun(16);
-						FlxG.switchState(new PlayState());
-
-					case "lev18":
-						PlayState.levRun(17);
-						FlxG.switchState(new PlayState());
-
-					case "lev19":
-						PlayState.levRun(18);
-						FlxG.switchState(new PlayState());
-
-					case "lev20":
-						PlayState.levRun(19);
+					case "lev1", "lev2", "lev3", "lev4", "lev5", "lev6", "lev7", "lev8", "lev9", "lev10", "lev11", "lev12", "lev13", "lev14", "lev15", "lev16", "lev17", "lev18", "lev19", "lev20":
+						PlayState.levRun(Std.parseInt(list[select].replace('lev', '')) - 1);
 						FlxG.switchState(new PlayState());
 
 					case "lev1e" | "lev2e" | "lev3e" | "lev4e" | "lev5e":
@@ -240,19 +158,11 @@ class MenuSelectLevel extends MainState
 		select_lev.forEach(function(spr:MenuSelect)
 		{
 			spr.setPosition(x, y);
+			spr.animation.play("lev" + Std.string(select + 1));
 
 			if (FlxG.mouse.overlaps(spr))
 			{
-				spr.alpha = 0.5;
-				spr.animation.play("lev" + Std.string(select + 1));
-			}
-			else
-			{
-				spr.animation.play("lev" + Std.string(select + 1));
-			}
-
-			if (FlxG.mouse.overlaps(spr))
-			{
+				spr.alpha = 0.6;
 				FlxG.mouse.load(Paths.overlaps_mouse__png);
 			}
 
