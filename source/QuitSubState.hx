@@ -25,6 +25,7 @@ class QuitSubState extends FlxSubState
 		text.screenCenter();
 		text.alignment = CENTER;
 		text.scrollFactor.set();
+		text.scale.set(2, 2);
 		add(text);
 	}
 

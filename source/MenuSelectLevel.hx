@@ -56,6 +56,12 @@ class MenuSelectLevel extends MainState
 		bg.scrollFactor.set();
 		add(bg);
 
+		var text:FlxText = new FlxText(0, 100, 0, "- Select Level -", 20);
+		text.screenCenter(X);
+		text.scrollFactor.set();
+		text.scale.set(1, 1);
+		add(text);
+
 		map = new FlxOgmo3Loader(Paths.levelProject__ogmo, jsonPaths);
 		walls = map.loadTilemap(Paths.tilemap_1__png, 'walls');
 		walls.screenCenter();

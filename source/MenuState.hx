@@ -6,6 +6,7 @@ import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
+import lime.app.Application;
 
 class MenuState extends MainState
 {
@@ -64,6 +65,17 @@ class MenuState extends MainState
 			selectThing.scrollFactor.set();
 			menu_group.add(selectThing);
 		}
+
+		var pngTitle:FlxSprite = new FlxSprite(0, 100).loadGraphic(Paths.title_png__png);
+		pngTitle.screenCenter(X);
+		pngTitle.scrollFactor.set();
+		pngTitle.scale.set(3, 3);
+		add(pngTitle);
+
+		var text:FlxText = new FlxText(0, 100, 0, "- Version: " + Application.current.meta.get('version') " -", 20);
+		text.screenCenter(X);
+		text.scrollFactor.set();
+		add(text);
 
 		change();
 	}
