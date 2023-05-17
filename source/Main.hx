@@ -8,7 +8,7 @@ import util.Util;
 class Main extends Sprite
 {
 	public static var fpsCounter:FPS;
-	public static var framerate:Int = Std.parseInt(Util.fileString(Paths.framerate__txt));
+	public static var framerate:Int = 60;
 
 	public function new()
 	{
