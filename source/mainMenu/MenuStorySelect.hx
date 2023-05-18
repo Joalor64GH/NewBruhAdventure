@@ -1,0 +1,3 @@
+package mainMenu;
+
+class MenuStorySelect {}
