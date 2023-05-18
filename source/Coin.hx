@@ -6,6 +6,13 @@ import flixel.tweens.FlxTween;
 class Coin extends MainSprite
 {
 	public var typeCoin(default, set):String = '';
+	public var isFakeCoin:Bool = false;
+	/**
+		How much score does the coin gives when touched.
+	*/
+	public var score:Int = 10;
+	//Maybe... like... you have to do something to take this coin.
+	public var canBeScored:Bool = true;
 
 	inline function set_typeCoin(v:String):String
 	{
@@ -44,12 +51,23 @@ class Coin extends MainSprite
 			case '2':
 				loadGraphic(Paths.coin_2__png, true, 16, 16);
 				updateHitbox();
+				score = 50;
 			case 'super':
 				loadGraphic(Paths.coin_super__png, true, 16, 16);
 				animation.add('idle', [0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0], 12, true);
 				animation.play('idle');
 				updateHitbox();
+				score = 100;
+			case 'fake': // a black coin? A normal coin but with different animation???
+				isFakeCoin = true;
+				score = 0;
+			case 'rewarded': // maybe a red one???
+				canBeScored = false;
 		}
+	}
+	function playerTouched(player:Player)
+	{
+		this.kill();
 	}
 }
 
