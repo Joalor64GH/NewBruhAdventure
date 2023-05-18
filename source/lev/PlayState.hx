@@ -149,6 +149,11 @@ class PlayState extends MainState
 				curLevel = 'lev21';
 				jsonPaths = Paths.lev21__json;
 				trace('load: ' + jsonPaths);
+
+			case 21:
+				curLevel = 'lev22';
+				jsonPaths = Paths.lev22__json;
+				trace('load: ' + jsonPaths);
 		}
 	}
 

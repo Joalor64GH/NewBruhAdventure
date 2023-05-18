@@ -29,7 +29,7 @@ class Water extends MainSprite
 		super(x, y);
 
 		loadGraphic(Paths.liquid__png, true, 16, 16);
-		animation.add("water", [0]);
+		animation.add("water", [1]);
 		animation.play("water");
 	}
 }
@@ -43,7 +43,7 @@ class Lava extends MainSprite
 		super(x, y);
 
 		loadGraphic(Paths.liquid__png, true, 16, 16);
-		animation.add("lava", [1]);
+		animation.add("lava", [0]);
 		animation.play("lava");
 	}
 }
