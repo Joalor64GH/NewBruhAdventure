@@ -362,7 +362,7 @@
     },
     {
       "exportID": "40051107",
-      "name": "coin_red",
+      "name": "coin_rewarded",
       "limit": -1,
       "size": {"x": 16, "y": 16},
       "origin": {"x": 0, "y": 0},

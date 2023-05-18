@@ -231,29 +231,11 @@ class PlayState extends MainState
 				player.acceleration.y = 900;
 				player.maxVelocity.y = 300;
 
-			case 'coin', 'coin_2', 'coin_super':
+			case 'coin', 'coin_2', 'coin_super', 'coin_fake', 'coin_rewarded':
 				coins.add(new Coin(x, y, entity.name));
-
-			/*case 'coin':
-					coin.add(new Coin(x, y));
-
-				case 'coin_2':
-					coin_2.add(new Coin_2(x, y));
-
-				case 'coin_super':
-					coin_super.add(new Coin_Super(x, y)); */
 
 			case 'water', 'lava', 'poison':
 				liquids.add(new Liquid(x, y, entity.name));
-
-			/*case 'water':
-					water.add(new Water(x, y));
-
-				case 'lava':
-					lava.add(new Lava(x, y));
-
-				case 'posion':
-					liquid.add(new Liquid(x, y, 'poison')); */
 
 			case 'flag':
 				flag.x = x;
@@ -350,39 +332,6 @@ class PlayState extends MainState
 		}
 	}
 
-	function touchCoin(player:Player, coin:Coin)
-	{
-		if (player.alive && player.exists && coin.alive && coin.exists)
-		{
-			coinSound.play(true);
-			coin.kill();
-			score += 10;
-			trace('player got 10 score');
-		}
-	}
-
-	function touchCoin2(player:Player, coin_2:Coin_2)
-	{
-		if (player.alive && player.exists && coin_2.alive && coin_2.exists)
-		{
-			coinSound.play(true);
-			coin_2.kill();
-			score += 50;
-			trace('player got 50 score');
-		}
-	}
-
-	function touchCoinSuper(player:Player, coin_super:Coin_Super)
-	{
-		if (player.alive && player.exists && coin_super.alive && coin_super.exists)
-		{
-			coinSound.play(true);
-			coin_super.kill();
-			score += 100;
-			trace('player got 100 score');
-		}
-	}
-
 	function touchFlag(player:Player, flag:Flag)
 	{
 		if (player.alive && player.exists && flag.alive && flag.exists)
@@ -404,38 +353,11 @@ class PlayState extends MainState
 			}
 			if (liquid.firesUpPlayer)
 			{
-				// player.fireUp(); // an animation like its burning
+				player.fireUp(); // an animation like its burning
 			}
 		}
 	}
 
-	/*function touchWater(player:Player, water:Water)
-		{
-			if (player.alive && player.exists && water.alive && water.exists)
-			{
-				water.slowWalk = true;
-			}
-			else
-			{
-				water.slowWalk = false;
-			}
-		}
-
-		function touchLava(player:Player, lava:Lava)
-		{
-			if (player.alive && player.exists && lava.alive && lava.exists)
-			{
-				gameOver();
-			}
-		}
-
-		function touchPosion(player:Player, liquid:Liquid)
-		{
-			if (player.alive && player.exists && liquid.alive && liquid.exists)
-			{
-				gameOver();
-			}
-	}*/
 	function gameOver()
 	{
 		openSubState(new GameoverSubState());

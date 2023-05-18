@@ -50,6 +50,20 @@ class Player extends MainSprite
 		return flip;
 	}
 
+	public function fireUp(enable:Bool = false)
+	{
+		if (enable)
+		{
+			animation.play("in_burn", true);
+		}
+		else
+		{
+			animation.play("in_normall", false);
+		}
+
+		return enable;
+	}
+
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
