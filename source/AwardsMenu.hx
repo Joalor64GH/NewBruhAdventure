@@ -7,15 +7,16 @@ import flixel.util.FlxColor;
 
 class AwardsMenu extends MainState
 {
-	final awards:Array<String> = [
-		"Finish Level 1 EX",
-		"Collect 20 Yellow Coin",
-		"Collect 20 Green Coin",
-		"Collect 5 Super Coin",
-		"Collect 2 Fake Coin",
-		"Collect 1 Rewarded Coin"
+	final awards:Array<Array<String>> = [
+		["Wow... For sure that was hard...", "Finish Level 1 EX"],
+		["Oooh... Shiny!", "Collect 20 Yellow Coins"],
+		["Are these... Avocados!?", "Collect 20 Green Coins"],
+		["I'm... tired.", "Collect 5 Super Coins"],
+		["Is this real?!", "Collect 2 Fake Coins"],
+		["So that was what I had to do!", "Collect 1 Rewarded Coin"]
 	];
 	var textAwards:FlxText;
+	var textAwardDescription:FlxText;
 	var curPage:Int = 0;
 
 	override public function create()
@@ -32,6 +33,12 @@ class AwardsMenu extends MainState
 		// textCredits.alignment = CENTER;
 		textAwards.screenCenter(Y);
 		add(textAwards);
+
+		textAwardDescription = new FlxText(0, 20, 0, "", 20);
+		textAwardDescription.screenCenter(Y);
+		textAwardDescription.y -= 20;
+		textAwardDescription.alignment = CENTER;
+		add(textAwardDescription);
 
 		changeText();
 	}
@@ -64,6 +71,7 @@ class AwardsMenu extends MainState
 		if (curPage < 0)
 			curPage = awards.length - 1;
 
-		textAwards.text = awards[curPage];
+		textAwards.text = awards[curPage][0];
+		textAwardDescription = awards[curPage][1];
 	}
 }
