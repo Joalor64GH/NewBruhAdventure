@@ -3,6 +3,7 @@ package lev;
 import Coin.Coin_2;
 import Coin.Coin_Super;
 import Coin;
+import KindWater.Liquid;
 import Player;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -21,6 +22,7 @@ class PlayState extends MainState
 	var coin_2:FlxTypedGroup<Coin_2>;
 	var coin_super:FlxTypedGroup<Coin_Super>;
 	var flag:Flag;
+	var liquid:FlxTypedGroup<Liquid>;
 
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
@@ -137,6 +139,11 @@ class PlayState extends MainState
 				curLevel = 'lev20';
 				jsonPaths = Paths.lev20__json;
 				trace('load: ' + jsonPaths);
+
+			case 20:
+				curLevel = 'lev21';
+				jsonPaths = Paths.lev21__json;
+				trace('load: ' + jsonPaths);
 		}
 	}
 
@@ -179,6 +186,13 @@ class PlayState extends MainState
 		flag = new Flag();
 		add(flag);
 
+		liquid = new FlxTypedGroup<Liquid>();
+		liquid.forEach(function(posion:Liquid)
+		{
+			posion.killsWhenTouched = false;
+		});
+		add(liquid);
+
 		map.loadEntities(placeEntities, 'entity');
 
 		// FlxG.sound.playMusic(Paths.grass_step__wav);
@@ -207,6 +221,9 @@ class PlayState extends MainState
 			case 'coin_super':
 				coin_super.add(new Coin_Super(x, y));
 
+			case 'posion':
+				liquid.add(new Liquid(x, y));
+
 			case 'flag':
 				flag.x = x;
 				flag.y = y;
@@ -223,6 +240,7 @@ class PlayState extends MainState
 		FlxG.overlap(player, coin_2, touchCoin2);
 		FlxG.overlap(player, coin_super, touchCoinSuper);
 		FlxG.overlap(player, flag, touchFlag);
+		FlxG.overlap(player, liquid, touchPosion);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
@@ -318,6 +336,14 @@ class PlayState extends MainState
 			flag.kill();
 			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
 			FlxG.switchState(new MenuSelectLevel());
+		}
+	}
+
+	function touchPosion(player:Player, liquid:Liquid)
+	{
+		if (player.alive && player.exists && liquid.alive && liquid.exists)
+		{
+			openSubState(new GameoverSubState());
 		}
 	}
 }
