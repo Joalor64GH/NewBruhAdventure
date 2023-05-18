@@ -4,6 +4,15 @@ class Liquid extends MainSprite
 {
 	public var killsWhenTouched:Bool = false;
 	public var liquidType /*(default, set)*/:String = '';
+
+	public function new(x:Float = 0, y:Float = 0)
+	{
+		super(x, y);
+
+		loadGraphic(Paths.liquid__png, true, 16, 16);
+		animation.add("posion", [2]);
+		animation.play("posion");
+	}
 }
 
 /**
@@ -17,8 +26,8 @@ class Water extends MainSprite
 	{
 		super(x, y);
 
-		loadGraphic(Paths.water_lava__png, true, 16, 16);
-		animation.add("water", [2]);
+		loadGraphic(Paths.liquid__png, true, 16, 16);
+		animation.add("water", [0]);
 		animation.play("water");
 	}
 }
@@ -29,8 +38,8 @@ class Lava extends MainSprite
 	{
 		super(x, y);
 
-		loadGraphic(Paths.water_lava__png, true, 16, 16);
-		animation.add("lava", [3]);
+		loadGraphic(Paths.liquid__png, true, 16, 16);
+		animation.add("lava", [1]);
 		animation.play("lava");
 	}
 }
