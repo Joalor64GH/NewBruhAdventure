@@ -14,6 +14,8 @@ class PauseSubState extends FlxSubState
 	{
 		super();
 
+		MainSprite.mouseImg();
+
 		var bg:FlxSprite = new FlxSprite();
 		bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = 0.65;

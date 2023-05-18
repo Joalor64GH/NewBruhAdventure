@@ -101,6 +101,7 @@ class MenuSelectLevel extends MainState
 
 			if (FlxG.mouse.overlaps(spr))
 				spr.alpha = 0.6;
+
 			spr.animation.play("lev" + Std.string(select + 1));
 
 			if (FlxG.mouse.overlaps(spr))

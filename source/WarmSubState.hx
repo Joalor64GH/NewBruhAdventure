@@ -14,6 +14,8 @@ class WarmSubState extends FlxSubState
 	{
 		super();
 
+		MainSprite.mouseImg();
+
 		var bg:FlxSprite = new FlxSprite();
 		bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = 0.65;
@@ -47,6 +49,8 @@ class WarmSubState2 extends FlxSubState
 	public function new()
 	{
 		super();
+
+		MainSprite.mouseImg();
 
 		var bg:FlxSprite = new FlxSprite();
 		bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
