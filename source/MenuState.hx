@@ -11,7 +11,7 @@ import lime.app.Application;
 
 class MenuState extends MainState
 {
-	var list:Array<String> = ['play', 'credits', 'exit'];
+	var list:Array<String> = ['play', 'credits', 'options', 'exit'];
 
 	var menu_group:FlxTypedGroup<MenuImage>;
 	var select:Int = 0;
@@ -105,6 +105,12 @@ class MenuState extends MainState
 
 				case 2:
 					if (FlxG.mouse.overlaps(spr))
+						spr.animation.play("options_select");
+					else
+						spr.animation.play("options_idle");
+
+				case 3:
+					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("quit_select");
 					else
 						spr.animation.play("quit_idle");
@@ -138,6 +144,9 @@ class MenuState extends MainState
 
 					case "credits":
 						FlxG.switchState(new CreditsState());
+
+					case "options":
+						FlxG.switchState(new OptionsMenu());
 
 					case "exit":
 						openSubState(new QuitSubState());
@@ -177,6 +186,12 @@ class MenuState extends MainState
 						spr.animation.play("credits_idle");
 
 				case 2:
+					if (FlxG.mouse.overlaps(spr))
+						spr.animation.play("options_select");
+					else
+						spr.animation.play("options_idle");
+
+				case 3:
 					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("quit_select");
 					else

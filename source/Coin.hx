@@ -6,10 +6,12 @@ import flixel.tweens.FlxTween;
 class Coin extends MainSprite
 {
 	public var typeCoin(default, set):String = '';
-	
-	inline function set_typeCoin(v:String):String {
-		if(typeCoin != v) {
-			this.typeCoing = v;
+
+	inline function set_typeCoin(v:String):String
+	{
+		if (typeCoin != v)
+		{
+			this.typeCoin = v;
 			reloadCoin();
 		}
 		return v;
@@ -19,7 +21,7 @@ class Coin extends MainSprite
 	{
 		super(x, y);
 
-		if(TypeCoin == '')
+		if (TypeCoin == '')
 			loadGraphic(Paths.coin__png, true, 16, 16);
 		this.typeCoin = TypeCoin;
 	}
@@ -35,8 +37,10 @@ class Coin extends MainSprite
 		exists = false;
 	}
 
-	function reloadCoin() {
-		switch(typeCoin) {
+	function reloadCoin()
+	{
+		switch (typeCoin)
+		{
 			case '2':
 				loadGraphic(Paths.coin_2__png, true, 16, 16);
 				updateHitbox();
@@ -48,7 +52,8 @@ class Coin extends MainSprite
 		}
 	}
 }
-//This must be deprecated.
+
+// This must be deprecated.
 class Coin_2 extends MainSprite
 {
 	public function new(x:Float = 0, y:Float = 0)
@@ -69,7 +74,8 @@ class Coin_2 extends MainSprite
 		exists = false;
 	}
 }
-//This is deprecated
+
+// This is deprecated
 class Coin_Super extends MainSprite
 {
 	public function new(x:Float = 0, y:Float = 0)
