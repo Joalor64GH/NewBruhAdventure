@@ -27,7 +27,7 @@ class PlayState extends MainState
 
 	var water:FlxTypedGroup<Water>;
 	var lava:FlxTypedGroup<Lava>;
-	var liquid:FlxTypedGroup<Liquid>;
+	var liquids:FlxTypedGroup<Liquid>;
 
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
@@ -203,12 +203,8 @@ class PlayState extends MainState
 		});
 		add(water);
 
-		liquid = new FlxTypedGroup<Liquid>();
-		liquid.forEach(function(posion:Liquid)
-		{
-			posion.killsWhenTouched = false;
-		});
-		add(liquid);
+		liquids = new FlxTypedGroup<Liquid>();
+		add(liquids);
 
 		lava = new FlxTypedGroup<Lava>();
 		lava.forEach(function(lava2:Lava)
@@ -245,14 +241,17 @@ class PlayState extends MainState
 			case 'coin_super':
 				coin_super.add(new Coin_Super(x, y));
 
-			case 'water':
+			case 'water', 'lava', 'poison':
+				liquids.add(new Liquid(x, y, entity.name));
+				
+			/*case 'water':
 				water.add(new Water(x, y));
 
 			case 'lava':
 				lava.add(new Lava(x, y));
 
 			case 'posion':
-				liquid.add(new Liquid(x, y));
+				liquid.add(new Liquid(x, y, 'poison'));*/
 
 			case 'flag':
 				flag.x = x;
@@ -272,7 +271,8 @@ class PlayState extends MainState
 		FlxG.overlap(player, flag, touchFlag);
 		FlxG.overlap(player, water, touchWater);
 		FlxG.overlap(player, lava, touchLava);
-		FlxG.overlap(player, liquid, touchPosion);
+		FlxG.overlap(player, liquids, touchPosion);
+		//FlxG.overlap(player, liquids, touchedLiquid); // interesting... i have to give it a look...
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
@@ -328,6 +328,18 @@ class PlayState extends MainState
 			player.velocity.x = 0;
 	}
 
+	function touchedCoin(player:Player, coin:Coin) {
+		if (player.alive && player.exists && coin.alive && coin.exists)
+		{
+			//if (!coin.isFake)
+			//{
+				coinSound.play(true);
+				/*coin.onPlayerTouch(player);*/coin.kill();
+				//score += coin.score;
+				trace('player got ' + coin.score + ' score');
+			//}
+		}
+	}
 	function touchCoin(player:Player, coin:Coin)
 	{
 		if (player.alive && player.exists && coin.alive && coin.exists)
@@ -371,6 +383,20 @@ class PlayState extends MainState
 		}
 	}
 
+	function touchedLiquid(player:Player, liquid:Liquid)
+	{
+		if(liquid.exists && player.alive && player.exists)
+		{
+			if(liquid.killsWhenTouched)
+			{
+				//player.kill();
+			}
+			if(liquid.firesUpPlayer)
+			{
+				//player.fireUp(); // an animation like its burning
+			}
+		}
+	}
 	function touchWater(player:Player, water:Water)
 	{
 		if (player.alive && player.exists && water.alive && water.exists)
@@ -397,5 +423,10 @@ class PlayState extends MainState
 		{
 			openSubState(new GameoverSubState());
 		}
+	}
+
+	function gameOver()
+	{
+		openSubState(new GameoverSubState());
 	}
 }
