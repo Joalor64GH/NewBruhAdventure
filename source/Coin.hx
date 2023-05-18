@@ -50,11 +50,6 @@ class Coin extends MainSprite
 	{
 		switch (typeCoin)
 		{
-			case 'coin':
-				loadGraphic(Paths.coin__png, true, 16, 16);
-				updateHitbox();
-				score = 10;
-
 			case 'coin_2':
 				loadGraphic(Paths.coin_2__png, true, 16, 16);
 				updateHitbox();
