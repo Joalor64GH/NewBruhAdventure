@@ -48,20 +48,23 @@ class Coin extends MainSprite
 	{
 		switch (typeCoin)
 		{
-			case '2':
+			case 'coin_2':
 				loadGraphic(Paths.coin_2__png, true, 16, 16);
 				updateHitbox();
 				score = 50;
-			case 'super':
+
+			case 'coin_super':
 				loadGraphic(Paths.coin_super__png, true, 16, 16);
 				animation.add('idle', [0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0], 12, true);
 				animation.play('idle');
 				updateHitbox();
 				score = 100;
-			case 'fake': // a black coin? A normal coin but with different animation???
+
+			case 'coin_fake': // a black coin? A normal coin but with different animation???
 				isFakeCoin = true;
 				score = 0;
-			case 'rewarded': // maybe a red one???
+
+			case 'coin_rewarded': // maybe a red one???
 				canBeScored = false;
 		}
 	}
