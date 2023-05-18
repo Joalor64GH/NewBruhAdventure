@@ -1,9 +1,7 @@
 package lev;
 
 import Coin;
-import KindWater.Lava;
 import KindWater.Liquid;
-import KindWater.Water;
 import Player;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -19,13 +17,7 @@ class PlayState extends MainState
 {
 	var player:Player;
 	var coins:FlxTypedGroup<Coin>;
-	/*var coin:FlxTypedGroup<Coin>;
-		var coin_2:FlxTypedGroup<Coin_2>;
-		var coin_super:FlxTypedGroup<Coin_Super>; */
 	var flag:Flag;
-
-	/*var water:FlxTypedGroup<Water>;
-		var lava:FlxTypedGroup<Lava>; */
 	var liquids:FlxTypedGroup<Liquid>;
 
 	var map:FlxOgmo3Loader;
@@ -186,31 +178,11 @@ class PlayState extends MainState
 		coins = new FlxTypedGroup<Coin>();
 		add(coins);
 
-		/*coin_2 = new FlxTypedGroup<Coin_2>();
-			add(coin_2);
-
-			coin_super = new FlxTypedGroup<Coin_Super>();
-			add(coin_super); */
-
 		flag = new Flag();
 		add(flag);
 
-		/*water = new FlxTypedGroup<Water>();
-			water.forEach(function(water2:Water)
-			{
-				water2.slowWalk = false;
-			});
-			add(water); */
-
 		liquids = new FlxTypedGroup<Liquid>();
 		add(liquids);
-
-		/*lava = new FlxTypedGroup<Lava>();
-			lava.forEach(function(lava2:Lava)
-			{
-				lava2.killsWhenTouched = false;
-			});
-			add(lava); */
 
 		map.loadEntities(placeEntities, 'entity');
 
