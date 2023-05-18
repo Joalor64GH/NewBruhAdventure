@@ -3,7 +3,9 @@ package lev;
 import Coin.Coin_2;
 import Coin.Coin_Super;
 import Coin;
+import KindWater.Lava;
 import KindWater.Liquid;
+import KindWater.Water;
 import Player;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -22,6 +24,9 @@ class PlayState extends MainState
 	var coin_2:FlxTypedGroup<Coin_2>;
 	var coin_super:FlxTypedGroup<Coin_Super>;
 	var flag:Flag;
+
+	var water:FlxTypedGroup<Water>;
+	var lava:FlxTypedGroup<Lava>;
 	var liquid:FlxTypedGroup<Liquid>;
 
 	var map:FlxOgmo3Loader;
@@ -186,12 +191,26 @@ class PlayState extends MainState
 		flag = new Flag();
 		add(flag);
 
+		water = new FlxTypedGroup<Water>();
+		water.forEach(function(water2:Water)
+		{
+			water2.slowWalk = false;
+		});
+		add(water);
+
 		liquid = new FlxTypedGroup<Liquid>();
 		liquid.forEach(function(posion:Liquid)
 		{
 			posion.killsWhenTouched = false;
 		});
 		add(liquid);
+
+		lava = new FlxTypedGroup<Lava>();
+		lava.forEach(function(lava2:Lava)
+		{
+			lava2.killsWhenTouched = false;
+		});
+		add(lava);
 
 		map.loadEntities(placeEntities, 'entity');
 
@@ -221,6 +240,12 @@ class PlayState extends MainState
 			case 'coin_super':
 				coin_super.add(new Coin_Super(x, y));
 
+			case 'water':
+				water.add(new Water(x, y));
+
+			case 'lava':
+				lava.add(new Lava(x, y));
+
 			case 'posion':
 				liquid.add(new Liquid(x, y));
 
@@ -240,6 +265,8 @@ class PlayState extends MainState
 		FlxG.overlap(player, coin_2, touchCoin2);
 		FlxG.overlap(player, coin_super, touchCoinSuper);
 		FlxG.overlap(player, flag, touchFlag);
+		FlxG.overlap(player, water, touchWater);
+		FlxG.overlap(player, lava, touchLava);
 		FlxG.overlap(player, liquid, touchPosion);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
@@ -336,6 +363,26 @@ class PlayState extends MainState
 			flag.kill();
 			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
 			FlxG.switchState(new MenuSelectLevel());
+		}
+	}
+
+	function touchWater(player:Player, water:Water)
+	{
+		if (player.alive && player.exists && water.alive && water.exists)
+		{
+			water.slowWalk = true;
+		}
+		else
+		{
+			water.slowWalk = false;
+		}
+	}
+
+	function touchLava(player:Player, lava:Lava)
+	{
+		if (player.alive && player.exists && lava.alive && lava.exists)
+		{
+			openSubState(new GameoverSubState());
 		}
 	}
 

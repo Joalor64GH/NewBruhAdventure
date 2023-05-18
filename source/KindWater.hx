@@ -22,6 +22,8 @@ class KindWater extends MainSprite {}
 
 class Water extends MainSprite
 {
+	public var slowWalk:Bool = false;
+
 	public function new(x:Float = 0, y:Float = 0)
 	{
 		super(x, y);
@@ -34,6 +36,8 @@ class Water extends MainSprite
 
 class Lava extends MainSprite
 {
+	public var killsWhenTouched:Bool = false;
+
 	public function new(x:Float = 0, y:Float = 0)
 	{
 		super(x, y);
