@@ -27,7 +27,7 @@ class OptionsMenu extends MainState
 
 		text = new FlxText(0, 0, 0, "", 22);
 		text.scrollFactor.set();
-		text.screenCenter();
+		text.screenCenter(Y);
 		add(text);
 	}
 
@@ -59,7 +59,7 @@ class OptionsMenu extends MainState
 			number = 1;
 		}
 
-		if (FlxG.keys.justPressed.ENTER)
+		if (FlxG.keys.anyJustPressed([ENTER, ESCAPE]))
 		{
 			FlxG.switchState(new MenuState());
 		}
