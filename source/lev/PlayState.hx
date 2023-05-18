@@ -250,14 +250,7 @@ class PlayState extends MainState
 		FlxG.camera.follow(player, LOCKON);
 
 		FlxG.overlap(player, coins, touchedCoin);
-		/*FlxG.overlap(player, coin, touchCoin);
-			FlxG.overlap(player, coin_2, touchCoin2);
-			FlxG.overlap(player, coin_super, touchCoinSuper);
-			FlxG.overlap(player, flag, touchFlag);
-			FlxG.overlap(player, water, touchWater);
-			FlxG.overlap(player, lava, touchLava); */
 		FlxG.overlap(player, liquids, touchPosion);
-		// FlxG.overlap(player, liquids, touchedLiquid); // interesting... i have to give it a look...
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
@@ -325,20 +318,10 @@ class PlayState extends MainState
 			if (!coin.isFakeCoin)
 			{
 				coinSound.play(true);
-				/*coin.onPlayerTouch(player);*/ coin.kill();
+				coin.kill();
 				score += coin.score;
 				trace('player got ' + coin.score + ' score');
 			}
-		}
-	}
-
-	function touchFlag(player:Player, flag:Flag)
-	{
-		if (player.alive && player.exists && flag.alive && flag.exists)
-		{
-			flag.kill();
-			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
-			FlxG.switchState(new MenuSelectLevel());
 		}
 	}
 
@@ -355,6 +338,16 @@ class PlayState extends MainState
 			{
 				player.fireUp(); // an animation like its burning
 			}
+		}
+	}
+
+	function touchFlag(player:Player, flag:Flag)
+	{
+		if (player.alive && player.exists && flag.alive && flag.exists)
+		{
+			flag.kill();
+			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
+			FlxG.switchState(new MenuSelectLevel());
 		}
 	}
 
