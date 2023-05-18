@@ -1,7 +1,5 @@
 package lev;
 
-import Coin.Coin_2;
-import Coin.Coin_Super;
 import Coin;
 import KindWater.Lava;
 import KindWater.Liquid;
@@ -22,12 +20,12 @@ class PlayState extends MainState
 	var player:Player;
 	var coins:FlxTypedGroup<Coin>;
 	/*var coin:FlxTypedGroup<Coin>;
-	var coin_2:FlxTypedGroup<Coin_2>;
-	var coin_super:FlxTypedGroup<Coin_Super>;*/
+		var coin_2:FlxTypedGroup<Coin_2>;
+		var coin_super:FlxTypedGroup<Coin_Super>; */
 	var flag:Flag;
 
 	/*var water:FlxTypedGroup<Water>;
-	var lava:FlxTypedGroup<Lava>;*/
+		var lava:FlxTypedGroup<Lava>; */
 	var liquids:FlxTypedGroup<Liquid>;
 
 	var map:FlxOgmo3Loader;
@@ -189,30 +187,30 @@ class PlayState extends MainState
 		add(coins);
 
 		/*coin_2 = new FlxTypedGroup<Coin_2>();
-		add(coin_2);
+			add(coin_2);
 
-		coin_super = new FlxTypedGroup<Coin_Super>();
-		add(coin_super);*/
+			coin_super = new FlxTypedGroup<Coin_Super>();
+			add(coin_super); */
 
 		flag = new Flag();
 		add(flag);
 
 		/*water = new FlxTypedGroup<Water>();
-		water.forEach(function(water2:Water)
-		{
-			water2.slowWalk = false;
-		});
-		add(water);*/
+			water.forEach(function(water2:Water)
+			{
+				water2.slowWalk = false;
+			});
+			add(water); */
 
 		liquids = new FlxTypedGroup<Liquid>();
 		add(liquids);
 
 		/*lava = new FlxTypedGroup<Lava>();
-		lava.forEach(function(lava2:Lava)
-		{
-			lava2.killsWhenTouched = false;
-		});
-		add(lava);*/
+			lava.forEach(function(lava2:Lava)
+			{
+				lava2.killsWhenTouched = false;
+			});
+			add(lava); */
 
 		map.loadEntities(placeEntities, 'entity');
 
@@ -237,25 +235,25 @@ class PlayState extends MainState
 				coins.add(new Coin(x, y, entity.name));
 
 			/*case 'coin':
-				coin.add(new Coin(x, y));
+					coin.add(new Coin(x, y));
 
-			case 'coin_2':
-				coin_2.add(new Coin_2(x, y));
+				case 'coin_2':
+					coin_2.add(new Coin_2(x, y));
 
-			case 'coin_super':
-				coin_super.add(new Coin_Super(x, y));*/
+				case 'coin_super':
+					coin_super.add(new Coin_Super(x, y)); */
 
 			case 'water', 'lava', 'poison':
 				liquids.add(new Liquid(x, y, entity.name));
-				
+
 			/*case 'water':
-				water.add(new Water(x, y));
+					water.add(new Water(x, y));
 
-			case 'lava':
-				lava.add(new Lava(x, y));
+				case 'lava':
+					lava.add(new Lava(x, y));
 
-			case 'posion':
-				liquid.add(new Liquid(x, y, 'poison'));*/
+				case 'posion':
+					liquid.add(new Liquid(x, y, 'poison')); */
 
 			case 'flag':
 				flag.x = x;
@@ -271,13 +269,13 @@ class PlayState extends MainState
 
 		FlxG.overlap(player, coins, touchedCoin);
 		/*FlxG.overlap(player, coin, touchCoin);
-		FlxG.overlap(player, coin_2, touchCoin2);
-		FlxG.overlap(player, coin_super, touchCoinSuper);
-		FlxG.overlap(player, flag, touchFlag);
-		FlxG.overlap(player, water, touchWater);
-		FlxG.overlap(player, lava, touchLava);*/
+			FlxG.overlap(player, coin_2, touchCoin2);
+			FlxG.overlap(player, coin_super, touchCoinSuper);
+			FlxG.overlap(player, flag, touchFlag);
+			FlxG.overlap(player, water, touchWater);
+			FlxG.overlap(player, lava, touchLava); */
 		FlxG.overlap(player, liquids, touchPosion);
-		//FlxG.overlap(player, liquids, touchedLiquid); // interesting... i have to give it a look...
+		// FlxG.overlap(player, liquids, touchedLiquid); // interesting... i have to give it a look...
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
@@ -323,33 +321,35 @@ class PlayState extends MainState
 		{
 			stepSound.play(true);
 			player.velocity.x = -100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-			//player.runLeft();
+			// player.runLeft();
 		}
 		else if (right)
 		{
 			stepSound.play(true);
 			player.velocity.x = 100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-			//player.runRight();
+			// player.runRight();
 		}
 		else
 		{
 			player.velocity.x = 0;
-			//player.stopRunning();
+			// player.stopRunning();
 		}
 	}
 
-	function touchedCoin(player:Player, coin:Coin) {
+	function touchedCoin(player:Player, coin:Coin)
+	{
 		if (player.alive && player.exists && coin.alive && coin.exists)
 		{
 			if (!coin.isFakeCoin)
 			{
 				coinSound.play(true);
-				/*coin.onPlayerTouch(player);*/coin.kill();
+				/*coin.onPlayerTouch(player);*/ coin.kill();
 				score += coin.score;
 				trace('player got ' + coin.score + ' score');
 			}
 		}
 	}
+
 	function touchCoin(player:Player, coin:Coin)
 	{
 		if (player.alive && player.exists && coin.alive && coin.exists)
@@ -395,19 +395,20 @@ class PlayState extends MainState
 
 	function touchedLiquid(player:Player, liquid:Liquid)
 	{
-		if(liquid.exists && player.alive && player.exists)
+		if (liquid.exists && player.alive && player.exists)
 		{
-			if(liquid.killsWhenTouched)
+			if (liquid.killsWhenTouched)
 			{
-				//player.kill();
+				// player.kill();
 				gameOver();
 			}
-			if(liquid.firesUpPlayer)
+			if (liquid.firesUpPlayer)
 			{
-				//player.fireUp(); // an animation like its burning
+				// player.fireUp(); // an animation like its burning
 			}
 		}
 	}
+
 	function touchWater(player:Player, water:Water)
 	{
 		if (player.alive && player.exists && water.alive && water.exists)
