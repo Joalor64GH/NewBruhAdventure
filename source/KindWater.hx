@@ -6,11 +6,12 @@ class Liquid extends MainSprite
 	// In development
 	public var firesUpPlayer:Bool = false;
 	public var slowWalk:Bool = false;
-	
+
 	public var liquidType(default, set):String = '';
+
 	inline function set_liquidType(v:String):String
 	{
-		if(liquidType != v)
+		if (liquidType != v)
 		{
 			liquidType = v;
 			reload();
@@ -23,25 +24,32 @@ class Liquid extends MainSprite
 		super(x, y);
 		this.liquidType = LiquidType;
 	}
+
 	function reload()
 	{
-		switch(liquidType)
+		switch (liquidType)
 		{
 			case 'poison':
 				loadGraphic(Paths.liquid__png, true, 16, 16);
 				animation.add("posion", [2]);
 				animation.play("posion");
-				//killsWhenTouched = true;
+				killsWhenTouched = true;
+				slowWalk = false;
+				firesUpPlayer = false;
 			case 'water':
 				loadGraphic(Paths.liquid__png, true, 16, 16);
 				animation.add("water", [1]);
 				animation.play("water");
-				//slowWalk = true;
+				killsWhenTouched = false;
+				slowWalk = true;
+				firesUpPlayer = false;
 			case 'lava':
 				loadGraphic(Paths.liquid__png, true, 16, 16);
 				animation.add("lava", [0]);
 				animation.play("lava");
-				//firesUpPlayer = true;
+				killsWhenTouched = false;
+				slowWalk = false;
+				firesUpPlayer = true;
 		}
 	}
 }

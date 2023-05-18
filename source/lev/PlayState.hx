@@ -153,6 +153,8 @@ class PlayState extends MainState
 	var stepSound:FlxSound;
 	var coinSound:FlxSound;
 
+	var slowNow:Bool = false;
+
 	override public function create()
 	{
 		super.create();
@@ -222,6 +224,7 @@ class PlayState extends MainState
 		FlxG.camera.follow(player, LOCKON);
 
 		FlxG.overlap(player, coins, touchedCoin);
+		FlxG.overlap(player, flag, touchFlag);
 		FlxG.overlap(player, liquids, touchedLiquid);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
@@ -267,13 +270,19 @@ class PlayState extends MainState
 		if (left)
 		{
 			stepSound.play(true);
-			player.velocity.x = -100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+			if (slowNow)
+				player.velocity.x = -50 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+			else
+				player.velocity.x = -100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
 			// player.runLeft();
 		}
 		else if (right)
 		{
 			stepSound.play(true);
-			player.velocity.x = 100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+			if (slowNow)
+				player.velocity.x = 50 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+			else
+				player.velocity.x = 100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
 			// player.runRight();
 		}
 		else
@@ -287,13 +296,14 @@ class PlayState extends MainState
 	{
 		if (player.alive && player.exists && coin.alive && coin.exists)
 		{
-			if (!coin.isFakeCoin)
+			if (!coin.isFakeCoin && coin.canBeScored)
 			{
 				coinSound.play(true);
 				coin.kill();
 				score += coin.score;
-				trace('player got ' + coin.score + ' score');
 			}
+
+			trace('player got ' + coin.score + ' score');
 		}
 	}
 
@@ -301,14 +311,27 @@ class PlayState extends MainState
 	{
 		if (liquid.exists && player.alive && player.exists)
 		{
+			// for poison
 			if (liquid.killsWhenTouched)
 			{
 				// player.kill();
 				gameOver();
 			}
+
+			// for lava
 			if (liquid.firesUpPlayer)
 			{
 				player.fireUp(); // an animation like its burning
+			}
+
+			// for water
+			if (liquid.slowWalk)
+			{
+				slowNow = true;
+			}
+			else
+			{
+				slowNow = false;
 			}
 		}
 	}
@@ -319,6 +342,7 @@ class PlayState extends MainState
 		{
 			flag.kill();
 			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
+			trace('complete ' + curLevel + '!');
 			FlxG.switchState(new MenuSelectLevel());
 		}
 	}
