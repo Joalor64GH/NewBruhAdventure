@@ -145,6 +145,11 @@ class PlayState extends MainState
 				curLevel = 'lev22';
 				jsonPaths = Paths.lev22__json;
 				trace('load: ' + jsonPaths);
+
+			case 22:
+				curLevel = 'lev23';
+				jsonPaths = Paths.lev23__json;
+				trace('load: ' + jsonPaths);
 		}
 	}
 
@@ -325,9 +330,13 @@ class PlayState extends MainState
 			}
 
 			// for water
-			if (liquid.slowWalk)
+			if (liquid.slowWalk && player.overlaps(liquid))
 			{
 				slowNow = true;
+			}
+			else if (liquid.slowWalk && !player.overlaps(liquid))
+			{
+				slowNow = false;
 			}
 			else
 			{
