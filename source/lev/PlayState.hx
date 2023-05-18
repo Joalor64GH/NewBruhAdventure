@@ -222,7 +222,7 @@ class PlayState extends MainState
 		FlxG.camera.follow(player, LOCKON);
 
 		FlxG.overlap(player, coins, touchedCoin);
-		FlxG.overlap(player, liquids, touchPosion);
+		FlxG.overlap(player, liquids, touchedLiquid);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
