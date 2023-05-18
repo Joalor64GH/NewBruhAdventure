@@ -54,11 +54,11 @@ class Player extends MainSprite
 	{
 		if (enable)
 		{
-			animation.play("in_burn", true);
+			animation.play("in_burn");
 		}
-		else
+		else if (enable)
 		{
-			animation.play("in_normall", false);
+			animation.play("in_normall");
 		}
 
 		return enable;

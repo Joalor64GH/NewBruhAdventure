@@ -150,6 +150,11 @@ class PlayState extends MainState
 				curLevel = 'lev23';
 				jsonPaths = Paths.lev23__json;
 				trace('load: ' + jsonPaths);
+
+			case 40:
+				curLevel = 'lev1ex';
+				jsonPaths = Paths.lev1ex__json;
+				trace('load: ' + jsonPaths);
 		}
 	}
 
@@ -324,9 +329,17 @@ class PlayState extends MainState
 			}
 
 			// for lava
-			if (liquid.firesUpPlayer)
+			if (liquid.firesUpPlayer && player.overlaps(liquid))
 			{
-				player.fireUp(); // an animation like its burning
+				player.fireUp(true); // an animation like its burning
+			}
+			else if (liquid.firesUpPlayer && !player.overlaps(liquid))
+			{
+				player.fireUp(false);
+			}
+			else
+			{
+				player.fireUp(false);
 			}
 
 			// for water

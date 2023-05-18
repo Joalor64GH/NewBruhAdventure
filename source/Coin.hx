@@ -73,12 +73,12 @@ class Coin extends MainSprite
 				canBeScored = true;
 				score = 100;
 
-			case 'coin_fake': // a black coin that you will get nothing
+			case 'coin_fake': // a black coin that you will get -10 score
 				loadGraphic(Paths.coin_black__png, true, 16, 16);
 				updateHitbox();
-				isFakeCoin = true;
-				canBeScored = false;
-				score = 0;
+				isFakeCoin = false;
+				canBeScored = true;
+				score = -20;
 
 			case 'coin_rewarded': // a red one that have a animtion png
 				loadGraphic(Paths.coin_red__png, true, 16, 16);

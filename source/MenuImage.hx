@@ -19,6 +19,9 @@ class MenuImage extends MainSprite
 		animation.add("credits_idle", [6]);
 		animation.add("credits_select", [7]);
 
+		animation.add("awards_idle", [8]);
+		animation.add("awards_select", [9]);
+
 		scale.set(3, 3);
 	}
 }
