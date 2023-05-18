@@ -409,34 +409,33 @@ class PlayState extends MainState
 		}
 	}
 
-	function touchWater(player:Player, water:Water)
-	{
-		if (player.alive && player.exists && water.alive && water.exists)
+	/*function touchWater(player:Player, water:Water)
 		{
-			water.slowWalk = true;
+			if (player.alive && player.exists && water.alive && water.exists)
+			{
+				water.slowWalk = true;
+			}
+			else
+			{
+				water.slowWalk = false;
+			}
 		}
-		else
-		{
-			water.slowWalk = false;
-		}
-	}
 
-	function touchLava(player:Player, lava:Lava)
-	{
-		if (player.alive && player.exists && lava.alive && lava.exists)
+		function touchLava(player:Player, lava:Lava)
 		{
-			gameOver();
+			if (player.alive && player.exists && lava.alive && lava.exists)
+			{
+				gameOver();
+			}
 		}
-	}
 
-	function touchPosion(player:Player, liquid:Liquid)
-	{
-		if (player.alive && player.exists && liquid.alive && liquid.exists)
+		function touchPosion(player:Player, liquid:Liquid)
 		{
-			gameOver();
-		}
-	}
-
+			if (player.alive && player.exists && liquid.alive && liquid.exists)
+			{
+				gameOver();
+			}
+	}*/
 	function gameOver()
 	{
 		openSubState(new GameoverSubState());

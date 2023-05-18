@@ -53,6 +53,8 @@ class Coin extends MainSprite
 			case 'coin_2':
 				loadGraphic(Paths.coin_2__png, true, 16, 16);
 				updateHitbox();
+				isFakeCoin = false;
+				canBeScored = true;
 				score = 50;
 
 			case 'coin_super':
@@ -60,12 +62,15 @@ class Coin extends MainSprite
 				animation.add('idle', [0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0], 12, true);
 				animation.play('idle');
 				updateHitbox();
+				isFakeCoin = false;
+				canBeScored = true;
 				score = 100;
 
 			case 'coin_fake': // a black coin that you will get nothing
 				loadGraphic(Paths.coin_black__png, true, 16, 16);
 				updateHitbox();
 				isFakeCoin = true;
+				canBeScored = false;
 				score = 0;
 
 			case 'coin_rewarded': // a red one that have a animtion png
@@ -73,7 +78,9 @@ class Coin extends MainSprite
 				animation.add('idle', [0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0], 12, true);
 				animation.play('idle');
 				updateHitbox();
-				canBeScored = false;
+				isFakeCoin = false;
+				canBeScored = true;
+				score = 150;
 		}
 	}
 

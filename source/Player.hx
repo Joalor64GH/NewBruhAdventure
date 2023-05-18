@@ -18,8 +18,10 @@ class Player extends MainSprite
 		super(x, y);
 
 		loadGraphic(Paths.player__png, true, 16, 16);
-		animation.add("left", [1], 1);
-		animation.add("right", [2], 1);
+		animation.add("left", [0], 1);
+		animation.add("right", [1], 1);
+		animation.add("in_burn", [2], 1); // when player get burn
+		animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9, 0], 1); // when player after get out of lava
 		animation.play("right");
 	}
 
