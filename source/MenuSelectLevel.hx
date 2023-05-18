@@ -18,7 +18,7 @@ class MenuSelectLevel extends MainState
 		"lev1", "lev2", "lev3", "lev4", "lev5", "lev6", "lev7", "lev8", "lev9", "lev10", "lev11", "lev12", "lev13", "lev14", "lev15", "lev16", "lev17",
 		"lev18", "lev19", "lev20", "lev21", "lev22", "lev23", "lev24", "lev25", "lev26", "lev27", "lev28", "lev29", "lev30", "lev31", "lev32", "lev33",
 		"lev34", "lev35", "lev36", "lev37", "lev38", "lev39", "lev40", "lev1e", "lev2e", "lev3e", "lev4e", "lev5e"
-	];
+	]; // too much lol
 
 	var select_lev:FlxTypedGroup<MenuSelect>;
 	var select:Int = 0;

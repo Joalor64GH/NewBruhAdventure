@@ -1,10 +1,14 @@
 package;
 
-class Liquid extends MainSprite {
+class Liquid extends MainSprite
+{
 	public var killsWhenTouched:Bool = false;
-	public var liquidType/*(default, set)*/:String = '';
+	public var liquidType /*(default, set)*/:String = '';
 }
 
+/**
+ * Just a empty class but using this for other stuff
+ */
 class KindWater extends MainSprite {}
 
 class Water extends MainSprite
