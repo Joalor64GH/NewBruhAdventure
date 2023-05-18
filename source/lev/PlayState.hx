@@ -20,13 +20,14 @@ import util.Util;
 class PlayState extends MainState
 {
 	var player:Player;
-	var coin:FlxTypedGroup<Coin>;
+	var coins:FlxTypedGroup<Coin>;
+	/*var coin:FlxTypedGroup<Coin>;
 	var coin_2:FlxTypedGroup<Coin_2>;
-	var coin_super:FlxTypedGroup<Coin_Super>;
+	var coin_super:FlxTypedGroup<Coin_Super>;*/
 	var flag:Flag;
 
-	var water:FlxTypedGroup<Water>;
-	var lava:FlxTypedGroup<Lava>;
+	/*var water:FlxTypedGroup<Water>;
+	var lava:FlxTypedGroup<Lava>;*/
 	var liquids:FlxTypedGroup<Liquid>;
 
 	var map:FlxOgmo3Loader;
@@ -184,34 +185,34 @@ class PlayState extends MainState
 		player = new Player();
 		add(player);
 
-		coin = new FlxTypedGroup<Coin>();
-		add(coin);
+		coins = new FlxTypedGroup<Coin>();
+		add(coins);
 
-		coin_2 = new FlxTypedGroup<Coin_2>();
+		/*coin_2 = new FlxTypedGroup<Coin_2>();
 		add(coin_2);
 
 		coin_super = new FlxTypedGroup<Coin_Super>();
-		add(coin_super);
+		add(coin_super);*/
 
 		flag = new Flag();
 		add(flag);
 
-		water = new FlxTypedGroup<Water>();
+		/*water = new FlxTypedGroup<Water>();
 		water.forEach(function(water2:Water)
 		{
 			water2.slowWalk = false;
 		});
-		add(water);
+		add(water);*/
 
 		liquids = new FlxTypedGroup<Liquid>();
 		add(liquids);
 
-		lava = new FlxTypedGroup<Lava>();
+		/*lava = new FlxTypedGroup<Lava>();
 		lava.forEach(function(lava2:Lava)
 		{
 			lava2.killsWhenTouched = false;
 		});
-		add(lava);
+		add(lava);*/
 
 		map.loadEntities(placeEntities, 'entity');
 
@@ -232,14 +233,17 @@ class PlayState extends MainState
 				player.acceleration.y = 900;
 				player.maxVelocity.y = 300;
 
-			case 'coin':
+			case 'coin', 'coin_2', 'coin_super':
+				coins.add(new Coin(x, y, entity.name));
+
+			/*case 'coin':
 				coin.add(new Coin(x, y));
 
 			case 'coin_2':
 				coin_2.add(new Coin_2(x, y));
 
 			case 'coin_super':
-				coin_super.add(new Coin_Super(x, y));
+				coin_super.add(new Coin_Super(x, y));*/
 
 			case 'water', 'lava', 'poison':
 				liquids.add(new Liquid(x, y, entity.name));
@@ -265,12 +269,13 @@ class PlayState extends MainState
 		FlxG.collide(player, walls);
 		FlxG.camera.follow(player, LOCKON);
 
-		FlxG.overlap(player, coin, touchCoin);
+		FlxG.overlap(player, coins, touchedCoin);
+		/*FlxG.overlap(player, coin, touchCoin);
 		FlxG.overlap(player, coin_2, touchCoin2);
 		FlxG.overlap(player, coin_super, touchCoinSuper);
 		FlxG.overlap(player, flag, touchFlag);
 		FlxG.overlap(player, water, touchWater);
-		FlxG.overlap(player, lava, touchLava);
+		FlxG.overlap(player, lava, touchLava);*/
 		FlxG.overlap(player, liquids, touchPosion);
 		//FlxG.overlap(player, liquids, touchedLiquid); // interesting... i have to give it a look...
 
@@ -318,26 +323,31 @@ class PlayState extends MainState
 		{
 			stepSound.play(true);
 			player.velocity.x = -100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+			//player.runLeft();
 		}
 		else if (right)
 		{
 			stepSound.play(true);
 			player.velocity.x = 100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+			//player.runRight();
 		}
 		else
+		{
 			player.velocity.x = 0;
+			//player.stopRunning();
+		}
 	}
 
 	function touchedCoin(player:Player, coin:Coin) {
 		if (player.alive && player.exists && coin.alive && coin.exists)
 		{
-			//if (!coin.isFake)
-			//{
+			if (!coin.isFakeCoin)
+			{
 				coinSound.play(true);
 				/*coin.onPlayerTouch(player);*/coin.kill();
-				//score += coin.score;
+				score += coin.score;
 				trace('player got ' + coin.score + ' score');
-			//}
+			}
 		}
 	}
 	function touchCoin(player:Player, coin:Coin)
@@ -390,6 +400,7 @@ class PlayState extends MainState
 			if(liquid.killsWhenTouched)
 			{
 				//player.kill();
+				gameOver();
 			}
 			if(liquid.firesUpPlayer)
 			{
@@ -413,7 +424,7 @@ class PlayState extends MainState
 	{
 		if (player.alive && player.exists && lava.alive && lava.exists)
 		{
-			openSubState(new GameoverSubState());
+			gameOver();
 		}
 	}
 
@@ -421,7 +432,7 @@ class PlayState extends MainState
 	{
 		if (player.alive && player.exists && liquid.alive && liquid.exists)
 		{
-			openSubState(new GameoverSubState());
+			gameOver();
 		}
 	}
 
