@@ -80,5 +80,6 @@ class AwardsMenu extends MainState
 
 		textAwards.text = awards[curPage][0];
 		textAwardDescription.text = awards[curPage][1];
+		textCheckAwards.text = checkAwards;
 	}
 }
