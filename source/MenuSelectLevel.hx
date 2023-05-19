@@ -40,14 +40,6 @@ class MenuSelectLevel extends MainState
 		text.scale.set(1, 1);
 		add(text);
 
-		map = new FlxOgmo3Loader(Paths.levelProject__ogmo, jsonPaths);
-		walls = map.loadTilemap(Paths.tilemap_1__png, 'walls');
-		walls.screenCenter();
-		walls.follow();
-		walls.setTileProperties(1, NONE);
-		walls.setTileProperties(2, ANY);
-		add(walls);
-
 		select_lev = new FlxTypedGroup<MenuSelect>();
 		add(select_lev);
 
