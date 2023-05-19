@@ -2,7 +2,7 @@ package;
 
 class AwardsImage extends MainSprite
 {
-	var curInt:Int = 6;
+	var curInt:Int = 7;
 
 	public function new(x:Float = 0, y:Float = 0)
 	{
