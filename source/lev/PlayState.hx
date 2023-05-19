@@ -13,6 +13,9 @@ import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
 import util.Util;
 
+/**
+ * Soon that will be outdate!
+ */
 class PlayState extends MainState
 {
 	var player:Player;
