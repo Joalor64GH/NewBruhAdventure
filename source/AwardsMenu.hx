@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
@@ -9,7 +10,7 @@ class AwardsMenu extends MainState
 {
 	var checkAwards:String = '';
 
-	final awards:Array<Array<String>> = [
+	var awards:Array<Array<String>> = [
 		["Wow... For sure that was hard...", "Finish Level 1 EX"],
 		["Oooh... Shiny!", "Collect 20 Yellow Coins"],
 		["Are these... Avocados!?", "Collect 20 Green Coins"],
@@ -17,6 +18,8 @@ class AwardsMenu extends MainState
 		["Is this real?!", "Collect 2 Fake Coins"],
 		["So that was what I had to do!", "Collect 1 Rewarded Coin"]
 	];
+
+	var awardsImage:FlxTypedGroup<AwardsImage>;
 	var textAwards:FlxText;
 	var textAwardDescription:FlxText;
 	var textCheckAwards:FlxText;
@@ -34,6 +37,17 @@ class AwardsMenu extends MainState
 		textAwards = new FlxText(0, 0, 0, "", 20);
 		textAwards.screenCenter(Y);
 		add(textAwards);
+
+		awardsImage = new FlxTypedGroup<AwardsImage>();
+		add(awardsImage);
+
+		for (i in 0...awards.length)
+		{
+			var selectThing:AwardsImage = new AwardsImage(500, 0);
+			selectThing.ID = i;
+			selectThing.screenCenter(Y);
+			awardsImage.add(selectThing);
+		}
 
 		textAwardDescription = new FlxText(0, 40, 0, "", 20);
 		textAwardDescription.screenCenter(Y);
@@ -81,5 +95,10 @@ class AwardsMenu extends MainState
 		textAwards.text = awards[curPage][0];
 		textAwardDescription.text = awards[curPage][1];
 		textCheckAwards.text = checkAwards;
+
+		awardsImage.forEach(function(spr:AwardsImage)
+		{
+			spr.animation.play("awards" + Std.string(curPage + 1));
+		});
 	}
 }
