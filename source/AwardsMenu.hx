@@ -7,16 +7,19 @@ import flixel.util.FlxColor;
 
 class AwardsMenu extends MainState
 {
-	final awards:Array<Array<String>> = [
-		["Wow... For sure that was hard...", "Finish Level 1 EX"],
-		["Oooh... Shiny!", "Collect 20 Yellow Coins"],
-		["Are these... Avocados!?", "Collect 20 Green Coins"],
-		["I'm... tired.", "Collect 5 Super Coins"],
-		["Is this real?!", "Collect 2 Fake Coins"],
-		["So that was what I had to do!", "Collect 1 Rewarded Coin"]
+	var checkAwards:String = '';
+
+	final awards:Array<Array<Array<String>>> = [
+		["Wow... For sure that was hard...", "Finish Level 1 EX", checkAwards],
+		["Oooh... Shiny!", "Collect 20 Yellow Coins", checkAwards],
+		["Are these... Avocados!?", "Collect 20 Green Coins", checkAwards],
+		["I'm... tired.", "Collect 5 Super Coins", checkAwards],
+		["Is this real?!", "Collect 2 Fake Coins", checkAwards],
+		["So that was what I had to do!", "Collect 1 Rewarded Coin", checkAwards]
 	];
 	var textAwards:FlxText;
 	var textAwardDescription:FlxText;
+	var textCheckAwards:FlxText;
 	var curPage:Int = 0;
 
 	override public function create()
@@ -29,16 +32,20 @@ class AwardsMenu extends MainState
 		add(bg);
 
 		textAwards = new FlxText(0, 0, 0, "", 20);
-		// textCredits.scrollFactor.set();
-		// textCredits.alignment = CENTER;
 		textAwards.screenCenter(Y);
 		add(textAwards);
 
 		textAwardDescription = new FlxText(0, 20, 0, "", 20);
 		textAwardDescription.screenCenter(Y);
-		textAwardDescription.y -= 20;
+		textAwardDescription.y += 20;
 		textAwardDescription.alignment = CENTER;
 		add(textAwardDescription);
+
+		textCheckAwards = new FlxText(0, 40, 0, "", 20);
+		textCheckAwards.screenCenter(Y);
+		textCheckAwards.y += 40;
+		textCheckAwards.alignment = CENTER;
+		add(textCheckAwards);
 
 		changeText();
 	}
@@ -73,5 +80,6 @@ class AwardsMenu extends MainState
 
 		textAwards.text = awards[curPage][0];
 		textAwardDescription.text = awards[curPage][1];
+		textCheckAwards.text = awards[curPage][2];
 	}
 }
