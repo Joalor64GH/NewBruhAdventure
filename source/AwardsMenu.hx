@@ -35,15 +35,15 @@ class AwardsMenu extends MainState
 		textAwards.screenCenter(Y);
 		add(textAwards);
 
-		textAwardDescription = new FlxText(0, 20, 0, "", 20);
+		textAwardDescription = new FlxText(0, 40, 0, "", 20);
 		textAwardDescription.screenCenter(Y);
-		textAwardDescription.y += 20;
+		textAwardDescription.y += 40;
 		textAwardDescription.alignment = CENTER;
 		add(textAwardDescription);
 
-		textCheckAwards = new FlxText(0, 40, 0, "", 20);
+		textCheckAwards = new FlxText(0, 80, 0, "", 20);
 		textCheckAwards.screenCenter(Y);
-		textCheckAwards.y += 40;
+		textCheckAwards.y += 80;
 		textCheckAwards.alignment = CENTER;
 		add(textCheckAwards);
 
