@@ -9,13 +9,13 @@ class AwardsMenu extends MainState
 {
 	var checkAwards:String = '';
 
-	final awards:Array<Array<Array<String>>> = [
-		["Wow... For sure that was hard...", "Finish Level 1 EX", checkAwards],
-		["Oooh... Shiny!", "Collect 20 Yellow Coins", checkAwards],
-		["Are these... Avocados!?", "Collect 20 Green Coins", checkAwards],
-		["I'm... tired.", "Collect 5 Super Coins", checkAwards],
-		["Is this real?!", "Collect 2 Fake Coins", checkAwards],
-		["So that was what I had to do!", "Collect 1 Rewarded Coin", checkAwards]
+	final awards:Array<Array<String>> = [
+		["Wow... For sure that was hard...", "Finish Level 1 EX"],
+		["Oooh... Shiny!", "Collect 20 Yellow Coins"],
+		["Are these... Avocados!?", "Collect 20 Green Coins"],
+		["I'm... tired.", "Collect 5 Super Coins"],
+		["Is this real?!", "Collect 2 Fake Coins"],
+		["So that was what I had to do!", "Collect 1 Rewarded Coin"]
 	];
 	var textAwards:FlxText;
 	var textAwardDescription:FlxText;
@@ -80,6 +80,5 @@ class AwardsMenu extends MainState
 
 		textAwards.text = awards[curPage][0];
 		textAwardDescription.text = awards[curPage][1];
-		textCheckAwards.text = awards[curPage][2];
 	}
 }
