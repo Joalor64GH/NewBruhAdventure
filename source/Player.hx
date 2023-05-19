@@ -13,7 +13,13 @@ class Player extends MainSprite
 
 	public var speed:Vector = new Vector(0, 0);
 
-	public function new(x:Float = 0, y:Float = 0, skin:String)
+	// for skin
+	public var fasterInWater:Bool = false;
+	public var canHandlerlava:Bool = false;
+	public var runFaster:Bool = false;
+	public var gainAlotScore:Bool = false;
+
+	public function new(x:Float = 0, y:Float = 0, skin:String = 'normal')
 	{
 		super(x, y);
 
@@ -26,6 +32,10 @@ class Player extends MainSprite
 				animation.add("in_burn", [2], 1); // when player get burn
 				animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
 				animation.play("right");
+				fasterInWater = false;
+				canHandlerlava = false;
+				runFaster = false;
+				gainAlotScore = false;
 
 			case "cool_glassed":
 				loadGraphic(Paths.cool_glassed__png, true, 16, 16);
@@ -34,6 +44,10 @@ class Player extends MainSprite
 				animation.add("in_burn", [2], 1); // when player get burn
 				animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
 				animation.play("right");
+				fasterInWater = false;
+				canHandlerlava = false;
+				runFaster = false;
+				gainAlotScore = true;
 
 			case "speedrun":
 				loadGraphic(Paths.speedrun_player__png, true, 16, 16);
@@ -42,6 +56,46 @@ class Player extends MainSprite
 				animation.add("in_burn", [2], 1); // when player get burn
 				animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
 				animation.play("right");
+				fasterInWater = false;
+				canHandlerlava = false;
+				runFaster = true;
+				gainAlotScore = false;
+
+			case "blueOne":
+				loadGraphic(Paths.blue_player__png, true, 16, 16);
+				animation.add("left", [0], 1);
+				animation.add("right", [1], 1);
+				animation.add("in_burn", [2], 1); // when player get burn
+				animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
+				animation.play("right");
+				fasterInWater = true;
+				canHandlerlava = false;
+				runFaster = false;
+				gainAlotScore = false;
+
+			case "yellowOne":
+				loadGraphic(Paths.yellow_player__png, true, 16, 16);
+				animation.add("left", [0], 1);
+				animation.add("right", [1], 1);
+				animation.add("in_burn", [2], 1); // when player get burn
+				animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
+				animation.play("right");
+				fasterInWater = false;
+				canHandlerlava = true;
+				runFaster = false;
+				gainAlotScore = false;
+
+			default:
+				loadGraphic(Paths.normall__png, true, 16, 16);
+				animation.add("left", [0], 1);
+				animation.add("right", [1], 1);
+				animation.add("in_burn", [2], 1); // when player get burn
+				animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
+				animation.play("right");
+				fasterInWater = false;
+				canHandlerlava = false;
+				runFaster = false;
+				gainAlotScore = false;
 		}
 	}
 
