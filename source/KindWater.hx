@@ -5,6 +5,8 @@ class Liquid extends MainSprite
 	public var killsWhenTouched:Bool = false;
 	// In development
 	public var firesUpPlayer:Bool = false;
+	public var stopsBurningPlayer:Bool = false;
+
 	public var slowWalk:Bool = false;
 
 	public var liquidType(default, set):String = '';
@@ -41,6 +43,7 @@ class Liquid extends MainSprite
 				animation.add("water", [1]);
 				animation.play("water");
 				killsWhenTouched = false;
+				//stopsBurningPlayer = true; // stops the player for burning if its in flames. For that we need a "fire" timer.
 				slowWalk = true;
 				firesUpPlayer = false;
 			case 'lava':
