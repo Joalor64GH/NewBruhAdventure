@@ -379,14 +379,7 @@ class PlayState extends MainState
 			}
 			else if (!liquid.firesUpPlayer && !player.overlaps(liquid))
 			{
-				if (inLeft && !inRight)
-				{
-					player.animation.play("left");
-				}
-				else if (!inLeft && inRight)
-				{
-					player.animation.play("right");
-				}
+				player.animation.play("right");
 			}
 
 			// for water
@@ -401,14 +394,6 @@ class PlayState extends MainState
 			else
 			{
 				slowNow = false;
-				if (inLeft && !inRight)
-				{
-					player.animation.play("left");
-				}
-				else if (!inLeft && inRight)
-				{
-					player.animation.play("right");
-				}
 			}
 		}
 	}
