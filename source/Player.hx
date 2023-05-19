@@ -21,7 +21,7 @@ class Player extends MainSprite
 		animation.add("left", [0], 1);
 		animation.add("right", [1], 1);
 		animation.add("in_burn", [2], 1); // when player get burn
-		animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9, 0], 1); // when player after get out of lava
+		animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
 		animation.play("right");
 	}
 
@@ -50,20 +50,19 @@ class Player extends MainSprite
 		return flip;
 	}
 
-	public function fireUp(enable:Bool = false)
-	{
-		if (enable)
+	/*public function fireUp(enable:Bool = false)
 		{
-			animation.play("in_burn");
-		}
-		else if (enable)
-		{
-			animation.play("in_normall");
-		}
+			if (enable)
+			{
+				animation.play("in_burn");
+			}
+			else if (enable)
+			{
+				animation.play("in_normall");
+			}
 
-		return enable;
-	}
-
+			return enable;
+	}*/
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);

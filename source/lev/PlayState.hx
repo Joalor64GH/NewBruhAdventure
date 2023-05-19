@@ -190,6 +190,9 @@ class PlayState extends MainState
 
 	var slowNow:Bool = false;
 
+	var inLeft:Bool = false;
+	var inRight:Bool = false;
+
 	override public function create()
 	{
 		super.create();
@@ -292,11 +295,21 @@ class PlayState extends MainState
 		if (left)
 		{
 			player.turnLeft(true);
+			inLeft = true;
+		}
+		else
+		{
+			inLeft = false;
 		}
 
 		if (right)
 		{
 			player.turnRight(false);
+			inRight = true;
+		}
+		else
+		{
+			inRight = false;
 		}
 
 		if (left && right)
@@ -356,15 +369,24 @@ class PlayState extends MainState
 			// for lava
 			if (liquid.firesUpPlayer && player.overlaps(liquid))
 			{
-				player.fireUp(true); // an animation like its burning
+				player.animation.play("in_burn");
+				liquid.firesUpPlayer = true;
 			}
 			else if (liquid.firesUpPlayer && !player.overlaps(liquid))
 			{
-				player.fireUp(false);
+				player.animation.play("in_normall");
+				liquid.firesUpPlayer = false;
 			}
-			else
+			else if (!liquid.firesUpPlayer && !player.overlaps(liquid))
 			{
-				player.fireUp(false);
+				if (inLeft && !inRight)
+				{
+					player.animation.play("left");
+				}
+				else if (!inLeft && inRight)
+				{
+					player.animation.play("right");
+				}
 			}
 
 			// for water
@@ -379,6 +401,14 @@ class PlayState extends MainState
 			else
 			{
 				slowNow = false;
+				if (inLeft && !inRight)
+				{
+					player.animation.play("left");
+				}
+				else if (!inLeft && inRight)
+				{
+					player.animation.play("right");
+				}
 			}
 		}
 	}
@@ -389,9 +419,10 @@ class PlayState extends MainState
 		{
 			flag.kill();
 			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
-			trace('complete ' + curLevel + '!');
 			FlxG.switchState(new MenuSelectLevel());
 		}
+
+		trace('complete ' + curLevel + '!');
 	}
 
 	function gameOver()
