@@ -13,16 +13,36 @@ class Player extends MainSprite
 
 	public var speed:Vector = new Vector(0, 0);
 
-	public function new(x:Float = 0, y:Float = 0)
+	public function new(x:Float = 0, y:Float = 0, skin:String)
 	{
 		super(x, y);
 
-		loadGraphic(Paths.player__png, true, 16, 16);
-		animation.add("left", [0], 1);
-		animation.add("right", [1], 1);
-		animation.add("in_burn", [2], 1); // when player get burn
-		animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
-		animation.play("right");
+		switch (skin)
+		{
+			case "normal":
+				loadGraphic(Paths.normall__png, true, 16, 16);
+				animation.add("left", [0], 1);
+				animation.add("right", [1], 1);
+				animation.add("in_burn", [2], 1); // when player get burn
+				animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
+				animation.play("right");
+
+			case "cool_glassed":
+				loadGraphic(Paths.cool_glassed__png, true, 16, 16);
+				animation.add("left", [0], 1);
+				animation.add("right", [1], 1);
+				animation.add("in_burn", [2], 1); // when player get burn
+				animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
+				animation.play("right");
+
+			case "speedrun":
+				loadGraphic(Paths.speedrun_player__png, true, 16, 16);
+				animation.add("left", [0], 1);
+				animation.add("right", [1], 1);
+				animation.add("in_burn", [2], 1); // when player get burn
+				animation.add("in_normall", [3, 4, 5, 6, 7, 8, 9], 12); // when player after get out of lava
+				animation.play("right");
+		}
 	}
 
 	// this would use less images...
