@@ -13,5 +13,7 @@ class MenuMode extends MainSprite
 
 		animation.add("freeplay_idle", [2]);
 		animation.add("freeplay_select", [3]);
+
+		scale.set(3, 3);
 	}
 }

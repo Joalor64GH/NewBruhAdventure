@@ -122,10 +122,10 @@ class MenuSelectLevel extends MainState
 			}
 		});
 
-		if (FlxG.keys.justPressed.C)
-		{
-			openSubState(new SelectSkinSubState());
-		}
+		/*if (FlxG.keys.justPressed.C)
+			{
+				openSubState(new SelectSkinSubState());
+		}*/
 	}
 
 	function change(change:Int = 0)
