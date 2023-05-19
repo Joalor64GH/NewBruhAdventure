@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.app.Application;
 import mainMenu.MenuImage;
+import mainMenu.MenuStorySelect;
 
 class MenuState extends MainState
 {
@@ -112,7 +113,7 @@ class MenuState extends MainState
 				switch (list[select])
 				{
 					case "play":
-						FlxG.switchState(new MenuSelectLevel());
+						FlxG.switchState(new MenuStorySelect());
 
 					case "credits":
 						FlxG.switchState(new CreditsState());

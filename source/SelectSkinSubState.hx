@@ -30,9 +30,12 @@ class SelectSkinSubState extends FlxSubState
 		add(text);
 
 		player = new Player(0, 0, slotSkin);
+		player.scale.set(6, 6);
 		player.screenCenter();
 		player.animation.play("right");
 		add(player);
+
+		change();
 	}
 
 	override public function update(elapsed:Float)
@@ -49,15 +52,19 @@ class SelectSkinSubState extends FlxSubState
 			change(1);
 		}
 
-		if (FlxG.keys.justPressed.ENTER)
+		if (FlxG.keys.anyJustPressed([ENTER, ESCAPE]))
 		{
 			close();
 		}
 
-		if (FlxG.keys.justPressed.ESCAPE)
+		if (curPlayer == 5)
 		{
-			FlxG.save.flush();
-			Sys.exit(0);
+			curPlayer = 0;
+		}
+
+		if (curPlayer == 0)
+		{
+			curPlayer = 4;
 		}
 
 		player.updateHitbox();
@@ -71,18 +78,48 @@ class SelectSkinSubState extends FlxSubState
 		{
 			case 0:
 				slotSkin = 'normal';
+				remove(player);
+				player = new Player(0, 0, slotSkin);
+				player.scale.set(6, 6);
+				player.screenCenter();
+				player.animation.play("right");
+				add(player);
 
 			case 1:
 				slotSkin = 'cool_glassed';
+				remove(player);
+				player = new Player(0, 0, slotSkin);
+				player.scale.set(6, 6);
+				player.screenCenter();
+				player.animation.play("right");
+				add(player);
 
 			case 2:
 				slotSkin = 'speedrun';
+				remove(player);
+				player = new Player(0, 0, slotSkin);
+				player.scale.set(6, 6);
+				player.screenCenter();
+				player.animation.play("right");
+				add(player);
 
 			case 3:
 				slotSkin = 'blueOne';
+				remove(player);
+				player = new Player(0, 0, slotSkin);
+				player.scale.set(6, 6);
+				player.screenCenter();
+				player.animation.play("right");
+				add(player);
 
 			case 4:
 				slotSkin = 'yellowOne';
+				remove(player);
+				player = new Player(0, 0, slotSkin);
+				player.scale.set(6, 6);
+				player.screenCenter();
+				player.animation.play("right");
+				add(player);
 		}
 
 		player.updateHitbox();
