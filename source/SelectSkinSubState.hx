@@ -65,7 +65,7 @@ class SelectSkinSubState extends FlxSubState
 
 	function change(change:Int = 0)
 	{
-		select += change;
+		curPlayer += change;
 
 		switch (curPlayer)
 		{
