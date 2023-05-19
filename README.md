@@ -7,6 +7,9 @@ A Adventure Game, _'bruhhhhh'_
 
 Download from [here](https://huy1234th.itch.io/bruh-adventure)
 
+### Story: (Kinda normal)
+one day, player are in a business then one unknow entity was take all player coin, while this entity run, coin was out of that entity bag, player need to follow this unknow entity and recollect all coin was that bag was out
+
 # Control:
 - WASD or Arrow key to move
 - Enter, Mouse to Action
