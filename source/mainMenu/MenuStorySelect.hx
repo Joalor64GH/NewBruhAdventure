@@ -1,3 +1,3 @@
 package mainMenu;
 
-class MenuStorySelect {}
+class MenuStorySelect extends MainState {}
