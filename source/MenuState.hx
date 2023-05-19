@@ -8,6 +8,7 @@ import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
 import lime.app.Application;
+import mainMenu.MenuImage;
 
 class MenuState extends MainState
 {
