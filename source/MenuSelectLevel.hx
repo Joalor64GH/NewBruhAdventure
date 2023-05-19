@@ -2,10 +2,8 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
-import flixel.tile.FlxTilemap;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import util.Util;
@@ -28,32 +26,9 @@ class MenuSelectLevel extends MainState
 	var x:Float = 50;
 	var y:Float = 180;
 
-	var map:FlxOgmo3Loader;
-	var walls:FlxTilemap;
-
-	var jsonPaths:String = '';
-
-	function menuRun()
-	{
-		if (FlxG.random.bool(50)) // 50%
-			jsonPaths = Paths.menuMap1__json;
-		else if (FlxG.random.bool(25)) // 25%
-			jsonPaths = Paths.menuMap2__json;
-		else if (FlxG.random.bool(15)) // 15%
-			jsonPaths = Paths.menuMap3__json;
-		else if (FlxG.random.bool(5)) // 5%
-			jsonPaths = Paths.menuMap4__json;
-		else if (FlxG.random.bool(2)) // 2%
-			jsonPaths = Paths.menuMap5__json;
-		else
-			jsonPaths = Paths.menuMap1__json;
-	}
-
 	override public function create()
 	{
 		super.create();
-
-		menuRun();
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.CYAN);
 		bg.scrollFactor.set();
@@ -92,8 +67,6 @@ class MenuSelectLevel extends MainState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
-		menuRun();
 
 		select_lev.forEach(function(spr:MenuSelect)
 		{
