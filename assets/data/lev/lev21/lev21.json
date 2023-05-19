@@ -15,13 +15,13 @@
       "gridCellsX": 256,
       "gridCellsY": 41,
       "entities": [
-        {"name": "posion", "id": 1, "_eid": "39095142", "x": 2416, "y": 288, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 2, "_eid": "39095142", "x": 2432, "y": 288, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 3, "_eid": "39095142", "x": 2448, "y": 288, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 4, "_eid": "39095142", "x": 2464, "y": 288, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 5, "_eid": "39095142", "x": 2480, "y": 288, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 6, "_eid": "39095142", "x": 2496, "y": 288, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 7, "_eid": "39095142", "x": 2512, "y": 288, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 1, "_eid": "39095142", "x": 2416, "y": 288, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 2, "_eid": "39095142", "x": 2432, "y": 288, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 3, "_eid": "39095142", "x": 2448, "y": 288, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 4, "_eid": "39095142", "x": 2464, "y": 288, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 5, "_eid": "39095142", "x": 2480, "y": 288, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 6, "_eid": "39095142", "x": 2496, "y": 288, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 7, "_eid": "39095142", "x": 2512, "y": 288, "originX": 0, "originY": 0},
         {"name": "player", "id": 8, "_eid": "81434651", "x": 16, "y": 560, "originX": 0, "originY": 0},
         {"name": "coin", "id": 9, "_eid": "81430102", "x": 112, "y": 560, "originX": 0, "originY": 0},
         {"name": "coin", "id": 10, "_eid": "81430102", "x": 256, "y": 544, "originX": 0, "originY": 0},
@@ -59,11 +59,11 @@
         {"name": "coin_2", "id": 42, "_eid": "81438897", "x": 2464, "y": 224, "originX": 0, "originY": 0},
         {"name": "coin_2", "id": 43, "_eid": "81438897", "x": 1808, "y": 448, "originX": 0, "originY": 0},
         {"name": "coin_2", "id": 44, "_eid": "81438897", "x": 1632, "y": 448, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 45, "_eid": "39095142", "x": 3504, "y": 512, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 46, "_eid": "39095142", "x": 3520, "y": 512, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 47, "_eid": "39095142", "x": 3552, "y": 512, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 48, "_eid": "39095142", "x": 3536, "y": 512, "originX": 0, "originY": 0},
-        {"name": "posion", "id": 49, "_eid": "39095142", "x": 3568, "y": 512, "originX": 0, "originY": 0}
+        {"name": "poison", "id": 45, "_eid": "39095142", "x": 3504, "y": 512, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 46, "_eid": "39095142", "x": 3520, "y": 512, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 47, "_eid": "39095142", "x": 3552, "y": 512, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 48, "_eid": "39095142", "x": 3536, "y": 512, "originX": 0, "originY": 0},
+        {"name": "poison", "id": 49, "_eid": "39095142", "x": 3568, "y": 512, "originX": 0, "originY": 0}
       ]
     },
     {

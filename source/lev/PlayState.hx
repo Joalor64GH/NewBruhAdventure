@@ -166,6 +166,16 @@ class PlayState extends MainState
 				jsonPaths = Paths.lev26__json;
 				trace('load: ' + jsonPaths);
 
+			case 26:
+				curLevel = 'lev27';
+				jsonPaths = Paths.lev27__json;
+				trace('load: ' + jsonPaths);
+
+			case 27:
+				curLevel = 'lev28';
+				jsonPaths = Paths.lev28__json;
+				trace('load: ' + jsonPaths);
+
 			case 40:
 				curLevel = 'lev1ex';
 				jsonPaths = Paths.lev1ex__json;
@@ -202,14 +212,14 @@ class PlayState extends MainState
 		player = new Player();
 		add(player);
 
-		coins = new FlxTypedGroup<Coin>();
-		add(coins);
-
 		flag = new Flag();
 		add(flag);
 
 		liquids = new FlxTypedGroup<Liquid>();
 		add(liquids);
+
+		coins = new FlxTypedGroup<Coin>();
+		add(coins);
 
 		map.loadEntities(placeEntities, 'entity');
 

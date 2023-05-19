@@ -182,7 +182,7 @@
     },
     {
       "exportID": "39095142",
-      "name": "posion",
+      "name": "poison",
       "limit": -1,
       "size": {"x": 16, "y": 16},
       "origin": {"x": 0, "y": 0},
