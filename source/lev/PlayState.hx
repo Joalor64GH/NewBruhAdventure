@@ -362,41 +362,45 @@ class PlayState extends MainState
 	{
 		if (liquid.exists && player.alive && player.exists)
 		{
-			// for poison
-			if (liquid.killsWhenTouched && player.overlaps(liquid))
+			if(player.overlaps(liquid)) // less lag interaction
 			{
-				// player.kill();
-				gameOver();
-			}
+				// for poison
+				if (liquid.killsWhenTouched)
+				{
+					// player.kill();
+					gameOver();
+				}
 
-			// for lava
-			if (liquid.firesUpPlayer && player.overlaps(liquid))
-			{
-				player.animation.play("in_burn");
-				liquid.firesUpPlayer = true;
-			}
-			else if (liquid.firesUpPlayer && !player.overlaps(liquid))
-			{
-				player.animation.play("in_normall");
-				liquid.firesUpPlayer = false;
-			}
-			else if (!liquid.firesUpPlayer && !player.overlaps(liquid))
-			{
-				player.animation.play("right");
-			}
+				// for lava
+				if (liquid.firesUpPlayer)
+				{
+					player.animation.play("in_burn");
+					liquid.firesUpPlayer = true;
+				}
 
-			// for water
-			if (liquid.slowWalk && player.overlaps(liquid))
-			{
-				slowNow = true;
-			}
-			else if (liquid.slowWalk && !player.overlaps(liquid))
-			{
-				slowNow = false;
+				// for water
+				if (liquid.slowWalk)
+				{
+					slowNow = true;
+				}
 			}
 			else
 			{
-				slowNow = false;
+				//lava
+				if (liquid.firesUpPlayer)
+				{
+					player.animation.play("in_normall");
+					liquid.firesUpPlayer = false;
+				}
+				else //if (player.animation.curAnim != 'right')
+					player.animation.play("right");
+
+				if (liquid.slowWalk)
+				{
+					slowNow = false;
+				}
+				else //if(slowNow != false)
+					slowNow = false;
 			}
 		}
 	}
