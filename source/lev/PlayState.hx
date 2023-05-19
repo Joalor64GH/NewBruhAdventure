@@ -209,14 +209,14 @@ class PlayState extends MainState
 		walls.setTileProperties(2, ANY);
 		add(walls);
 
-		player = new Player();
-		add(player);
-
 		flag = new Flag();
 		add(flag);
 
 		liquids = new FlxTypedGroup<Liquid>();
 		add(liquids);
+
+		player = new Player();
+		add(player);
 
 		coins = new FlxTypedGroup<Coin>();
 		add(coins);
@@ -347,7 +347,7 @@ class PlayState extends MainState
 		if (liquid.exists && player.alive && player.exists)
 		{
 			// for poison
-			if (liquid.killsWhenTouched)
+			if (liquid.killsWhenTouched && player.overlaps(liquid))
 			{
 				// player.kill();
 				gameOver();
