@@ -89,7 +89,7 @@ class MenuSelectLevel extends MainState
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.switchState(new MenuState());
+			FlxG.switchState(new mainMenu.MenuStorySelect());
 		}
 
 		select_lev.forEach(function(spr:MenuSelect)

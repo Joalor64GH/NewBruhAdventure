@@ -10,11 +10,13 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.sound.FlxSound;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
+import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
 import util.Util;
 
 /**
  * Why i need make this outdate
+ * 
  * Since i want to make some non-main level!
  */
 class PlayState extends MainState
@@ -23,9 +25,14 @@ class PlayState extends MainState
 	var coins:FlxTypedGroup<Coin>;
 	var flag:Flag;
 	var liquids:FlxTypedGroup<Liquid>;
+	var vases:FlxTypedGroup<Vases>;
+	var thorns:FlxTypedGroup<Thorns>;
 
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
+	var trees:FlxTilemap;
+	var shop:FlxTilemap;
+	var stone:FlxTilemap;
 
 	var jumpTimer:Float = 0;
 	var jumping:Bool = false;
@@ -35,6 +42,8 @@ class PlayState extends MainState
 
 	var score:Int = 0;
 	var scoreTxt:FlxText;
+
+	var health:Int = 5;
 
 	public static function levRun(typeLev:Int = 0)
 	{
@@ -216,6 +225,18 @@ class PlayState extends MainState
 		walls.setTileProperties(2, ANY);
 		add(walls);
 
+		trees = map.loadTilemap(Paths.moreTree__png, 'tree');
+		trees.follow();
+		trees.setTileProperties(1, NONE);
+		trees.setTileProperties(2, ANY);
+		add(trees);
+
+		stone = map.loadTilemap(Paths.stone__png, 'stone');
+		stone.follow();
+		stone.setTileProperties(1, NONE);
+		stone.setTileProperties(2, ANY);
+		add(stone);
+
 		flag = new Flag();
 		add(flag);
 
@@ -224,6 +245,12 @@ class PlayState extends MainState
 
 		player = new Player();
 		add(player);
+
+		vases = new FlxTypedGroup<Vases>();
+		add(vases);
+
+		thorns = new FlxTypedGroup<Thorns>();
+		add(thorns);
 
 		coins = new FlxTypedGroup<Coin>();
 		add(coins);
@@ -247,8 +274,14 @@ class PlayState extends MainState
 				player.acceleration.y = 900;
 				player.maxVelocity.y = 300;
 
+			case 'vases_random', 'vases_coin', 'vases_hurt', 'vases_kill':
+				vases.add(new Vases(x, y, entity.name));
+
 			case 'coin', 'coin_2', 'coin_super', 'coin_fake', 'coin_rewarded':
 				coins.add(new Coin(x, y, entity.name));
+
+			case 'thorns_nor', 'thorns_veryHurt':
+				thorns.add(new Thorns(x, y, entity.name));
 
 			case 'water', 'lava', 'poison':
 				liquids.add(new Liquid(x, y, entity.name));
@@ -268,11 +301,14 @@ class PlayState extends MainState
 		FlxG.overlap(player, coins, touchedCoin);
 		FlxG.overlap(player, flag, touchFlag);
 		FlxG.overlap(player, liquids, touchedLiquid);
+		FlxG.overlap(player, vases, touchedVases);
+		FlxG.overlap(player, thorns, touchedThorns);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
 		var right:Bool = FlxG.keys.anyPressed([RIGHT, D]);
 		var up:Bool = FlxG.keys.anyPressed([W, UP, SPACE]);
+		var down:Bool = FlxG.keys.anyPressed([S, DOWN]);
 
 		if (pause)
 		{
@@ -341,6 +377,63 @@ class PlayState extends MainState
 		{
 			player.velocity.x = 0;
 			// player.stopRunning();
+		}
+
+		if (health == 0)
+		{
+			gameOver();
+		}
+		else {}
+	}
+
+	function touchedThorns(player:Player, thorns:Thorns)
+	{
+		if (player.alive && player.exists && thorns.alive && thorns.exists)
+		{
+			if (player.overlaps(vases)) // less lag interaction
+			{
+				// for normall thorns
+				if (thorns.hurtPlayer)
+				{
+					health--;
+				}
+
+				// for thorns was very hurt
+				if (thorns.killPlayer)
+				{
+					gameOver();
+				}
+			}
+		}
+	}
+
+	function touchedVases(player:Player, vases:Vases)
+	{
+		if (player.alive && player.exists && vases.alive && vases.exists)
+		{
+			if (player.overlaps(vases)) // less lag interaction
+			{
+				// for vases contains coin
+				if (vases.thatCoin)
+				{
+					score += vases.score;
+					vases.kill();
+					trace('vases give player ' + vases.score + ' score');
+				}
+
+				// for vases contains something to hurt player
+				if (vases.hurtPlayer)
+				{
+					health--;
+					vases.kill();
+				}
+
+				// for vases contains something to kill player
+				if (vases.killPlayer)
+				{
+					gameOver();
+				}
+			}
 		}
 	}
 

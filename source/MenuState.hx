@@ -6,6 +6,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.app.Application;
+import main.MainData;
 import mainMenu.MenuImage;
 import mainMenu.MenuStorySelect;
 
@@ -19,6 +20,8 @@ class MenuState extends MainState
 	override public function create()
 	{
 		super.create();
+
+		MainData.checkData();
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.CYAN);
 		bg.scrollFactor.set();

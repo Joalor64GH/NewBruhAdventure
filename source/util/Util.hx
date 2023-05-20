@@ -7,13 +7,13 @@ import openfl.events.Event;
 
 using StringTools;
 
-// just copy fnf code here
 class Util
 {
 	inline public static function fileText(path:String):Array<String>
 	{
 		return [
-			for (i in Assets.getText(path).trim().split('\n')) i.trim()
+			for (i in Assets.getText(path).trim().split('\n'))
+				i.trim()
 		];
 	}
 
@@ -22,10 +22,12 @@ class Util
 		return Assets.getText(path).trim();
 	}
 
-	inline public static function updateFrames(){
-		Lib.current.addEventListener(Event.ENTER_FRAME, _ -> {
+	inline public static function updateFrames()
+	{
+		Lib.current.addEventListener(Event.ENTER_FRAME, _ ->
+		{
 			if (FlxG.stage != null) // so we don't update it every frame to prevent lag
-				Main.updateFrameRate(60);
+				Main.updateFrameRate(Main.framerate);
 		});
 	}
 }
