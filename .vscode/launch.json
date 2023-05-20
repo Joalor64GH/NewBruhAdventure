@@ -9,9 +9,7 @@
 		{
 			"name": "Debug",
 			"type": "lime",
-			"request": "launch",
-			"preLaunchTask": null
-		},
+			"request": "launch"		},
 		{
 			"name": "Macro",
 			"type": "haxe-eval",
