@@ -193,6 +193,12 @@ class PlayState extends MainState
 				curLevel = 'lev1ex';
 				jsonPaths = Paths.lev1ex__json;
 				trace('load: ' + jsonPaths);
+
+			// story mode level here:
+			case 45:
+				curLevel = 'story1';
+				jsonPaths = Paths.lev1__json;
+				trace('load: ' + jsonPaths);
 		}
 	}
 
@@ -236,6 +242,12 @@ class PlayState extends MainState
 		stone.setTileProperties(1, NONE);
 		stone.setTileProperties(2, ANY);
 		add(stone);
+
+		shop = map.loadTilemap(Paths.shop__png, 'fruitShop');
+		shop.follow();
+		shop.setTileProperties(1, NONE);
+		shop.setTileProperties(2, ANY);
+		add(shop);
 
 		flag = new Flag();
 		add(flag);
@@ -504,7 +516,7 @@ class PlayState extends MainState
 		if (player.alive && player.exists && flag.alive && flag.exists)
 		{
 			flag.kill();
-			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
+			// sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
 			FlxG.switchState(new MenuSelectLevel());
 		}
 
