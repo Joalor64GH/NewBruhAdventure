@@ -12,6 +12,7 @@ class MenuStorySelect extends MainState
 
 	var menu_group:FlxTypedGroup<MenuMode>;
 	var select:Int = 0;
+	var desc:FlxText;
 
 	override public function create()
 	{
@@ -43,6 +44,12 @@ class MenuStorySelect extends MainState
 		text.screenCenter(X);
 		text.scrollFactor.set();
 		add(text);
+
+		desc = new FlxText(0, 160, 0, "", 20);
+		desc.screenCenter(Y);
+		desc.y += 160;
+		desc.alignment = CENTER;
+		add(desc);
 
 		change();
 	}
@@ -120,12 +127,14 @@ class MenuStorySelect extends MainState
 			switch (select)
 			{
 				case 0:
+					desc.text = "Play thought story mode";
 					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("storyMode_select");
 					else
 						spr.animation.play("storyMode_idle");
 
 				case 1:
+					desc.text = "Play all non-main stage (level)";
 					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("freeplay_select");
 					else
