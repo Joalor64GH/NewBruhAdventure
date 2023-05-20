@@ -19,6 +19,8 @@ class Player extends MainSprite
 	public var runFaster:Bool = false;
 	public var gainAlotScore:Bool = false;
 
+	public static var burning:Bool = false; // when the player is on fire, gonna use this for skeleton code atm
+
 	public function new(x:Float = 0, y:Float = 0 /*, skin:String = 'normal'*/)
 	{
 		super(x, y);
