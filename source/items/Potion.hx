@@ -1,4 +1,6 @@
 package items;
 
-class Potion {
+import main.MainSprite;
+
+class Potion extends MainSprite {
 }
