@@ -1,28 +1,31 @@
 package util;
 
+import flixel.FlxG;
 import lime.utils.Assets;
+import openfl.Lib;
+import openfl.events.Event;
 
 using StringTools;
 
 // just copy fnf code here
 class Util
 {
-	public static function fileText(path:String):Array<String>
+	inline public static function fileText(path:String):Array<String>
 	{
-		var daList:Array<String> = Assets.getText(path).trim().split('\n');
-
-		for (i in 0...daList.length)
-		{
-			daList[i] = daList[i].trim();
-		}
-
-		return daList;
+		return [
+			for (i in Assets.getText(path).trim().split('\n')) i.trim()
+		];
 	}
 
-	public static function fileString(path:String):String
+	inline public static function fileString(path:String):String
 	{
-		var daThing:String = Assets.getText(path).trim();
+		return Assets.getText(path).trim();
+	}
 
-		return daThing;
+	inline public static function updateFrames(){
+		Lib.current.addEventListener(Event.ENTER_FRAME, _ -> {
+			if (FlxG.stage != null) // so we don't update it every frame to prevent lag
+				Main.updateFrameRate(60);
+		});
 	}
 }

@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import flixel.FlxGame;
 import openfl.display.FPS;
 import openfl.display.Sprite;
@@ -27,6 +28,8 @@ class Main extends Sprite
 		addChild(fpsCounter);
 
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+
+		util.Util.updateFrames();
 	}
 
 	function onCrash(e:UncaughtErrorEvent){
@@ -71,5 +74,12 @@ class Main extends Sprite
 				lime.utils.Log.println("Error!\nClouldn't save the crash dump because:\n" + e);
 			#end
 		}
+	}
+
+	inline public static function updateFrameRate(newFramerate:Int){
+		if (newFramerate > FlxG.drawFramerate)
+			FlxG.updateFramerate = FlxG.drawFramerate = newFramerate;
+		else
+			FlxG.drawFramerate = FlxG.updateFramerate = newFramerate;
 	}
 }
