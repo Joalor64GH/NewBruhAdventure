@@ -14,7 +14,8 @@ import flixel.util.FlxColor;
 import util.Util;
 
 /**
- * Soon that will be outdate!
+ * Why i need make this outdate
+ * Since i want to make some non-main level!
  */
 class PlayState extends MainState
 {
@@ -362,7 +363,7 @@ class PlayState extends MainState
 	{
 		if (liquid.exists && player.alive && player.exists)
 		{
-			if(player.overlaps(liquid)) // less lag interaction
+			if (player.overlaps(liquid)) // less lag interaction
 			{
 				// for poison
 				if (liquid.killsWhenTouched)
@@ -386,20 +387,20 @@ class PlayState extends MainState
 			}
 			else
 			{
-				//lava
+				// lava
 				if (liquid.firesUpPlayer)
 				{
 					player.animation.play("in_normall");
 					liquid.firesUpPlayer = false;
 				}
-				else //if (player.animation.curAnim != 'right')
+				else // if (player.animation.curAnim != 'right')
 					player.animation.play("right");
 
 				if (liquid.slowWalk)
 				{
 					slowNow = false;
 				}
-				else //if(slowNow != false)
+				else // if(slowNow != false)
 					slowNow = false;
 			}
 		}
