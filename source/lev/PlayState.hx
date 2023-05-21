@@ -237,10 +237,9 @@ class PlayState extends MainState
 		FlxG.overlap(player, vases, touchedVases);
 		FlxG.overlap(player, thorns, touchedThorns);
 
-		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
 		// var down:Bool = FlxG.keys.anyPressed([S, DOWN]);
 
-		if (pause)
+		if (FlxG.keys.justPressed.ESCAPE)
 			openSubState(new PauseSubState());
 
 		if (!inLeft && !inRight)
