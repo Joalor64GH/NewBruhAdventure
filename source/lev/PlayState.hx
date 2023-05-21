@@ -45,6 +45,10 @@ class PlayState extends MainState
 
 	var health:Int = 5;
 
+	/**
+	 * Level want to run
+	 * @param typeLev cur number (since first is 0 = level 1)
+	 */
 	public static function levRun(typeLev:Int = 0)
 	{
 		switch (typeLev)
@@ -197,7 +201,6 @@ class PlayState extends MainState
 			// story mode level here:
 			case 45:
 				curLevel = 'story1';
-				jsonPaths = Paths.lev1__json;
 				trace('load: ' + jsonPaths);
 		}
 	}
@@ -320,7 +323,7 @@ class PlayState extends MainState
 		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
 		var right:Bool = FlxG.keys.anyPressed([RIGHT, D]);
 		var up:Bool = FlxG.keys.anyPressed([W, UP, SPACE]);
-		var down:Bool = FlxG.keys.anyPressed([S, DOWN]);
+		// var down:Bool = FlxG.keys.anyPressed([S, DOWN]);
 
 		if (pause)
 		{
@@ -516,7 +519,7 @@ class PlayState extends MainState
 		if (player.alive && player.exists && flag.alive && flag.exists)
 		{
 			flag.kill();
-			// sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
+			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
 			FlxG.switchState(new MenuSelectLevel());
 		}
 

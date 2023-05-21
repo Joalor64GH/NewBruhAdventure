@@ -8,7 +8,7 @@ import flixel.util.FlxColor;
 class CreditsState extends MainState
 {
 	final credits:Array<String> = [
-		"- PAGE 1 : MAIN -" + "\n- Huy1234TH: Code, Art of This Project\n- Wither362: Coder of This Project",
+		"- PAGE 1 : MAIN -" + "\n- Huy1234TH: Code, Art of This Project\n- Wither362: Coder of This Project\n- MemeHoovy: Coder of This Project",
 		"- PAGE 2 : SOUND AND MUSIC (STILL NEED HELP) -" +
 		"\n- Mixkit: (I took the sound from this website since it free)\n\n\nPress Enter to Enter Mixkit Website!"
 	];
