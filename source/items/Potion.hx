@@ -1,6 +1,7 @@
 package items;
 
 import flixel.util.FlxColor;
+import flixel.tweens.FlxTween;
 
 //THIS IS AN ITEM FOR THE 2ND ADVENTURE!! NOT THE MAIN ONE!! THIS IS FOR THE UNDERGROUND ONE, SO DONT ADD IT UNTIL I SAY IT.
 class Potion extends MainSprite {
@@ -12,5 +13,12 @@ class Potion extends MainSprite {
 		super(x, y);
 		//loadGraphic(potion); // BLANK POTION. WITHOUT ANY COLORS EXCEPT BLACK (border) AND WHITE (in color)
 		this.color = color; // no need to make more sprites for more potion colors.
+	}
+
+	override function kill()
+	{
+		//like if it wants to go
+		FlxTween.tween(this, { y: y + 10 }, 0.2, {ease: flixel.tweens.FlxEase.cubeOut});
+		super.kill();
 	}
 }
