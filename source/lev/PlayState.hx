@@ -245,11 +245,8 @@ class PlayState extends MainState
 		if (!inLeft && !inRight)
 			player.velocity.x = 0;
 
-		if (health == 0)
+		if (health <= 0)
 			gameOver();
-		else
-		{
-		}
 	}
 
 	function touchedThorns(player:Player, thorns:Thorns)
