@@ -33,12 +33,7 @@ class Thorns extends MainSprite
 	override function kill()
 	{
 		alive = false;
-		FlxTween.tween(this, {alpha: 0, y: y - 16}, 0.22, {ease: FlxEase.circOut, onComplete: finishKill});
-	}
-
-	function finishKill(_)
-	{
-		exists = false;
+		FlxTween.tween(this, {alpha: 0, y: y - 16}, 0.22, {ease: FlxEase.circOut, onComplete: _ -> exists = false});
 	}
 
 	function reloadThorns()

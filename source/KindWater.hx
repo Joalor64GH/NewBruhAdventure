@@ -68,7 +68,7 @@ class Liquid extends MainSprite
 
 	function reload()
 	{
-		switch (liquidType)
+		switch (liquidType.toLowerCase())
 		{
 			case 'poison':
 				loadGraphic(Paths.liquid__png, true, 16, 16);

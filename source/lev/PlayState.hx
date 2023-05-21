@@ -35,7 +35,23 @@ class PlayState extends MainState
 	var stone:FlxTilemap;
 
 	var jumpTimer:Float = 0;
-	var jumping:Bool = false;
+
+	var jumping(get, default):Bool;
+
+	function get_jumping():Bool{
+		if (player.isTouching(DOWN) && !jumping)
+			jumpTimer = 0;
+
+		if (jumpTimer > 0 && jumpTimer < 0.25)
+			player.velocity.y = -300;
+
+		if (jumpTimer >= 0 && jumping)
+			jumpTimer += FlxG.elapsed;
+		else
+			jumpTimer = -1;
+
+		return false;
+	}
 
 	static var jsonPaths:String = '';
 	static var curLevel:String = '';
@@ -44,6 +60,43 @@ class PlayState extends MainState
 	var scoreTxt:FlxText;
 
 	var health:Int = 5;
+
+	@:isVar
+	var left(get, never):Bool;
+
+	inline function get_left():Bool{
+		player.turnLeft(true);
+		inLeft = left;
+		stepSound.play(true);
+		if (slowNow)
+			player.velocity.x = -50 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+		else
+			player.velocity.x = -100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+
+		return FlxG.keys.anyPressed([LEFT, A]);
+	}
+
+	@:isVar
+	var right(get, never):Bool;
+
+	inline function get_right():Bool{
+		player.turnRight(false);
+		stepSound.play(true);
+		if (slowNow)
+			player.velocity.x = 50 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+		else
+			player.velocity.x = 100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
+
+		return FlxG.keys.anyPressed([RIGHT, D]);
+	}
+
+	@:isVar
+	var up(get, never):Bool;
+
+	inline function get_up():Bool{
+		jumping = up;
+		return FlxG.keys.anyPressed([W, UP, SPACE]);
+	}
 
 	public static function levRun(typeLev:Int = 0)
 	{
@@ -202,21 +255,31 @@ class PlayState extends MainState
 		}
 	}
 
-	var restart:Bool = false;
+	var restart(get, never):Bool;
+
+	inline function get_restart():Bool{
+		return false;
+	}
 
 	var stepSound:FlxSound;
 	var coinSound:FlxSound;
 
-	var slowNow:Bool = false;
+	var slowNow(get, never):Bool;
 
-	var inLeft:Bool = false;
-	var inRight:Bool = false;
+	function get_slowNow():Bool{
+		final liquid:Liquid = new Liquid('water');
+		if (player.overlaps(liquid) && liquid.slowWalk){
+			return true;
+		}
+		return false;
+	}
+
+	var inLeft(default, null):Bool = false;
+	var inRight(default, null):Bool = false;
 
 	override public function create()
 	{
 		super.create();
-
-		restart = false;
 
 		FlxG.camera.zoom = camZoom;
 
@@ -317,85 +380,19 @@ class PlayState extends MainState
 		FlxG.overlap(player, thorns, touchedThorns);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
-		var left:Bool = FlxG.keys.anyPressed([LEFT, A]);
-		var right:Bool = FlxG.keys.anyPressed([RIGHT, D]);
-		var up:Bool = FlxG.keys.anyPressed([W, UP, SPACE]);
 		var down:Bool = FlxG.keys.anyPressed([S, DOWN]);
 
 		if (pause)
-		{
 			openSubState(new PauseSubState());
-		}
 
-		if (jumping && !up)
-			jumping = false;
-
-		if (player.isTouching(DOWN) && !jumping)
-			jumpTimer = 0;
-
-		if (jumpTimer >= 0 && up)
-		{
-			jumping = true;
-			jumpTimer += elapsed;
-		}
-		else
-			jumpTimer = -1;
-
-		if (jumpTimer > 0 && jumpTimer < 0.25)
-			player.velocity.y = -300;
-
-		if (left)
-		{
-			player.turnLeft(true);
-			inLeft = true;
-		}
-		else
-		{
-			inLeft = false;
-		}
-
-		if (right)
-		{
-			player.turnRight(false);
-			inRight = true;
-		}
-		else
-		{
-			inRight = false;
-		}
-
-		if (left && right)
-			left = right = false;
-
-		if (left)
-		{
-			stepSound.play(true);
-			if (slowNow)
-				player.velocity.x = -50 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-			else
-				player.velocity.x = -100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-			// player.runLeft();
-		}
-		else if (right)
-		{
-			stepSound.play(true);
-			if (slowNow)
-				player.velocity.x = 50 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-			else
-				player.velocity.x = 100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-			// player.runRight();
-		}
-		else
-		{
+		if (!inLeft && !inRight)
 			player.velocity.x = 0;
-			// player.stopRunning();
-		}
 
 		if (health == 0)
-		{
 			gameOver();
+		else
+		{
 		}
-		else {}
 	}
 
 	function touchedThorns(player:Player, thorns:Thorns)
@@ -483,12 +480,6 @@ class PlayState extends MainState
 					player.animation.play("in_burn");
 					liquid.firesUpPlayer = true;
 				}
-
-				// for water
-				if (liquid.slowWalk)
-				{
-					slowNow = true;
-				}
 			}
 			else
 			{
@@ -500,13 +491,6 @@ class PlayState extends MainState
 				}
 				else // if (player.animation.curAnim != 'right')
 					player.animation.play("right");
-
-				if (liquid.slowWalk)
-				{
-					slowNow = false;
-				}
-				else // if(slowNow != false)
-					slowNow = false;
 			}
 		}
 	}
