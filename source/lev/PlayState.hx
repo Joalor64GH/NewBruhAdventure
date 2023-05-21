@@ -98,158 +98,16 @@ class PlayState extends MainState
 		return FlxG.keys.anyPressed([W, UP, SPACE]);
 	}
 
+	/**
+	 * Level want to run
+	 * @param typeLev cur number (since first is 0 = level 1)
+	 */
 	public static function levRun(typeLev:Int = 0)
 	{
 		switch (typeLev)
 		{
 			case 0:
 				curLevel = 'lev1';
-				jsonPaths = Paths.lev1__json;
-				trace('load: ' + jsonPaths);
-
-			case 1:
-				curLevel = 'lev2';
-				jsonPaths = Paths.lev2__json;
-				trace('load: ' + jsonPaths);
-
-			case 2:
-				curLevel = 'lev3';
-				jsonPaths = Paths.lev3__json;
-				trace('load: ' + jsonPaths);
-
-			case 3:
-				curLevel = 'lev4';
-				jsonPaths = Paths.lev4__json;
-				trace('load: ' + jsonPaths);
-
-			case 4:
-				curLevel = 'lev5';
-				jsonPaths = Paths.lev5__json;
-				trace('load: ' + jsonPaths);
-
-			case 5:
-				curLevel = 'lev6';
-				jsonPaths = Paths.lev6__json;
-				trace('load: ' + jsonPaths);
-
-			case 6:
-				curLevel = 'lev7';
-				jsonPaths = Paths.lev7__json;
-				trace('load: ' + jsonPaths);
-
-			case 7:
-				curLevel = 'lev8';
-				jsonPaths = Paths.lev8__json;
-				trace('load: ' + jsonPaths);
-
-			case 8:
-				curLevel = 'lev9';
-				jsonPaths = Paths.lev9__json;
-				trace('load: ' + jsonPaths);
-
-			case 9:
-				curLevel = 'lev10';
-				jsonPaths = Paths.lev10__json;
-				trace('load: ' + jsonPaths);
-
-			case 10:
-				curLevel = 'lev11';
-				jsonPaths = Paths.lev11__json;
-				trace('load: ' + jsonPaths);
-
-			case 11:
-				curLevel = 'lev12';
-				jsonPaths = Paths.lev12__json;
-				trace('load: ' + jsonPaths);
-
-			case 12:
-				curLevel = 'lev13';
-				jsonPaths = Paths.lev13__json;
-				trace('load: ' + jsonPaths);
-
-			case 13:
-				curLevel = 'lev14';
-				jsonPaths = Paths.lev14__json;
-				trace('load: ' + jsonPaths);
-
-			case 14:
-				curLevel = 'lev15';
-				jsonPaths = Paths.lev15__json;
-				trace('load: ' + jsonPaths);
-
-			case 15:
-				curLevel = 'lev16';
-				jsonPaths = Paths.lev16__json;
-				trace('load: ' + jsonPaths);
-
-			case 16:
-				curLevel = 'lev17';
-				jsonPaths = Paths.lev17__json;
-				trace('load: ' + jsonPaths);
-
-			case 17:
-				curLevel = 'lev18';
-				jsonPaths = Paths.lev18__json;
-				trace('load: ' + jsonPaths);
-
-			case 18:
-				curLevel = 'lev19';
-				jsonPaths = Paths.lev19__json;
-				trace('load: ' + jsonPaths);
-
-			case 19:
-				curLevel = 'lev20';
-				jsonPaths = Paths.lev20__json;
-				trace('load: ' + jsonPaths);
-
-			case 20:
-				curLevel = 'lev21';
-				jsonPaths = Paths.lev21__json;
-				trace('load: ' + jsonPaths);
-
-			case 21:
-				curLevel = 'lev22';
-				jsonPaths = Paths.lev22__json;
-				trace('load: ' + jsonPaths);
-
-			case 22:
-				curLevel = 'lev23';
-				jsonPaths = Paths.lev23__json;
-				trace('load: ' + jsonPaths);
-
-			case 23:
-				curLevel = 'lev24';
-				jsonPaths = Paths.lev24__json;
-				trace('load: ' + jsonPaths);
-
-			case 24:
-				curLevel = 'lev25';
-				jsonPaths = Paths.lev25__json;
-				trace('load: ' + jsonPaths);
-
-			case 25:
-				curLevel = 'lev26';
-				jsonPaths = Paths.lev26__json;
-				trace('load: ' + jsonPaths);
-
-			case 26:
-				curLevel = 'lev27';
-				jsonPaths = Paths.lev27__json;
-				trace('load: ' + jsonPaths);
-
-			case 27:
-				curLevel = 'lev28';
-				jsonPaths = Paths.lev28__json;
-				trace('load: ' + jsonPaths);
-
-			case 40:
-				curLevel = 'lev1ex';
-				jsonPaths = Paths.lev1ex__json;
-				trace('load: ' + jsonPaths);
-
-			// story mode level here:
-			case 45:
-				curLevel = 'story1';
 				jsonPaths = Paths.lev1__json;
 				trace('load: ' + jsonPaths);
 		}
@@ -380,7 +238,7 @@ class PlayState extends MainState
 		FlxG.overlap(player, thorns, touchedThorns);
 
 		var pause:Bool = FlxG.keys.justPressed.ESCAPE;
-		var down:Bool = FlxG.keys.anyPressed([S, DOWN]);
+		// var down:Bool = FlxG.keys.anyPressed([S, DOWN]);
 
 		if (pause)
 			openSubState(new PauseSubState());
@@ -500,7 +358,7 @@ class PlayState extends MainState
 		if (player.alive && player.exists && flag.alive && flag.exists)
 		{
 			flag.kill();
-			// sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
+			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
 			FlxG.switchState(new MenuSelectLevel());
 		}
 
