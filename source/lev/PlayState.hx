@@ -38,7 +38,8 @@ class PlayState extends MainState
 
 	var jumping(get, default):Bool;
 
-	function get_jumping():Bool{
+	function get_jumping():Bool
+	{
 		if (player.isTouching(DOWN) && !jumping)
 			jumpTimer = 0;
 
@@ -64,7 +65,8 @@ class PlayState extends MainState
 	@:isVar
 	var left(get, never):Bool;
 
-	inline function get_left():Bool{
+	inline function get_left():Bool
+	{
 		player.turnLeft(true);
 		inLeft = left;
 		stepSound.play(true);
@@ -79,7 +81,8 @@ class PlayState extends MainState
 	@:isVar
 	var right(get, never):Bool;
 
-	inline function get_right():Bool{
+	inline function get_right():Bool
+	{
 		player.turnRight(false);
 		stepSound.play(true);
 		if (slowNow)
@@ -93,7 +96,8 @@ class PlayState extends MainState
 	@:isVar
 	var up(get, never):Bool;
 
-	inline function get_up():Bool{
+	inline function get_up():Bool
+	{
 		jumping = up;
 		return FlxG.keys.anyPressed([W, UP, SPACE]);
 	}
@@ -107,7 +111,7 @@ class PlayState extends MainState
 		switch (typeLev)
 		{
 			case 0:
-				curLevel = 'lev1';
+				// curLevel = 'lev1';
 				jsonPaths = Paths.lev1__json;
 				trace('load: ' + jsonPaths);
 		}
@@ -115,7 +119,8 @@ class PlayState extends MainState
 
 	var restart(get, never):Bool;
 
-	inline function get_restart():Bool{
+	inline function get_restart():Bool
+	{
 		return false;
 	}
 
@@ -124,9 +129,11 @@ class PlayState extends MainState
 
 	var slowNow(get, never):Bool;
 
-	function get_slowNow():Bool{
+	function get_slowNow():Bool
+	{
 		final liquid:Liquid = new Liquid('water');
-		if (player.overlaps(liquid) && liquid.slowWalk){
+		if (player.overlaps(liquid) && liquid.slowWalk)
+		{
 			return true;
 		}
 		return false;
@@ -247,9 +254,7 @@ class PlayState extends MainState
 
 		if (health == 0)
 			gameOver();
-		else
-		{
-		}
+		else {}
 	}
 
 	function touchedThorns(player:Player, thorns:Thorns)
