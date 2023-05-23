@@ -2,9 +2,6 @@
 
 A Adventure Game, _'bruhhhhh'_
 
-- `Why the art was so bad`
-> - look at the Title name
-
 Download from [here](https://huy1234th.itch.io/bruh-adventure)
 
 ### Story: (Kinda normal)
