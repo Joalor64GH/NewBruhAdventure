@@ -11,12 +11,23 @@ class AwardsMenu extends MainState
 	var checkAwards:String = '';
 
 	var awards:Array<Array<String>> = [
-		["Wow... For sure that was hard...", "Finish Level 1 EX"],
+		["What the heck?!?!?", "Finish Level 1 With Hard Mode!"],
+		["Spare Me Please!!", "Finish Level 2 With Hard Mode!"],
+		["Are there more?!", "Finish Level 3 With Hard Mode!"],
+		["Why so many?!?", "Finish Level 4 With Hard Mode!"],
+		["Why i need to go there?", "Beat Story Mode on Chapter 1"],
+		["Perfect!", "Beat Story Mode on Chapter 1 without hitting by any entity"],
+		["Vases, Ohhhh....", "Collect 10 Vases Cointains Coin"],
+		["Thorns was hurt me :(", "Hitting 5 time on normall Thorns"],
+		["Banana!!", "Collect 1 Banana"],
+		["Wow... For sure that was hard...", "Finish Level 1 in EX Mode"],
+		["A Long road for a travel!", "Finish Level 2 in EX Mode"],
 		["Oooh... Shiny!", "Collect 20 Yellow Coins"],
 		["Are these... Avocados!?", "Collect 20 Green Coins"],
 		["I'm... tired.", "Collect 5 Super Coins"],
 		["Is this real?!", "Collect 2 Fake Coins"],
-		["So that was what I had to do!", "Collect 1 Rewarded Coin"]
+		["So that was what I had to do!", "Collect 1 Rewarded Coin"],
+		["Where all my coin?", "Finish all Freeplay Level with Story Mode Chapter 1"]
 	];
 
 	var awardsImage:FlxTypedGroup<AwardsImage>;

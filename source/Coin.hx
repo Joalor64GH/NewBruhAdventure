@@ -2,6 +2,7 @@ package;
 
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import lev.PlayState;
 
 class Coin extends MainSprite
 {
@@ -55,14 +56,20 @@ class Coin extends MainSprite
 				updateHitbox();
 				isFakeCoin = false;
 				canBeScored = true;
-				score = 10;
+				if (PlayState.gotHardMode)
+					score = 1;
+				else
+					score = 10;
 
 			case 'coin_2':
 				loadGraphic(Paths.coin_2__png, true, 16, 16);
 				updateHitbox();
 				isFakeCoin = false;
 				canBeScored = true;
-				score = 50;
+				if (PlayState.gotHardMode)
+					score = 5;
+				else
+					score = 50;
 
 			case 'coin_super':
 				loadGraphic(Paths.coin_super__png, true, 16, 16);
@@ -71,14 +78,20 @@ class Coin extends MainSprite
 				updateHitbox();
 				isFakeCoin = false;
 				canBeScored = true;
-				score = 100;
+				if (PlayState.gotHardMode)
+					score = 10;
+				else
+					score = 100;
 
 			case 'coin_fake': // a black coin that you will get -10 score
 				loadGraphic(Paths.coin_black__png, true, 16, 16);
 				updateHitbox();
 				isFakeCoin = false;
 				canBeScored = true;
-				score = -20;
+				if (PlayState.gotHardMode)
+					score = -100;
+				else
+					score = -20;
 
 			case 'coin_rewarded': // a red one that have a animtion png
 				loadGraphic(Paths.coin_red__png, true, 16, 16);
@@ -87,7 +100,10 @@ class Coin extends MainSprite
 				updateHitbox();
 				isFakeCoin = false;
 				canBeScored = true;
-				score = 150;
+				if (PlayState.gotHardMode)
+					score = 50;
+				else
+					score = 150;
 		}
 	}
 

@@ -50,7 +50,7 @@ class MenuSelectLevel extends MainState
 			select_lev.add(selectThing);
 		}
 
-		arrowSelect = new SelectArrow(x + -10, 0);
+		arrowSelect = new SelectArrow(x + -50, 0);
 		arrowSelect.scrollFactor.set();
 		arrowSelect.screenCenter(Y);
 		add(arrowSelect);

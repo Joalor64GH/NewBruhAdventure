@@ -34,6 +34,8 @@ class PlayState extends MainState
 	var shop:FlxTilemap;
 	var stone:FlxTilemap;
 
+	public static var gotHardMode:Bool = false;
+
 	var jumpTimer:Float = 0;
 
 	var jumping(get, default):Bool;
@@ -118,7 +120,10 @@ class PlayState extends MainState
 			case 0:
 				curLevel = 'lev1';
 				colorInStage = FlxColor.CYAN;
-				jsonPaths = Paths.lev1__json;
+				if (FlxG.random.bool(50))
+					jsonPaths = Paths.lev1_hard__json;
+				else
+					jsonPaths = Paths.lev1__json;
 				trace('load: ' + jsonPaths);
 		}
 	}
@@ -287,7 +292,14 @@ class PlayState extends MainState
 				// for vases contains coin
 				if (vases.thatCoin)
 				{
-					score += vases.score;
+					if (gotHardMode)
+					{
+						score += 50;
+					}
+					else
+					{
+						score += 200;
+					}
 					vases.kill();
 					trace('vases give player ' + vases.score + ' score');
 				}
