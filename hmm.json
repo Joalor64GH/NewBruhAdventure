@@ -59,6 +59,11 @@
 			"name": "hxcpp-debug-server",
 			"type": "haxelib",
 			"version": null
+		},
+		{
+			"name": "flixel-studio",
+			"type": "haxelib",
+			"version": null
 		}
 	]
 }

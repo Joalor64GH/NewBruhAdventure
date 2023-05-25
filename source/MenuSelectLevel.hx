@@ -23,8 +23,8 @@ class MenuSelectLevel extends MainState
 
 	var arrowSelect:SelectArrow;
 
-	var x:Float = 50;
-	var y:Float = 180;
+	var x:Float = 100;
+	var y:Float = 250;
 
 	override public function create()
 	{
@@ -98,25 +98,7 @@ class MenuSelectLevel extends MainState
 			{
 				switch (list[select])
 				{
-					// // all playable level
-					// case "lev1", "lev2", "lev3", "lev4", "lev5", "lev6", "lev7", "lev8", "lev9", "lev10", "lev11", "lev12", "lev13", "lev14", "lev15",
-					// 	"lev16", "lev17", "lev18", "lev19", "lev20", "lev21", "lev22", "lev23", "lev24", "lev25", "lev26", "lev27", "lev28":
-					// 	PlayState.levRun(Std.parseInt(list[select].replace('lev', '')) - 1);
-					// 	FlxG.switchState(new PlayState());
-					//
-					// // all playable ex level
-					// case "lev1ex":
-					// 	PlayState.levRun(40);
-					// 	FlxG.switchState(new PlayState());
-					//
-					// // all not playable ex level
-					// case "lev2ex" | "lev3ex" | "lev4ex" | "lev5ex":
-					// 	trace('wait!, you cant play right now!');
-					// 	openSubState(new WarmSubState());
-
-					// level didnt not have a json playable file!
 					default:
-						// trace('level not found!');
 						PlayState.levRun(Std.parseInt(list[select].replace('lev', '')) - 1);
 						FlxG.switchState(new PlayState());
 				}

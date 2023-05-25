@@ -45,6 +45,9 @@
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
 
+	<!--This lib for debug - Use this for doing some stuff in game-->
+	<haxelib name='flixel-studio' if='debug'/>
+
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
 	<!--Optimise inputs, be careful you will get null errors if you don't use conditionals in your game-->

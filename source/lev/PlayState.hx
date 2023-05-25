@@ -62,8 +62,13 @@ class PlayState extends MainState
 
 	var health:Int = 5;
 
+	static var colorInStage:FlxColor;
+
+	var inLeft(default, null):Bool = false;
+	var inRight(default, null):Bool = false;
+
 	@:isVar
-	var left(get, never):Bool;
+	var left(get, default):Bool;
 
 	inline function get_left():Bool
 	{
@@ -79,7 +84,7 @@ class PlayState extends MainState
 	}
 
 	@:isVar
-	var right(get, never):Bool;
+	var right(get, default):Bool;
 
 	inline function get_right():Bool
 	{
@@ -94,7 +99,7 @@ class PlayState extends MainState
 	}
 
 	@:isVar
-	var up(get, never):Bool;
+	var up(get, default):Bool;
 
 	inline function get_up():Bool
 	{
@@ -111,7 +116,8 @@ class PlayState extends MainState
 		switch (typeLev)
 		{
 			case 0:
-				// curLevel = 'lev1';
+				curLevel = 'lev1';
+				colorInStage = FlxColor.CYAN;
 				jsonPaths = Paths.lev1__json;
 				trace('load: ' + jsonPaths);
 		}
@@ -139,16 +145,13 @@ class PlayState extends MainState
 		return false;
 	}
 
-	var inLeft(default, null):Bool = false;
-	var inRight(default, null):Bool = false;
-
 	override public function create()
 	{
 		super.create();
 
 		FlxG.camera.zoom = camZoom;
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.CYAN);
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, colorInStage);
 		bg.scrollFactor.set();
 		add(bg);
 
@@ -158,6 +161,12 @@ class PlayState extends MainState
 		walls.setTileProperties(1, NONE);
 		walls.setTileProperties(2, ANY);
 		add(walls);
+
+		var bmd = flixel.system.FlxAssets.getBitmapData(Paths.tilemap_1__png);
+		if (bmd == null)
+			throw "missing asset:  " + Paths.tilemap_1__png;
+		else
+			trace('asset found, width:${bmd.width} height:${bmd.height}'); // should be 48x64
 
 		trees = map.loadTilemap(Paths.moreTree__png, 'tree');
 		trees.follow();
@@ -170,12 +179,6 @@ class PlayState extends MainState
 		stone.setTileProperties(1, NONE);
 		stone.setTileProperties(2, ANY);
 		add(stone);
-
-		shop = map.loadTilemap(Paths.shop__png, 'fruitShop');
-		shop.follow();
-		shop.setTileProperties(1, NONE);
-		shop.setTileProperties(2, ANY);
-		add(shop);
 
 		flag = new Flag();
 		add(flag);
@@ -243,8 +246,6 @@ class PlayState extends MainState
 		FlxG.overlap(player, liquids, touchedLiquid);
 		FlxG.overlap(player, vases, touchedVases);
 		FlxG.overlap(player, thorns, touchedThorns);
-
-		// var down:Bool = FlxG.keys.anyPressed([S, DOWN]);
 
 		if (FlxG.keys.justPressed.ESCAPE)
 			openSubState(new PauseSubState());

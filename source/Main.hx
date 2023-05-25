@@ -2,18 +2,20 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxGame;
+import flixel.addons.studio.FlxStudio;
+import haxe.CallStack;
+import openfl.Lib;
 import openfl.display.FPS;
 import openfl.display.Sprite;
-import util.Util;
-import openfl.Lib;
-import haxe.CallStack;
 import openfl.events.UncaughtErrorEvent;
+import util.Util;
+
+using StringTools;
+
 #if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
-
-using StringTools;
 
 class Main extends Sprite
 {
@@ -30,14 +32,18 @@ class Main extends Sprite
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 
 		util.Util.updateFrames();
+		FlxStudio.create();
 	}
 
-	function onCrash(e:UncaughtErrorEvent){
+	function onCrash(e:UncaughtErrorEvent)
+	{
 		var stack:Array<String> = [];
 		stack.push(e.error);
 
-		for (stackItem in CallStack.exceptionStack(true)){
-			switch (stackItem){
+		for (stackItem in CallStack.exceptionStack(true))
+		{
+			switch (stackItem)
+			{
 				case CFunction:
 					stack.push('C Function');
 				case Module(m):
@@ -76,7 +82,8 @@ class Main extends Sprite
 		}
 	}
 
-	inline public static function updateFrameRate(newFramerate:Int){
+	inline public static function updateFrameRate(newFramerate:Int)
+	{
 		if (newFramerate > FlxG.drawFramerate)
 			FlxG.updateFramerate = FlxG.drawFramerate = newFramerate;
 		else

@@ -1,6 +1,7 @@
 package main;
 
 import flixel.FlxG;
+import flixel.addons.studio.FlxStudio;
 import flixel.addons.ui.FlxUIState;
 import flixel.util.FlxSave;
 import util.Util;
@@ -21,6 +22,8 @@ class MainState extends FlxUIState
 		{
 			FlxG.fullscreen = !FlxG.fullscreen;
 		}
+
+		FlxStudio.create();
 	}
 
 	override public function update(elapsed:Float)
