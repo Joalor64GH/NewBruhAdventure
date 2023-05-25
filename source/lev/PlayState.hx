@@ -120,10 +120,16 @@ class PlayState extends MainState
 			case 0:
 				curLevel = 'lev1';
 				colorInStage = FlxColor.CYAN;
-				if (FlxG.random.bool(50))
+				if (FlxG.random.bool(30))
+				{
+					gotHardMode = true;
 					jsonPaths = Paths.lev1_hard__json;
+				}
 				else
+				{
+					gotHardMode = true;
 					jsonPaths = Paths.lev1__json;
+				}
 				trace('load: ' + jsonPaths);
 		}
 	}
