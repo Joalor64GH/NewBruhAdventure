@@ -30,7 +30,7 @@ class MenuStorySelect extends MainState
 			var selectThing:MenuMode = new MenuMode(300, 0);
 			selectThing.ID = i;
 			selectThing.screenCenter(Y);
-			selectThing.y -= (i * 40);
+			selectThing.y -= (i * 100);
 			selectThing.scrollFactor.set();
 			menu_group.add(selectThing);
 		}

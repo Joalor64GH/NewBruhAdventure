@@ -2,7 +2,6 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxGame;
-import flixel.addons.studio.FlxStudio;
 import haxe.CallStack;
 import openfl.Lib;
 import openfl.display.FPS;
@@ -12,6 +11,9 @@ import util.Util;
 
 using StringTools;
 
+#if debug
+import flixel.addons.studio.FlxStudio;
+#end
 #if sys
 import sys.FileSystem;
 import sys.io.File;
@@ -32,7 +34,9 @@ class Main extends Sprite
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 
 		util.Util.updateFrames();
+		#if debug
 		FlxStudio.create();
+		#end
 	}
 
 	function onCrash(e:UncaughtErrorEvent)
