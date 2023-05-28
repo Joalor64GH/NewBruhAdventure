@@ -14,6 +14,8 @@ class MenuStorySelect extends MainState
 	var select:Int = 0;
 	var desc:FlxText;
 
+	public static var inStoryMode:Bool = false;
+
 	override public function create()
 	{
 		super.create();
@@ -101,10 +103,12 @@ class MenuStorySelect extends MainState
 				{
 					case "storyMode":
 						trace('story mode open');
+						inStoryMode = true;
 						PlayState.levRun(0);
 						FlxG.switchState(new PlayState());
 
 					case "freeplayMode":
+						inStoryMode = false;
 						FlxG.switchState(new MenuSelectLevel());
 				}
 			}

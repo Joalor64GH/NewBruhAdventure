@@ -1,6 +1,7 @@
 package main;
 
 import flixel.FlxG;
+import flixel.FlxState;
 import flixel.addons.ui.FlxUIState;
 import flixel.util.FlxSave;
 import util.Util;
@@ -44,5 +45,15 @@ class MainState extends FlxUIState
 		{
 			FlxG.stage.addChild(Main.fpsCounter);
 		}
+	}
+
+	function changeState(stageToChange:FlxState)
+	{
+		FlxG.switchState(state(stageToChange));
+	}
+
+	function state(stageToChange:FlxState):FlxState
+	{
+		return stageToChange;
 	}
 }

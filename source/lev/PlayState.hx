@@ -266,6 +266,22 @@ class PlayState extends MainState
 
 		if (health <= 0)
 			gameOver();
+
+		switch levRun()
+		{
+			case 0:
+				if (player.y == 76)
+				{
+					gameOver();
+				}
+
+			// story mode here
+			case 45:
+				if (player.y == 38)
+				{
+					gameOver();
+				}
+		}
 	}
 
 	function touchedThorns(player:Player, thorns:Thorns)
