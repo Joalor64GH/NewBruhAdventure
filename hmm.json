@@ -78,6 +78,11 @@
       "version": null
     },
     {
+      "name": "nape-haxe4",
+      "type": "haxelib",
+      "version": null
+    },
+    {
       "name": "openfl",
       "type": "haxelib",
       "version": null
