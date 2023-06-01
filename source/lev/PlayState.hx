@@ -106,6 +106,7 @@ class PlayState extends MainState
 	inline function get_up():Bool
 	{
 		jumping = up;
+		get_jumping();
 		return FlxG.keys.anyPressed([W, UP, SPACE]);
 	}
 
