@@ -40,6 +40,9 @@ class PlayState extends MainState
 
 	var jumping(get, default):Bool;
 
+	/**
+	 * When get jump
+	 */
 	function get_jumping():Bool
 	{
 		if (player.isTouching(DOWN) && !jumping)
@@ -72,6 +75,9 @@ class PlayState extends MainState
 	@:isVar
 	var left(get, default):Bool;
 
+	/**
+	 * When press left
+	 */
 	inline function get_left():Bool
 	{
 		player.turnLeft(true);
@@ -88,6 +94,9 @@ class PlayState extends MainState
 	@:isVar
 	var right(get, default):Bool;
 
+	/**
+	 * When press right
+	 */
 	inline function get_right():Bool
 	{
 		player.turnRight(false);
@@ -103,6 +112,9 @@ class PlayState extends MainState
 	@:isVar
 	var up(get, default):Bool;
 
+	/**
+	 * When press up
+	 */
 	inline function get_up():Bool
 	{
 		jumping = up;

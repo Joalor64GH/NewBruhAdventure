@@ -1,3 +1,4 @@
+#if desktop
 package;
 
 import flixel.FlxG;
@@ -45,3 +46,4 @@ class QuitSubState extends FlxSubState
 		}
 	}
 }
+#end

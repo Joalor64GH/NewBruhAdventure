@@ -21,6 +21,12 @@ class Player extends MainSprite
 
 	public static var burning:Bool = false; // when the player is on fire, gonna use this for skeleton code atm
 
+	/**
+	 * Player code (i think i will try code skin)
+	 * @param x x postion
+	 * @param y y postion
+	 * @param skin player skin (not working)
+	 */
 	public function new(x:Float = 0, y:Float = 0 /*, skin:String = 'normal'*/)
 	{
 		super(x, y);

@@ -12,7 +12,7 @@ import mainMenu.MenuStorySelect;
 
 class MenuState extends MainState
 {
-	var list:Array<String> = ['play', 'credits', 'options', 'awards', 'exit'];
+	var list:Array<String> = ['play', 'credits', 'options', 'awards', #if desktop 'exit' #end];
 
 	var menu_group:FlxTypedGroup<MenuImage>;
 	var select:Int = 0;
@@ -21,6 +21,9 @@ class MenuState extends MainState
 	{
 		super.create();
 
+		/**
+		 * Check data to loading data game
+		 */
 		MainData.checkData();
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.CYAN);
@@ -32,6 +35,7 @@ class MenuState extends MainState
 
 		for (i in 0...list.length)
 		{
+			trace("load menu image");
 			var selectThing:MenuImage = new MenuImage(300, 0);
 			selectThing.ID = i;
 			selectThing.screenCenter(Y);
@@ -85,11 +89,13 @@ class MenuState extends MainState
 					else
 						spr.animation.play("awards_idle");
 
+				#if desktop
 				case 4:
 					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("quit_select");
 					else
 						spr.animation.play("quit_idle");
+				#end
 			}
 
 			if (FlxG.mouse.overlaps(spr))
@@ -133,10 +139,12 @@ class MenuState extends MainState
 			}
 		});
 
+		#if desktop
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			openSubState(new QuitSubState());
 		}
+		#end
 	}
 
 	function change(change:Int = 0)
@@ -176,11 +184,13 @@ class MenuState extends MainState
 					else
 						spr.animation.play("awards_idle");
 
+				#if desktop
 				case 4:
 					if (FlxG.mouse.overlaps(spr))
 						spr.animation.play("quit_select");
 					else
 						spr.animation.play("quit_idle");
+				#end
 			}
 
 			if (FlxG.mouse.overlaps(spr))

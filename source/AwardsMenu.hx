@@ -57,6 +57,7 @@ class AwardsMenu extends MainState
 
 		for (i in 0...awards.length)
 		{
+			trace("load awards image");
 			var selectThing:AwardsImage = new AwardsImage(500, 0);
 			selectThing.ID = i;
 			selectThing.screenCenter(Y);
