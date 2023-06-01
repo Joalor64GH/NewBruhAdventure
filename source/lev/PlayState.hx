@@ -13,7 +13,7 @@ import flixel.tile.FlxTilemap;
 import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
 import util.Util;
-
+import flixel.FlxCamera;
 /**
  * Why i need make this outdate
  * 
@@ -36,91 +36,32 @@ class PlayState extends MainState
 
 	public static var gotHardMode:Bool = false;
 
-	var jumpTimer:Float = 0;
-
-	var jumping(get, default):Bool;
-
 	/**
-	 * When get jump
+	 * load tilemap file
 	 */
-	function get_jumping():Bool
-	{
-		if (player.isTouching(DOWN) && !jumping)
-			jumpTimer = 0;
-
-		if (jumpTimer > 0 && jumpTimer < 0.25)
-			player.velocity.y = -300;
-
-		if (jumpTimer >= 0 && jumping)
-			jumpTimer += FlxG.elapsed;
-		else
-			jumpTimer = -1;
-
-		return false;
-	}
-
 	static var jsonPaths:String = '';
 	static var curLevel:String = '';
 
 	var score:Int = 0;
 	var scoreTxt:FlxText;
 
-	var health:Int = 5;
+	/**
+	 * player health
+	 */
+	var health(default, set):Int = 5;
+
+	inline function set_health(value:Int):Int
+	{
+		health = value;
+		gameOver(health < value, "");
+		return health;
+	}
 
 	static var colorInStage:FlxColor;
 
-	var inLeft(default, null):Bool = false;
-	var inRight(default, null):Bool = false;
+	var camHUD:FlxCamera;
 
-	@:isVar
-	var left(get, default):Bool;
-
-	/**
-	 * When press left
-	 */
-	inline function get_left():Bool
-	{
-		player.turnLeft(true);
-		inLeft = left;
-		stepSound.play(true);
-		if (slowNow)
-			player.velocity.x = -50 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-		else
-			player.velocity.x = -100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-
-		return FlxG.keys.anyPressed([LEFT, A]);
-	}
-
-	@:isVar
-	var right(get, default):Bool;
-
-	/**
-	 * When press right
-	 */
-	inline function get_right():Bool
-	{
-		player.turnRight(false);
-		stepSound.play(true);
-		if (slowNow)
-			player.velocity.x = 50 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-		else
-			player.velocity.x = 100 * Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-
-		return FlxG.keys.anyPressed([RIGHT, D]);
-	}
-
-	@:isVar
-	var up(get, default):Bool;
-
-	/**
-	 * When press up
-	 */
-	inline function get_up():Bool
-	{
-		jumping = up;
-		get_jumping();
-		return FlxG.keys.anyPressed([W, UP, SPACE]);
-	}
+	public static var instance:PlayState = null;
 
 	/**
 	 * Level want to run
@@ -154,10 +95,9 @@ class PlayState extends MainState
 		return false;
 	}
 
-	var stepSound:FlxSound;
 	var coinSound:FlxSound;
 
-	var slowNow(get, never):Bool;
+	public var slowNow(get, never):Bool;
 
 	function get_slowNow():Bool
 	{
@@ -172,6 +112,14 @@ class PlayState extends MainState
 	override public function create()
 	{
 		super.create();
+
+		instance = this;
+
+		trace("Play game\nLoading json: " + jsonPaths);
+
+		camHUD = new FlxCamera();
+		camHUD.bgColor = 0;
+		FlxG.cameras.add(camHUD, false);
 
 		FlxG.camera.zoom = camZoom;
 
@@ -188,7 +136,7 @@ class PlayState extends MainState
 
 		var bmd = flixel.system.FlxAssets.getBitmapData(Paths.tilemap_1__png);
 		if (bmd == null)
-			throw "missing asset:  " + Paths.tilemap_1__png;
+			throw "missing asset: " + Paths.tilemap_1__png;
 		else
 			trace('asset found, width:${bmd.width} height:${bmd.height}'); // should be 48x64
 
@@ -225,8 +173,13 @@ class PlayState extends MainState
 		map.loadEntities(placeEntities, 'entity');
 
 		// FlxG.sound.playMusic(Paths.grass_step__wav);
-		stepSound = FlxG.sound.load(Paths.grass_step__wav, 1);
 		coinSound = FlxG.sound.load(Paths.arcade_game_jump_coin__wav, 1);
+
+		scoreTxt = new FlxText(0, 0, 0, "", 20);
+		scoreTxt.scrollFactor.set();
+		add(scoreTxt);
+
+		scoreTxt.cameras = [camHUD];
 	}
 
 	function placeEntities(entity:EntityData)
@@ -263,7 +216,7 @@ class PlayState extends MainState
 	{
 		super.update(elapsed);
 		FlxG.collide(player, walls);
-		FlxG.camera.follow(player, LOCKON);
+		FlxG.camera.follow(player, LOCKON, 0.9);
 
 		FlxG.overlap(player, coins, touchedCoin);
 		FlxG.overlap(player, flag, touchFlag);
@@ -271,14 +224,10 @@ class PlayState extends MainState
 		FlxG.overlap(player, vases, touchedVases);
 		FlxG.overlap(player, thorns, touchedThorns);
 
+		scoreTxt.text = "Score: " + score;
+
 		if (FlxG.keys.justPressed.ESCAPE)
 			openSubState(new PauseSubState());
-
-		if (!inLeft && !inRight)
-			player.velocity.x = 0;
-
-		if (health <= 0)
-			gameOver();
 	}
 
 	function touchedThorns(player:Player, thorns:Thorns)
@@ -290,13 +239,13 @@ class PlayState extends MainState
 				// for normall thorns
 				if (thorns.hurtPlayer)
 				{
-					health--;
+					health -= 1; // for make sure if the health was drain by thorns
 				}
 
 				// for thorns was very hurt
 				if (thorns.killPlayer)
 				{
-					gameOver();
+					gameOver(true, "thorns");
 				}
 			}
 		}
@@ -333,7 +282,7 @@ class PlayState extends MainState
 				// for vases contains something to kill player
 				if (vases.killPlayer)
 				{
-					gameOver();
+					gameOver(true, "vases");
 				}
 			}
 		}
@@ -364,7 +313,7 @@ class PlayState extends MainState
 				if (liquid.killsWhenTouched)
 				{
 					// player.kill();
-					gameOver();
+					gameOver(true, "liquid");
 				}
 
 				// for lava
@@ -394,14 +343,41 @@ class PlayState extends MainState
 		{
 			flag.kill();
 			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
-			FlxG.switchState(new MenuSelectLevel());
+			FlxG.save.flush();
+			// FlxG.switchState(new MenuSelectLevel());
+			changeState(new MenuSelectLevel());
 		}
 
 		trace('complete ' + curLevel + '!');
 	}
 
-	function gameOver()
+	/**
+	 * Player got game over
+	 * @param shouldKill idk if the game want to kill player
+	 * @param reason like was ran out of health, was got very hurt thorns, ...
+	 */
+	inline function gameOver(?shouldKill:Bool, reason:String):Bool
 	{
-		openSubState(new GameoverSubState());
+		switch (reason)
+		{
+			case "health":
+				reason = "ran out of health";
+			case "thorns":
+				reason = "was just hit by very hurt thorns";
+			case "vases" | "vase":
+				reason = "dude you got the hurt vases";
+			case "liquid":
+				reason = "touch a poison...";
+			default:
+				reason = "unknown how you die";
+		}
+
+		if ((shouldKill) || health <= 0) {
+			trace("player got game over due to: " + reason);
+			openSubState(new GameoverSubState());
+			return true;
+		}
+
+		return false;
 	}
 }
