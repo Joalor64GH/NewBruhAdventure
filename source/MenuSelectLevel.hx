@@ -12,11 +12,10 @@ using StringTools;
 
 class MenuSelectLevel extends MainState
 {
-	var list:Array<String> = [
-		"lev1", "lev2", "lev3", "lev4", "lev5", "lev6", "lev7", "lev8", "lev9", "lev10", "lev11", "lev12", "lev13", "lev14", "lev15", "lev16", "lev17",
-		"lev18", "lev19", "lev20", "lev21", "lev22", "lev23", "lev24", "lev25", "lev26", "lev27", "lev28", "lev29", "lev30", "lev31", "lev32", "lev33",
-		"lev34", "lev35", "lev36", "lev37", "lev38", "lev39", "lev40", "lev1ex", "lev2ex", "lev3ex", "lev4ex", "lev5ex"
-	]; // too much lol
+	/*
+	 * alot stuff to load
+	 */
+	var list:Array<String>;
 
 	var select_lev:FlxTypedGroup<MenuSelect>;
 	var select:Int = 0;
@@ -29,6 +28,9 @@ class MenuSelectLevel extends MainState
 	override public function create()
 	{
 		super.create();
+
+		// this code will load by list level txt
+		list = Util.fileText(Paths.listLevel__txt);
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.CYAN);
 		bg.scrollFactor.set();
