@@ -37,10 +37,6 @@ class PlayState extends MainState
 
 	public static var gotHardMode:Bool = false;
 
-	var jumpTimer:Float = 0;
-
-	var jumping:Bool = false;
-
 	/**
 	 * load tilemap file
 	 */
@@ -65,15 +61,9 @@ class PlayState extends MainState
 
 	static var colorInStage:FlxColor;
 
-	var inLeft:Bool = false;
-	var inRight:Bool = false;
-
-	// actual controls
-	var left:Bool = false;
-	var right:Bool = false;
-	var up:Bool = false;
-
 	var camHUD:FlxCamera;
+
+	public static var instance:PlayState = null;
 
 	/**
 	 * Level want to run
@@ -107,10 +97,9 @@ class PlayState extends MainState
 		return false;
 	}
 
-	var stepSound:FlxSound;
 	var coinSound:FlxSound;
 
-	var slowNow(get, never):Bool;
+	public var slowNow(get, never):Bool;
 
 	function get_slowNow():Bool
 	{
@@ -125,6 +114,8 @@ class PlayState extends MainState
 	override public function create()
 	{
 		super.create();
+
+		instance = this;
 
 		trace("Play game\nLoading json: " + jsonPaths);
 
@@ -184,7 +175,6 @@ class PlayState extends MainState
 		map.loadEntities(placeEntities, 'entity');
 
 		// FlxG.sound.playMusic(Paths.grass_step__wav);
-		stepSound = FlxG.sound.load(Paths.grass_step__wav, 1);
 		coinSound = FlxG.sound.load(Paths.arcade_game_jump_coin__wav, 1);
 
 		scoreTxt = new FlxText(0, 0, 0, "", 20);
@@ -240,84 +230,6 @@ class PlayState extends MainState
 
 		if (FlxG.keys.justPressed.ESCAPE)
 			openSubState(new PauseSubState());
-
-		if (!inLeft && !inRight)
-			player.velocity.x = 0;
-
-		// TODO: find a way to optimize this
-		keyInput();
-	}
-
-	var speed_file:Float = Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
-
-	/**
-	 * Key input moving
-	 */
-	function keyInput()
-	{
-		/**
-		 * right key
-		 */
-		if (FlxG.keys.anyPressed([RIGHT, D]))
-		{
-			player.turnRight(true);
-			stepSound.play(true);
-			inRight = true;
-			if (slowNow)
-				player.velocity.x = 50 * speed_file;
-			else
-				player.velocity.x = 100 * speed_file;
-		}
-		else
-			inRight = false;
-
-		/**
-		 * left key
-		 */
-		if (FlxG.keys.anyPressed([LEFT, A]))
-		{
-			player.turnLeft(true);
-			stepSound.play(true);
-			inLeft = true;
-			if (slowNow)
-				player.velocity.x = -50 * speed_file;
-			else
-				player.velocity.x = -100 * speed_file;
-		}
-		else
-			inLeft = false;
-
-		/**
-		 * up key and when jumping
-		 */
-		if (FlxG.keys.anyPressed([W, UP, SPACE]))
-		{
-			jumping = true;
-
-			if (jumpTimer > 0 && jumpTimer < 0.25)
-				player.velocity.y -= 300;
-
-			// test
-			// an attempt to fix a bug where you can only jump once
-			// while (player.velocity.y > 0)
-			// {
-			// 	if (player.velocity.y <= 0)
-			// 		break;
-
-			if (jumpTimer >= 0 && jumping)
-				jumpTimer += FlxG.elapsed;
-			else
-				jumpTimer -= 1;
-
-			if (jumpTimer <= 0 && player.isTouching(DOWN) && !jumping)
-			{
-				jumpTimer = 0;
-				jumping = false;
-			}
-			// }
-
-			// trace("jumping sick!");
-		}
 	}
 
 	function touchedThorns(player:Player, thorns:Thorns)

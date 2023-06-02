@@ -47,6 +47,10 @@ class MainState extends FlxUIState
 		}
 	}
 
+	/**
+	 * switch state
+	 * @param stageToChange name the state
+	 */
 	function changeState(stageToChange:FlxState)
 	{
 		FlxG.switchState(state(stageToChange));
