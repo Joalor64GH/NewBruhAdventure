@@ -117,6 +117,7 @@ class PlayState extends MainState
 
 		instance = this;
 
+		// load trace
 		trace("Play game\nLoading json: " + jsonPaths);
 
 		camHUD = new FlxCamera();
@@ -344,7 +345,9 @@ class PlayState extends MainState
 		if (player.alive && player.exists && flag.alive && flag.exists)
 		{
 			flag.kill();
+			#if desktop
 			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
+			#end
 			FlxG.save.flush();
 			// FlxG.switchState(new MenuSelectLevel());
 			changeState(new MenuSelectLevel());
