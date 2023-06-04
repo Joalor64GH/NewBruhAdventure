@@ -76,12 +76,14 @@ class Main extends Sprite
 					+ Lib.application.meta.get('file')
 					+ '-'
 					+ Date.now().toString().replace(' ', '-').replace(':', "'")
-					+ '.txt',
+					+ '.log',
 					msg
 					+ '\n');
 			}
 			catch (e:Dynamic)
-				lime.utils.Log.println("Error!\nClouldn't save the crash dump because:\n" + e);
+				lime.utils.Log.println("Error!\nClouldn't save the crash dump because:\n"
+					+ e
+					+ "\n\nPlease report this on https://github.com/khuonghoanghuy/Bruh-Adventure/issues");
 			#end
 		}
 	}
