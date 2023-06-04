@@ -65,29 +65,50 @@ class PlayState extends MainState
 
 	public static var instance:PlayState = null;
 
+	static var curMode:String = '';
+
 	/**
 	 * Level want to run
 	 * @param typeLev cur number (since first is 0 = level 1)
 	 */
-	public static function levRun(typeLev:Int = 0)
+	public static function levRun(typeLev:Int = 0, mode:Int = 0)
 	{
+		switch (mode)
+		{
+			case 0:
+				curMode = "easy";
+				gotHardMode = false;
+
+			case 1:
+				curMode = "hard";
+				gotHardMode = true;
+
+			default:
+				curMode = "easy";
+				gotHardMode = false;
+		}
+
 		switch (typeLev)
 		{
 			case 0:
 				curLevel = 'lev1';
 				colorInStage = FlxColor.CYAN;
-				if (FlxG.random.bool(30))
+				if (gotHardMode)
 				{
-					gotHardMode = true;
 					jsonPaths = Paths.lev1_hard__json;
 				}
 				else
 				{
-					gotHardMode = true;
 					jsonPaths = Paths.lev1__json;
 				}
-				trace('load: ' + jsonPaths);
+
+			case 1:
+				curLevel = 'lev2';
+				colorInStage = FlxColor.CYAN;
+				jsonPaths = Paths.lev2__json;
 		}
+
+		trace('load:' + jsonPaths);
 	}
 
 	var restart(get, never):Bool;

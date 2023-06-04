@@ -16,9 +16,13 @@ class MenuSelectLevel extends MainState
 	 * alot stuff to load
 	 */
 	var list:Array<String>;
+	var mode:Array<String> = ["easy", "hard"];
 
 	var select_lev:FlxTypedGroup<MenuSelect>;
+	var select_mode:FlxTypedGroup<DifficultSelectImage>;
+
 	var select:Int = 0;
+	var select_mde:Int = 0;
 
 	var arrowSelect:SelectArrow;
 
@@ -52,6 +56,16 @@ class MenuSelectLevel extends MainState
 			select_lev.add(selectThing);
 		}
 
+		select_mode = new FlxTypedGroup<DifficultSelectImage>();
+		add(select_mode);
+
+		for (i in 0...mode.length)
+		{
+			var modeThing:DifficultSelectImage = new DifficultSelectImage(0, 0);
+			modeThing.ID = i;
+			select_mode.add(modeThing);
+		}
+
 		arrowSelect = new SelectArrow(x + -50, 0);
 		arrowSelect.scrollFactor.set();
 		arrowSelect.screenCenter(Y);
@@ -81,12 +95,22 @@ class MenuSelectLevel extends MainState
 
 		if (FlxG.keys.anyJustPressed([UP, W]))
 		{
-			change(-1);
+			changeLev(-1);
 		}
 
 		if (FlxG.keys.anyJustPressed([DOWN, S]))
 		{
-			change(1);
+			changeLev(1);
+		}
+
+		if (FlxG.keys.anyJustPressed([LEFT, A]))
+		{
+			changeDiff(-1);
+		}
+
+		if (FlxG.keys.anyJustPressed([RIGHT, D]))
+		{
+			changeDiff(1);
 		}
 
 		if (FlxG.keys.justPressed.ESCAPE)
@@ -101,19 +125,38 @@ class MenuSelectLevel extends MainState
 				switch (list[select])
 				{
 					default:
-						PlayState.levRun(Std.parseInt(list[select].replace('lev', '')) - 1);
-						FlxG.switchState(new PlayState());
+						if (list[select] == null)
+						{
+							trace("not found lev");
+							openSubState(new WarmSubState("not_found"));
+						}
+						else
+						{
+							PlayState.levRun(Std.parseInt(list[select].replace('lev', '')) - 1, select_mde);
+							FlxG.switchState(new PlayState());
+						}
 				}
 			}
 		});
-
-		/*if (FlxG.keys.justPressed.C)
-			{
-				openSubState(new SelectSkinSubState());
-		}*/
 	}
 
-	function change(change:Int = 0)
+	function changeDiff(change:Int = 0)
+	{
+		select_mde += change;
+
+		if (select_mde < 0)
+			select_mde = select_mode.length - 1;
+		if (select_mde >= select_mode.length)
+			select_mde = 0;
+
+		select_mode.forEach(function(spr:DifficultSelectImage)
+		{
+			spr.animation.play(mode[select_mde]);
+			spr.updateHitbox();
+		});
+	}
+
+	function changeLev(change:Int = 0)
 	{
 		select += change;
 

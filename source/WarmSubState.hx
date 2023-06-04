@@ -10,7 +10,9 @@ class WarmSubState extends FlxSubState
 {
 	var text:FlxText;
 
-	public function new()
+	public static var textType:String = 'cant_play';
+
+	public function new(textType)
 	{
 		super();
 
@@ -22,8 +24,7 @@ class WarmSubState extends FlxSubState
 		bg.scrollFactor.set();
 		add(bg);
 
-		text = new FlxText(0, 0, 0, "- HEY YOU -
-            \n!That Level can't play right now!\nPlease wait for a new update\n\nPress Enter or Click anywhere to close", 16);
+		text = new FlxText(0, 0, 0, "", 16);
 		text.screenCenter();
 		text.alignment = CENTER;
 		text.scrollFactor.set();
@@ -35,41 +36,16 @@ class WarmSubState extends FlxSubState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.justPressed.ENTER || FlxG.mouse.pressed)
+		switch (textType)
 		{
-			close();
+			case "cant_play":
+				text.text = "- HEY YOU -
+            \n!That Level can't play right now!\nPlease wait for a new update\n\nPress Enter or Click anywhere to close";
+
+			case "not_found":
+				text.text = "- HEY YOU -
+            \n!Level Not Found!\n\nPress Enter or Click anywhere to close";
 		}
-	}
-}
-
-class WarmSubState2 extends FlxSubState
-{
-	var text:FlxText;
-
-	public function new()
-	{
-		super();
-
-		MainSprite.mouseImg();
-
-		var bg:FlxSprite = new FlxSprite();
-		bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		bg.alpha = 0.65;
-		bg.scrollFactor.set();
-		add(bg);
-
-		text = new FlxText(0, 0, 0, "- HEY YOU -
-            \n!Level Not Found!\n\nPress Enter or Click anywhere to close", 16);
-		text.screenCenter();
-		text.alignment = CENTER;
-		text.scrollFactor.set();
-		text.scale.set(2, 2);
-		add(text);
-	}
-
-	override public function update(elapsed:Float)
-	{
-		super.update(elapsed);
 
 		if (FlxG.keys.justPressed.ENTER || FlxG.mouse.pressed)
 		{

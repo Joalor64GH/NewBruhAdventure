@@ -133,8 +133,10 @@ class MenuState extends MainState
 					case "awards":
 						FlxG.switchState(new AwardsMenu());
 
+					#if desktop
 					case "exit":
 						openSubState(new QuitSubState());
+					#end
 				}
 			}
 		});
