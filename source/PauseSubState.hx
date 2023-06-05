@@ -21,7 +21,7 @@ class PauseImage extends MainSprite
 		animation.add("return_normall", [4]);
 		animation.add("return_select", [5]);
 
-		scale.set(3, 3);
+		// scale.set(3, 3);
 	}
 }
 
@@ -29,9 +29,9 @@ class PauseSubState extends FlxSubState
 {
 	var text:FlxText;
 
-	var list:Array<String> = ["resume", "restart", "return"];
+	var list:Array<String> = ["Resume", "Restart", "Return"];
 
-	var pause_group:FlxTypedGroup<PauseImage>;
+	// var pause_group:FlxTypedGroup<PauseImage>;
 	var select:Int = 0;
 
 	var x:Float = 0;
@@ -49,21 +49,22 @@ class PauseSubState extends FlxSubState
 		bg.scrollFactor.set();
 		add(bg);
 
-		text = new FlxText(0, 0, 0, "- PAUSE -", 16);
+		text = new FlxText(0, 0, 0, "- PAUSE -\n" + "< " + list[select] + " >", 16);
 		text.screenCenter();
 		text.alignment = CENTER;
 		text.scrollFactor.set();
 		add(text);
 
-		pause_group = new FlxTypedGroup<PauseImage>();
-		add(pause_group);
+		/*pause_group = new FlxTypedGroup<PauseImage>();
+			add(pause_group);
 
-		for (i in 0...list.length)
-		{
-			var selectThing:PauseImage = new PauseImage(x, y);
-			selectThing.ID = i;
-			pause_group.add(selectThing);
-		}
+			for (i in 0...list.length)
+			{
+				var selectThing:PauseImage = new PauseImage(x, y);
+				selectThing.ID = i;
+				// selectThing.screenCenter();
+				pause_group.add(selectThing);
+		}*/
 
 		change();
 	}
@@ -72,23 +73,25 @@ class PauseSubState extends FlxSubState
 	{
 		super.update(elapsed);
 
-		pause_group.forEach(function(spr:PauseImage)
-		{
-			spr.setPosition(x, y);
-
-			if (FlxG.mouse.overlaps(spr))
+		/*pause_group.forEach(function(spr:PauseImage)
 			{
-				// spr.alpha = 0.6;
-				spr.animation.play(list[select] + "_select");
-				FlxG.mouse.load(Paths.overlaps_mouse__png);
-			}
-			else
-			{
-				spr.animation.play(list[select] + "_normall");
-			}
+				spr.setPosition(x, y);
 
-			spr.updateHitbox();
-		});
+				if (FlxG.mouse.overlaps(spr))
+				{
+					// spr.alpha = 0.6;
+					spr.animation.play(list[select] + "_select");
+					FlxG.mouse.load(Paths.overlaps_mouse__png);
+				}
+				else
+				{
+					spr.animation.play(list[select] + "_normall");
+				}
+
+				spr.updateHitbox();
+		});*/
+
+		text.text = "- PAUSE -\n" + "< " + list[select] + " >";
 
 		if (FlxG.keys.anyJustPressed([LEFT, A]))
 		{
@@ -121,26 +124,28 @@ class PauseSubState extends FlxSubState
 		select += change;
 
 		if (select < 0)
-			select = pause_group.length - 1;
-		if (select >= pause_group.length)
+			select = list.length - 1;
+		if (select >= list.length)
 			select = 0;
 
-		pause_group.forEach(function(spr:PauseImage)
-		{
-			spr.setPosition(x, y);
-
-			if (FlxG.mouse.overlaps(spr))
+		/*pause_group.forEach(function(spr:PauseImage)
 			{
-				// spr.alpha = 0.6;
-				spr.animation.play(list[select] + "_select");
-				FlxG.mouse.load(Paths.overlaps_mouse__png);
-			}
-			else
-			{
-				spr.animation.play(list[select] + "_normall");
-			}
+				spr.setPosition(x, y);
 
-			spr.updateHitbox();
-		});
+				if (FlxG.mouse.overlaps(spr))
+				{
+					// spr.alpha = 0.6;
+					spr.animation.play(list[select] + "_select");
+					FlxG.mouse.load(Paths.overlaps_mouse__png);
+				}
+				else
+				{
+					spr.animation.play(list[select] + "_normall");
+				}
+
+				spr.updateHitbox();
+		});*/
+
+		text.text = "- PAUSE -\n" + "< " + list[select] + " >";
 	}
 }
