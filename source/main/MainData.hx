@@ -9,6 +9,9 @@ class MainData
 		return FlxG.save.data.fpsCounter = ifbool;
 	}
 
+	/**
+	 * Check data to loading data game
+	 */
 	public static function checkData()
 	{
 		if (FlxG.save.data.fpsCounter == null)

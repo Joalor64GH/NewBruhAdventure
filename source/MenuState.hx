@@ -21,9 +21,6 @@ class MenuState extends MainState
 	{
 		super.create();
 
-		/**
-		 * Check data to loading data game
-		 */
 		MainData.checkData();
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.CYAN);
