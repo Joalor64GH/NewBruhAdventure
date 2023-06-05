@@ -248,7 +248,7 @@ class PlayState extends MainState
 		FlxG.overlap(player, vases, touchedVases);
 		FlxG.overlap(player, thorns, touchedThorns);
 
-		scoreTxt.text = "Score: " + score;
+		scoreTxt.text = "Score: " + score + "\nHealth: " + health;
 
 		if (FlxG.keys.justPressed.ESCAPE)
 			openSubState(new PauseSubState());
@@ -299,7 +299,7 @@ class PlayState extends MainState
 				// for vases contains something to hurt player
 				if (vases.hurtPlayer)
 				{
-					health--;
+					health -= 1; // for make sure if the health was drain by vases
 					vases.kill();
 				}
 
@@ -373,7 +373,6 @@ class PlayState extends MainState
 			// FlxG.switchState(new MenuSelectLevel());
 			changeState(new MenuSelectLevel());
 		}
-
 		trace('complete ' + curLevel + '!');
 	}
 
@@ -400,7 +399,7 @@ class PlayState extends MainState
 
 		if ((shouldKill) || health <= 0)
 		{
-			trace("player got game over due to: " + reason);
+			trace("player was got game over due to: " + reason);
 			openSubState(new GameoverSubState());
 			return true;
 		}
