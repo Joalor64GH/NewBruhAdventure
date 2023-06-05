@@ -105,7 +105,7 @@ class PauseSubState extends FlxSubState
 
 		if (FlxG.keys.justPressed.ENTER)
 		{
-			switch (list[select])
+			switch (list[select].toLowerCase())
 			{
 				case "resume":
 					close();
