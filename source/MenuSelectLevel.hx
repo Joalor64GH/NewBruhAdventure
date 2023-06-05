@@ -61,12 +61,12 @@ class MenuSelectLevel extends MainState
 
 		for (i in 0...mode.length)
 		{
-			var modeThing:DifficultSelectImage = new DifficultSelectImage(0, 0);
+			var modeThing:DifficultSelectImage = new DifficultSelectImage(x, y + 125);
 			modeThing.ID = i;
 			select_mode.add(modeThing);
 		}
 
-		arrowSelect = new SelectArrow(x + -50, 0);
+		arrowSelect = new SelectArrow(x + -100, 0);
 		arrowSelect.scrollFactor.set();
 		arrowSelect.screenCenter(Y);
 		add(arrowSelect);
@@ -83,7 +83,22 @@ class MenuSelectLevel extends MainState
 			if (FlxG.mouse.overlaps(spr))
 				spr.alpha = 0.6;
 
-			spr.animation.play("lev" + Std.string(select + 1));
+			// spr.animation.play("lev" + Std.string(select + 1));
+
+			if (FlxG.mouse.overlaps(spr))
+			{
+				FlxG.mouse.load(Paths.overlaps_mouse__png);
+			}
+
+			spr.updateHitbox();
+		});
+
+		select_mode.forEach(function(spr:DifficultSelectImage)
+		{
+			spr.setPosition(x, y + 125);
+
+			if (FlxG.mouse.overlaps(spr))
+				spr.alpha = 0.6;
 
 			if (FlxG.mouse.overlaps(spr))
 			{
@@ -125,16 +140,8 @@ class MenuSelectLevel extends MainState
 				switch (list[select])
 				{
 					default:
-						if (list[select] == null)
-						{
-							trace("not found lev");
-							openSubState(new WarmSubState("not_found"));
-						}
-						else
-						{
-							PlayState.levRun(Std.parseInt(list[select].replace('lev', '')) - 1, select_mde);
-							FlxG.switchState(new PlayState());
-						}
+						PlayState.levRun(Std.parseInt(list[select].replace('lev', '')) - 1, select_mde);
+						FlxG.switchState(new PlayState());
 				}
 			}
 		});
@@ -151,6 +158,8 @@ class MenuSelectLevel extends MainState
 
 		select_mode.forEach(function(spr:DifficultSelectImage)
 		{
+			spr.setPosition(x, y + 125);
+
 			spr.animation.play(mode[select_mde]);
 			spr.updateHitbox();
 		});

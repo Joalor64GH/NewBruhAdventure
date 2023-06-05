@@ -103,9 +103,10 @@ class MenuStorySelect extends MainState
 				{
 					case "storyMode":
 						trace('story mode open');
-						inStoryMode = true;
-						PlayState.levRun(0);
-						FlxG.switchState(new PlayState());
+						/*inStoryMode = true;
+							PlayState.levRun(0);
+							FlxG.switchState(new PlayState()); */
+						openSubState(new WarmSubState("story_mode"));
 
 					case "freeplayMode":
 						inStoryMode = false;

@@ -28,13 +28,7 @@ class WarmSubState extends FlxSubState
 		text.screenCenter();
 		text.alignment = CENTER;
 		text.scrollFactor.set();
-		text.scale.set(2, 2);
 		add(text);
-	}
-
-	override public function update(elapsed:Float)
-	{
-		super.update(elapsed);
 
 		switch (textType)
 		{
@@ -45,7 +39,15 @@ class WarmSubState extends FlxSubState
 			case "not_found":
 				text.text = "- HEY YOU -
             \n!Level Not Found!\n\nPress Enter or Click anywhere to close";
+
+			case "story_mode":
+				text.text = "- HEY YOU -\nStory Mode is not finished yet!";
 		}
+	}
+
+	override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
 
 		if (FlxG.keys.justPressed.ENTER || FlxG.mouse.pressed)
 		{
