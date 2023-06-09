@@ -1,9 +1,9 @@
 package;
 
-import util.Vector;
-import util.Util;
 import flixel.FlxG;
 import flixel.sound.FlxSound;
+import util.Util;
+import util.Vector;
 
 class Player extends MainSprite
 {
@@ -163,14 +163,14 @@ class Player extends MainSprite
 
 			return enable;
 	}*/
-
 	final speed_file:Float = Std.parseFloat(Util.fileString(Paths.runSpeed__txt));
 
 	var inLeft:Bool = false;
 	var inRight:Bool = false;
 
 	var jumpTimer:Float = -1;
-	// var jumping:Bool = false;
+
+	var jumping:Bool = false;
 
 	override public function update(elapsed:Float)
 	{
@@ -181,7 +181,8 @@ class Player extends MainSprite
 		/**
 		 * right key
 		 */
-		if (FlxG.keys.anyPressed([RIGHT, D])){
+		if (FlxG.keys.anyPressed([RIGHT, D]))
+		{
 			turnRight(true);
 			stepSound.play(true);
 			inRight = true;
@@ -193,7 +194,8 @@ class Player extends MainSprite
 		else
 			inRight = false;
 
-		 if (FlxG.keys.anyPressed([LEFT, A])){
+		if (FlxG.keys.anyPressed([LEFT, A]))
+		{
 			turnLeft(true);
 			stepSound.play(true);
 			inLeft = true;
@@ -208,33 +210,48 @@ class Player extends MainSprite
 		if (!inLeft && !inRight)
 			velocity.x = 0;
 
-		jump(elapsed);
+		if (FlxG.keys.anyPressed([W, UP, SPACE]))
+		{
+			jump(elapsed);
+		}
 	}
 
 	function jump(elapsed:Float):Void
 	{
-		if (FlxG.keys.anyPressed([W, UP, SPACE])){
-			if (velocity.y == 0){
+		if (FlxG.keys.anyPressed([W, UP, SPACE]))
+		{
+			if (velocity.y == 0)
+			{
 				jumpTimer = 0;
+				jumping = false;
+			}
+			else
+			{
+				jumping = true;
 			}
 		}
 
 		/**
-		* up key and when jumping
-		* 
-		* why we dont using this?
-		*/
+		 * up key and when jumping
+		 */
 		if (FlxG.keys.anyPressed([W, UP, SPACE]) && (jumpTimer >= 0))
 		{
+			jumping = true;
 			jumpTimer += elapsed;
-	
+
 			if (jumpTimer > 0.25)
+			{
 				jumpTimer = -1;
-			else if (jumpTimer > 0){
-				velocity.y = -300;
+			}
+			else if (jumpTimer > 0)
+			{
+				velocity.y = -0.6 * maxVelocity.y;
 			}
 		}
 		else
-			jumpTimer = -1.0;
+		{
+			jumping = false;
+			jumpTimer = -1;
+		}
 	}
 }
