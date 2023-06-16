@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.input.keyboard.FlxKey;
 import flixel.sound.FlxSound;
 import util.Util;
 import util.Vector;
@@ -168,19 +169,14 @@ class Player extends MainSprite
 	var inLeft:Bool = false;
 	var inRight:Bool = false;
 
-	var jumpTimer:Float = -1;
-
+	var jumpTimer:Float = 0;
 	var jumping:Bool = false;
 
 	override public function update(elapsed:Float)
 	{
-		super.update(elapsed);
 		this.x += direction.dx * speed.dx;
 		this.y += direction.dy * speed.dy;
 
-		/**
-		 * right key
-		 */
 		if (FlxG.keys.anyPressed([RIGHT, D]))
 		{
 			turnRight(true);
@@ -193,6 +189,15 @@ class Player extends MainSprite
 		}
 		else
 			inRight = false;
+
+		jump(elapsed);
+
+		if (isTouching(FLOOR) && !FlxG.keys.anyPressed(_jumpKeys))
+		{
+			_jumpTime = -1;
+			// Reset the double jump flag
+			_timesJumped = 0;
+		}
 
 		if (FlxG.keys.anyPressed([LEFT, A]))
 		{
@@ -210,48 +215,44 @@ class Player extends MainSprite
 		if (!inLeft && !inRight)
 			velocity.x = 0;
 
-		if (FlxG.keys.anyPressed([W, UP, SPACE]))
-		{
-			jump(elapsed);
-		}
+		super.update(elapsed);
 	}
+
+	// all code from this project: https://haxeflixel.com/demos/ProjectJumper/#:~:text=Controls%3A,Jump%20%2D%20L%20%2F%20C
+	public static inline var JUMP_SPEED:Int = 250;
+	public static inline var JUMPS_ALLOWED:Int = 2;
+
+	var _jumpTime:Float = -1;
+	var _timesJumped:Int = 0;
+	var _jumpKeys:Array<FlxKey> = [W, UP, SPACE];
 
 	function jump(elapsed:Float):Void
 	{
-		if (FlxG.keys.anyPressed([W, UP, SPACE]))
+		if (FlxG.keys.anyJustPressed(_jumpKeys))
 		{
-			if (velocity.y == 0)
+			if ((velocity.y == 0) || (_timesJumped < JUMPS_ALLOWED)) // Only allow two jumps
 			{
-				jumpTimer = 0;
-				jumping = false;
-			}
-			else
-			{
-				jumping = true;
+				_timesJumped++;
+				_jumpTime = 0;
 			}
 		}
 
-		/**
-		 * up key and when jumping
-		 */
-		if (FlxG.keys.anyPressed([W, UP, SPACE]) && (jumpTimer >= 0))
+		// You can also use space or any other key you want
+		if ((FlxG.keys.anyPressed(_jumpKeys)) && (_jumpTime >= 0))
 		{
-			jumping = true;
-			jumpTimer += elapsed;
+			_jumpTime += elapsed;
 
-			if (jumpTimer > 0.25)
+			// You can't jump for more than 0.25 seconds
+			if (_jumpTime > 0.25)
 			{
-				jumpTimer = -1;
+				_jumpTime = -1;
 			}
-			else if (jumpTimer > 0)
+			else if (_jumpTime > 0)
 			{
 				velocity.y = -0.6 * maxVelocity.y;
 			}
 		}
 		else
-		{
-			jumping = false;
-			jumpTimer = -1;
-		}
+			_jumpTime = -1.0;
 	}
 }

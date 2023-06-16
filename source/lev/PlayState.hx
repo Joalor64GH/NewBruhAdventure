@@ -262,9 +262,7 @@ class PlayState extends MainState
 			{
 				// for normall thorns
 				if (thorns.hurtPlayer)
-				{
 					health -= 1; // for make sure if the health was drain by thorns
-				}
 
 				// for thorns was very hurt
 				if (thorns.killPlayer)
@@ -285,13 +283,10 @@ class PlayState extends MainState
 				if (vases.thatCoin)
 				{
 					if (gotHardMode)
-					{
 						score += 50;
-					}
 					else
-					{
 						score += 200;
-					}
+
 					vases.kill();
 					trace('vases give player ' + vases.score + ' score');
 				}
