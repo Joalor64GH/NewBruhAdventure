@@ -83,6 +83,10 @@ class PlayState extends MainState
 				curMode = "hard";
 				gotHardMode = true;
 
+			case 2:
+				curMode = "old";
+				gotHardMode = false;
+
 			default:
 				curMode = "easy";
 				gotHardMode = false;
@@ -93,19 +97,32 @@ class PlayState extends MainState
 			case 0:
 				curLevel = 'lev1';
 				colorInStage = FlxColor.CYAN;
-				if (gotHardMode)
+				switch (curMode)
 				{
-					jsonPaths = Paths.lev1_hard__json;
-				}
-				else
-				{
-					jsonPaths = Paths.lev1__json;
+					case "easy":
+						jsonPaths = Paths.lev1__json;
+					case "hard":
+						jsonPaths = Paths.lev1_hard__json;
+					case "old":
+						jsonPaths = Paths.lev1_old__json;
+					default:
+						jsonPaths = Paths.lev1__json;
 				}
 
 			case 1:
 				curLevel = 'lev2';
 				colorInStage = FlxColor.CYAN;
-				jsonPaths = Paths.lev2__json;
+				switch (curMode)
+				{
+					case "easy":
+						jsonPaths = Paths.lev2__json;
+					case "hard":
+						jsonPaths = Paths.lev2_hard__json;
+					case "old":
+						jsonPaths = Paths.lev2_old__json;
+					default:
+						jsonPaths = Paths.lev2__json;
+				}
 		}
 
 		trace('load:' + jsonPaths);
