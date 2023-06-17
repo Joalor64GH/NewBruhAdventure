@@ -16,7 +16,7 @@ class MenuSelectLevel extends MainState
 	 * alot stuff to load
 	 */
 	var list:Array<String>;
-	var mode:Array<String> = ["easy", "hard"];
+	var mode:Array<String> = ["easy", "hard", "old"];
 
 	var select_lev:FlxTypedGroup<MenuSelect>;
 	var select_mode:FlxTypedGroup<DifficultSelectImage>;

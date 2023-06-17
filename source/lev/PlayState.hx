@@ -367,6 +367,8 @@ class PlayState extends MainState
 					player.animation.play("in_burn");
 					liquid.firesUpPlayer = true;
 				}
+
+				if (liquid.slowWalk) {}
 			}
 			else
 			{
@@ -387,9 +389,6 @@ class PlayState extends MainState
 		if (player.alive && player.exists && flag.alive && flag.exists)
 		{
 			flag.kill();
-			#if desktop
-			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
-			#end
 			FlxG.save.flush();
 			changeState(new MenuSelectLevel());
 		}
