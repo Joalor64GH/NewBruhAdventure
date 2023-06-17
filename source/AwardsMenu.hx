@@ -89,7 +89,7 @@ class AwardsMenu extends MainState
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.switchState(new MenuState());
+			changeState(new MenuState());
 		}
 	}
 

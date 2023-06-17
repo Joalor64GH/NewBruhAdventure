@@ -44,13 +44,17 @@ class PlayState extends MainState
 
 	static var curLevel:String = '';
 
-	var score:Int = 0;
+	/**
+	 * player score
+	 */
+	public var score:Int = 0;
+
 	var scoreTxt:FlxText;
 
 	/**
 	 * player health
 	 */
-	var health(default, set):Int = 5;
+	public var health(default, set):Int = 5;
 
 	inline function set_health(value:Int):Int
 	{
@@ -294,6 +298,13 @@ class PlayState extends MainState
 		{
 			if (player.overlaps(vases)) // less lag interaction
 			{
+				// for vases have random system
+				if (vases.random)
+				{
+					openSubState(new RandomVases());
+					vases.kill();
+				}
+
 				// for vases contains coin
 				if (vases.thatCoin)
 				{
@@ -380,7 +391,6 @@ class PlayState extends MainState
 			sys.io.File.saveContent("assets/data/lev/" + curLevel + "/" + curLevel + ".txt", Std.string(score));
 			#end
 			FlxG.save.flush();
-			// FlxG.switchState(new MenuSelectLevel());
 			changeState(new MenuSelectLevel());
 		}
 		trace('complete ' + curLevel + '!');

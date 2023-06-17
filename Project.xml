@@ -38,6 +38,7 @@
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<define name="napeALLOW" if="desktop" />
+	<define name="studioALLOW" if="debug" />
 
 	<haxelib name="flixel" />
 
@@ -51,7 +52,7 @@
 	<haxelib name="nape-haxe4" if="napeALLOW" />
 
 	<!--This lib for debug - Use this for doing some stuff in game-->
-	<haxelib name='flixel-studio' if='debug'/>
+	<haxelib name='flixel-studio' if='studioALLOW'/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 

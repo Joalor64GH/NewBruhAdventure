@@ -119,16 +119,16 @@ class MenuState extends MainState
 				switch (list[select])
 				{
 					case "play":
-						FlxG.switchState(new MenuStorySelect());
+						changeState(new MenuStorySelect());
 
 					case "credits":
-						FlxG.switchState(new CreditsState());
+						changeState(new CreditsState());
 
 					case "options":
-						FlxG.switchState(new OptionsMenu());
+						changeState(new OptionsMenu());
 
 					case "awards":
-						FlxG.switchState(new AwardsMenu());
+						changeState(new AwardsMenu());
 
 					#if desktop
 					case "exit":

@@ -61,7 +61,7 @@ class OptionsMenu extends MainState
 
 		if (FlxG.keys.anyJustPressed([ENTER, ESCAPE]))
 		{
-			FlxG.switchState(new MenuState());
+			changeState(new MenuState());
 		}
 	}
 }

@@ -25,7 +25,7 @@ class PauseImage extends MainSprite
 	}
 }
 
-class PauseSubState extends FlxSubState
+class PauseSubState extends MainSubState
 {
 	var text:FlxText;
 
@@ -114,7 +114,7 @@ class PauseSubState extends FlxSubState
 					FlxG.resetState();
 
 				case "return":
-					FlxG.switchState(new MenuSelectLevel());
+					changeState(new MenuSelectLevel());
 			}
 		}
 	}

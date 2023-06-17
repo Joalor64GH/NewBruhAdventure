@@ -2,29 +2,17 @@ package main;
 
 import flixel.FlxG;
 import flixel.FlxState;
-import flixel.addons.ui.FlxUIState;
-import flixel.util.FlxSave;
-import util.Util;
+import flixel.addons.ui.FlxUISubState;
 #if studioALLOW
 import flixel.addons.studio.FlxStudio;
 #end
 
-class MainState extends FlxUIState
+class MainSubState extends FlxUISubState
 {
-	var save:FlxSave = new FlxSave();
-
-	var camZoom:Float = Std.parseFloat(Util.fileString(Paths.camZoom__txt));
-
-	override public function create()
+	public function new()
 	{
-		super.create();
-
-		save.bind("huy1234th", "data");
-		MainData.checkData();
-		if (FlxG.keys.justPressed.F10)
-		{
-			FlxG.fullscreen = !FlxG.fullscreen;
-		}
+		super();
+		trace("go sub");
 
 		#if studioALLOW
 		FlxStudio.create();

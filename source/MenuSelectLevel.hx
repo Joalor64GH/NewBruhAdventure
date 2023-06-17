@@ -130,7 +130,7 @@ class MenuSelectLevel extends MainState
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.switchState(new mainMenu.MenuStorySelect());
+			changeState(new mainMenu.MenuStorySelect());
 		}
 
 		select_lev.forEach(function(spr:MenuSelect)
@@ -141,7 +141,7 @@ class MenuSelectLevel extends MainState
 				{
 					default:
 						PlayState.levRun(Std.parseInt(list[select].replace('lev', '')) - 1, select_mde);
-						FlxG.switchState(new PlayState());
+						changeState(new PlayState());
 				}
 			}
 		});

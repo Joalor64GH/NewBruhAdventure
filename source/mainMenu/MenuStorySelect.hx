@@ -105,19 +105,19 @@ class MenuStorySelect extends MainState
 						trace('story mode open');
 						/*inStoryMode = true;
 							PlayState.levRun(0);
-							FlxG.switchState(new PlayState()); */
+							changeState(new PlayState()); */
 						openSubState(new WarmSubState("story_mode"));
 
 					case "freeplayMode":
 						inStoryMode = false;
-						FlxG.switchState(new MenuSelectLevel());
+						changeState(new MenuSelectLevel());
 				}
 			}
 		});
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.switchState(new MenuState());
+			changeState(new MenuState());
 		}
 	}
 

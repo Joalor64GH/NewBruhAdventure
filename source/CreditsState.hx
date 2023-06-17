@@ -49,7 +49,7 @@ class CreditsState extends MainState
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.switchState(new MenuState());
+			changeState(new MenuState());
 		}
 
 		if (FlxG.keys.justPressed.ENTER && curPage == 1)

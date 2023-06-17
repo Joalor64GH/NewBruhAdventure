@@ -2,11 +2,10 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.FlxSubState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 
-class GameoverSubState extends FlxSubState
+class GameoverSubState extends MainSubState
 {
 	var text:FlxText;
 
@@ -41,7 +40,7 @@ class GameoverSubState extends FlxSubState
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.switchState(new MenuSelectLevel());
+			changeState(new MenuSelectLevel());
 		}
 	}
 }

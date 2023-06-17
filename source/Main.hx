@@ -11,7 +11,7 @@ import util.Util;
 
 using StringTools;
 
-#if debug
+#if studioALLOW
 import flixel.addons.studio.FlxStudio;
 #end
 #if sys
@@ -34,7 +34,7 @@ class Main extends Sprite
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 
 		util.Util.updateFrames();
-		#if debug
+		#if studioALLOW
 		FlxStudio.create();
 		#end
 	}
