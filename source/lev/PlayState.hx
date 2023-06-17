@@ -116,8 +116,6 @@ class PlayState extends MainState
 				{
 					case "easy":
 						jsonPaths = Paths.lev2__json;
-					case "hard":
-						jsonPaths = Paths.lev2_hard__json;
 					case "old":
 						jsonPaths = Paths.lev2_old__json;
 					default:
