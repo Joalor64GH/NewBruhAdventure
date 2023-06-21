@@ -1,5 +1,7 @@
 # Bruh Adventure
 
+`The project will change into using RPG Maker MV instead, im sorry`
+
 A Adventure Game, _'bruhhhhh'_
 
 Download from [here](https://huy1234th.itch.io/bruh-adventure)
