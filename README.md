@@ -1,6 +1,6 @@
 # Bruh Adventure
 
-`The project will change into using RPG Maker MV instead, im sorry`
+`The project may now continue using Haxe, sorry again`
 
 A Adventure Game, _'bruhhhhh'_
 
