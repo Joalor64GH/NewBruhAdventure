@@ -1,16 +1,6 @@
 {
   "dependencies": [
     {
-      "name": "actuate",
-      "type": "haxelib",
-      "version": null
-    },
-    {
-      "name": "box2d",
-      "type": "haxelib",
-      "version": null
-    },
-    {
       "name": "flixel",
       "type": "haxelib",
       "version": null
@@ -28,27 +18,12 @@
       "url": "https://github.com/Dovyski/flixel-studio.git"
     },
     {
-      "name": "flixel-tools",
-      "type": "haxelib",
-      "version": null
-    },
-    {
       "name": "flixel-ui",
       "type": "haxelib",
       "version": null
     },
     {
-      "name": "format",
-      "type": "haxelib",
-      "version": null
-    },
-    {
       "name": "hscript",
-      "type": "haxelib",
-      "version": null
-    },
-    {
-      "name": "hxCodec",
       "type": "haxelib",
       "version": null
     },
@@ -59,16 +34,6 @@
     },
     {
       "name": "hxcpp-debug-server",
-      "type": "haxelib",
-      "version": null
-    },
-    {
-      "name": "hxjsonast",
-      "type": "haxelib",
-      "version": null
-    },
-    {
-      "name": "hxnodejs",
       "type": "haxelib",
       "version": null
     },

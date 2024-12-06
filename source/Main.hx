@@ -9,15 +9,20 @@ import openfl.display.Sprite;
 import openfl.events.UncaughtErrorEvent;
 import util.Util;
 
-using StringTools;
-
 #if studioALLOW
 import flixel.addons.studio.FlxStudio;
 #end
+
 #if sys
 import sys.FileSystem;
 import sys.io.File;
 #end
+
+#if desktop
+import ALSoftConfig;
+#end
+
+using StringTools;
 
 class Main extends Sprite
 {
@@ -27,7 +32,7 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-		addChild(new FlxGame(0, 0, MenuState, framerate, framerate));
+		addChild(new FlxGame(0, 0, MenuState, framerate, framerate, true, false));
 		fpsCounter = new FPS(0, 0, 0xFFFFFF);
 		addChild(fpsCounter);
 

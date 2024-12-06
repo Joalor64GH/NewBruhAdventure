@@ -30,10 +30,16 @@
 
 	<set name="BUILD_DIR" value="export/debug" if="debug" />
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
+
 	<source path="source" />
 	<assets path="assets"/>
 
 	<assets path="assets/sounds" include=".wav" unless="flash" />
+
+	<section if="desktop">
+		<assets path="alsoft.ini" if="windows" />
+		<assets path="alsoft.ini" rename="alsoft.conf" unless="windows" />
+	</section>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -52,7 +58,10 @@
 	<haxelib name="nape-haxe4" if="napeALLOW" />
 
 	<!--This lib for debug - Use this for doing some stuff in game-->
-	<haxelib name='flixel-studio' if='studioALLOW'/>
+	<haxelib name="flixel-studio" if="studioALLOW"/>
+
+	<haxelib name="hscript" if="debug" />
+	<haxelib name="hxcpp-debug-server" if="desktop debug" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
@@ -71,6 +80,15 @@
 	<haxedef name="HXCPP_CHECK_POINTER" />
 	<haxedef name="HXCPP_STACK_LINE" />
 	<haxedef name="HXCPP_STACK_TRACE" />
+
+	<haxedef name="HXCPP_GC_BIG_BLOCKS" />
+
+	<haxedef name="analyzer-optimize" />
+	<haxedef name="no-deprecation-warnings" />
+	<haxedef name="message.reporting" value="pretty" />
+
+	<haxeflag name="--macro" value="allowPackage('flash')" />
+	<haxeflag name="--macro" value="include('my.pack')" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 
